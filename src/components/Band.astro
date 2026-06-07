@@ -1,0 +1,35 @@
+---
+interface Props {
+  id?: string;
+  soft?: boolean;
+  class?: string;
+}
+
+const { id, soft, class: className } = Astro.props;
+---
+
+<section
+  {... id && { id }}
+  class:list={["band", soft && "band--soft", className]}
+>
+  <div class="container-page">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .band {
+    padding-block: 5rem 7rem;
+    background: transparent;
+  }
+
+  .band--soft {
+    background: var(--cc-bg-2);
+  }
+
+  @media (min-width: 768px) {
+    .band {
+      padding-block: 7rem;
+    }
+  }
+</style>

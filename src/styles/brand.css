@@ -1,0 +1,107 @@
+/* ===================================================================
+   BRAND.CSS — culture-castles.de
+   ===================================================================
+   "Gothic Manuscript" auf dunklem Pergament, Palette B —
+   Königsburgunder. Wein-Schwarz als Canvas, Champagnergold als Akzent,
+   Creme als Schrift. Übernimmt das Manuskript-System von Haley Park,
+   tauscht aber das Waldgrün gegen königliches Burgunder.
+
+   Strategie: Wir ÜBERSCHREIBEN die neutralen Light-Tokens aus global.css,
+   damit alle Bestands-Komponenten (Section, AdSlot, Breadcrumbs, .card,
+   .btn-*) automatisch in Dark-Königsburgunder rendern. Fonts werden im
+   BaseLayout per <link> geladen.
+   =================================================================== */
+
+/* Plain :root (NICHT @theme): brand.css wird separat von global.css
+   importiert; Tailwind v4 verarbeitet @theme nur in der Datei mit
+   `@import "tailwindcss"`. Als :root-Variablen greifen die Overrides
+   zuverlässig und gewinnen, da brand.css nach global.css lädt. */
+:root {
+  /* === Königsburgunder-Palette === */
+  --cc-bg:        #2a121a;
+  --cc-bg-2:      #341721;
+  --cc-text:      #f0e6d6;
+  --cc-text-soft: #cbb6a6;
+  --cc-text-mute: #a98b86;
+  --cc-accent:    #cdab6d;
+  --cc-accent-hi: #e0c489;
+  --cc-line:      #6e3b48;
+
+  /* === Bestands-Tokens überschrieben → Dark Theme === */
+  --color-canvas-white:    #2a121a;
+  --color-porcelain-mist:  #341721;
+  --color-ghost-gray:      #3d1c27;
+  --color-lavender-ash:    #6e3b48;
+  --color-inkwell-purple:  #f0e6d6;
+  --color-shadow-graphite: #cbb6a6;
+  --color-slate-steel:     #a98b86;
+  --color-deep-plum:       #f0e6d6;
+
+  --color-accent:          #cdab6d;
+  --color-accent-hover:    #e0c489;
+  --color-accent-tint:     rgba(205, 171, 109, 0.12);
+  --color-accent-contrast: #2a121a;
+
+  /* === Schrift — freie Google Fonts (Manuskript-Voice) === */
+  --font-sans:    "Lora", Georgia, "Times New Roman", serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-aux:     "Old Standard TT", Georgia, serif;
+  --font-serif2:  "Playfair Display", Georgia, serif;
+
+  /* === Hue-Pool — Burgunder/Gold-Familie (Fallback-Gradienten) === */
+  --hue-1: linear-gradient(135deg, #341721 0%, #6e3b48 55%, #cdab6d 140%);
+  --hue-2: linear-gradient(135deg, #2a121a 0%, #5a2f3a 60%, #b07c4f 130%);
+  --hue-3: linear-gradient(135deg, #341721 0%, #7a3a4e 55%, #e0c489 140%);
+  --hue-4: linear-gradient(135deg, #221019 0%, #4a2733 60%, #cdab6d 140%);
+  --hue-5: linear-gradient(135deg, #2a121a 0%, #3d1c27 60%, #8a5a3a 130%);
+
+  /* === Manuskript: 0px-Radien === */
+  --radius-card:    0px;
+  --radius-card-lg: 0px;
+  --radius-badge:   0px;
+  --radius-input:   0px;
+}
+
+/* -------------------------------------------------------------------
+   Dark-Theme-Overrides für Bestands-Utilities aus global.css, die harte
+   Tailwind-Farben (bg-white) oder runde Radien (rounded-full) nutzen.
+   brand.css wird NACH global.css geladen → gewinnt.
+   ------------------------------------------------------------------- */
+
+body {
+  background-image:
+    radial-gradient(circle at 18% 8%,  rgba(205, 171, 109, 0.05), transparent 45%),
+    radial-gradient(circle at 85% 82%, rgba(110, 59, 72, 0.20),  transparent 52%);
+  background-attachment: fixed;
+  letter-spacing: 0.004em;
+}
+
+.card {
+  background: var(--cc-bg-2);
+  border-color: var(--cc-line);
+  border-radius: 0;
+}
+.card:hover { border-color: var(--cc-accent); }
+
+.btn-primary, .btn-outline, .btn-ghost, .pill, .pill-accent {
+  border-radius: 0;
+  font-family: var(--font-aux);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.btn-ghost { background: transparent; color: var(--cc-text); border-color: var(--cc-text); }
+.btn-ghost:hover { background: transparent; border-color: var(--cc-accent); color: var(--cc-accent); }
+
+/* dünne Goldlinie als universeller Divider-Helfer */
+.cc-rule { display: flex; align-items: center; gap: 18px; color: var(--cc-accent); }
+.cc-rule::before, .cc-rule::after {
+  content: ""; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cc-line), transparent);
+}
+.cc-rule .mark {
+  font-family: var(--font-aux); letter-spacing: 0.4em;
+  text-transform: uppercase; font-size: 12px;
+}
+
+h1, h2, h3 { font-weight: 300; }

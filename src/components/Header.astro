@@ -1,0 +1,163 @@
+---
+import { site, nav } from "../data/site";
+---
+
+<header class="sticky top-0 z-40 border-b" style="background: rgba(42,18,26,.85); backdrop-filter: blur(8px); border-color: var(--cc-line);">
+  <div class="container-page">
+    <div class="flex items-center justify-between h-[78px] gap-4">
+      <a href="/" class="flex items-center gap-3 shrink-0" aria-label={`${site.brandName} Startseite`}>
+        <span style="color: var(--cc-accent); font-size: 26px; line-height: 1;">♜</span>
+        <span style="font-family: var(--font-display); font-weight: 400; font-size: 26px; letter-spacing: .04em; color: var(--cc-text);">Culture&nbsp;<b style="font-weight:400; color: var(--cc-accent);">Castles</b></span>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-7" aria-label="Hauptnavigation">
+        {nav.map((item) => (
+          <a
+            href={item.href}
+            class="cc-navlink"
+          >{item.label}</a>
+        ))}
+      </nav>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="/suche/" class="hidden lg:inline-flex items-center" style="font-family: var(--font-aux); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--cc-accent); border: 1px solid var(--cc-accent); padding: 9px 18px;">Schloss suchen</a>
+        <button
+          type="button"
+          id="mobile-menu-toggle"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Menü öffnen"
+          class="lg:hidden inline-flex items-center justify-center w-11 h-11 border"
+          style="border-color: var(--cc-line); color: var(--cc-text);"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-menu-backdrop" class="lg:hidden mobile-menu-backdrop" aria-hidden="true"></div>
+
+  <aside
+    id="mobile-menu"
+    class="lg:hidden mobile-menu-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile Navigation"
+    aria-hidden="true"
+  >
+    <div class="flex items-center justify-between px-5 py-4 border-b shrink-0" style="border-color: var(--cc-line);">
+      <a href="/" class="flex items-center gap-2" aria-label={`${site.brandName} Startseite`}>
+        <span style="color: var(--cc-accent); font-size: 22px;">♜</span>
+        <span style="font-family: var(--font-display); font-size: 22px; color: var(--cc-text);">Culture Castles</span>
+      </a>
+      <button
+        type="button"
+        id="mobile-menu-close"
+        aria-label="Menü schließen"
+        class="inline-flex items-center justify-center w-10 h-10"
+        style="color: var(--cc-text);"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+          <line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="flex-1 overflow-y-auto px-3 py-4" aria-label="Hauptnavigation mobil">
+      <ul class="space-y-1">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="flex items-center justify-between px-4 py-3 text-base transition-colors"
+              style="font-family: var(--font-display); font-size: 22px; color: var(--cc-text);"
+            >
+              <span>{item.label}</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="color: var(--cc-accent);">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="px-5 py-4 border-t shrink-0" style="border-color: var(--cc-line);">
+      <a href="/suche/" class="btn-ghost w-full justify-center" style="border-color: var(--cc-accent); color: var(--cc-accent);">Schloss suchen</a>
+    </div>
+  </aside>
+</header>
+
+<style>
+  .cc-navlink {
+    font-family: var(--font-aux);
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cc-text-soft);
+    padding-bottom: 3px;
+    border-bottom: 1px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  .cc-navlink:hover { color: var(--cc-text); border-bottom-color: var(--cc-accent); }
+
+  .mobile-menu-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 60; opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity 220ms ease, visibility 0s linear 220ms;
+  }
+  .mobile-menu-backdrop.is-open {
+    opacity: 1; visibility: visible; pointer-events: auto;
+    transition: opacity 220ms ease, visibility 0s linear 0s;
+  }
+  .mobile-menu-panel {
+    position: fixed; top: 0; right: 0; height: 100dvh;
+    width: min(88vw, 360px);
+    background: var(--cc-bg);
+    border-left: 1px solid var(--cc-line);
+    z-index: 70; transform: translateX(100%); visibility: hidden;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 260ms;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .mobile-menu-panel.is-open {
+    transform: translateX(0); visibility: visible;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0s;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var toggle = document.getElementById('mobile-menu-toggle');
+    var closeBtn = document.getElementById('mobile-menu-close');
+    var menu = document.getElementById('mobile-menu');
+    var backdrop = document.getElementById('mobile-menu-backdrop');
+    if (!toggle || !menu || !backdrop || !closeBtn) return;
+    var openState = false;
+    function setOpen(open) {
+      openState = open;
+      menu.classList.toggle('is-open', open);
+      backdrop.classList.toggle('is-open', open);
+      menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    toggle.addEventListener('click', function () { setOpen(!openState); });
+    closeBtn.addEventListener('click', function () { setOpen(false); toggle.focus(); });
+    backdrop.addEventListener('click', function () { setOpen(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && openState) { setOpen(false); toggle.focus(); }
+    });
+    menu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+    var mq = window.matchMedia('(min-width: 1024px)');
+    function handleResize(e) { if (e.matches && openState) setOpen(false); }
+    if (mq.addEventListener) mq.addEventListener('change', handleResize);
+    else mq.addListener(handleResize);
+  })();
+</script>

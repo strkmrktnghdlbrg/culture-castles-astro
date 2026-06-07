@@ -1,0 +1,126 @@
+---
+import CastleImage from "./CastleImage.astro";
+
+interface Props {
+  href: string;
+  title: string;
+  image?: string;
+  meta?: string;
+  teaser?: string;
+}
+
+const { href, title, image, meta, teaser } = Astro.props;
+---
+
+<a href={href} class="route-card">
+  <CastleImage
+    src={image}
+    alt={title}
+    class="route-card__bg"
+  />
+  <div class="route-card__veil"></div>
+  <div class="route-card__body">
+    {meta && (
+      <div class="route-card__meta">{meta}</div>
+    )}
+    <h3 class="route-card__title">{title}</h3>
+    {teaser && (
+      <p class="route-card__teaser">{teaser}</p>
+    )}
+  </div>
+</a>
+
+<style>
+  .route-card {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 320px;
+    border: 1px solid var(--cc-line);
+    overflow: hidden;
+    border-radius: 0;
+    text-decoration: none;
+    color: var(--cc-text);
+    transition: border-color 0.25s;
+  }
+
+  .route-card:hover {
+    border-color: var(--cc-accent);
+  }
+
+  .route-card :global(.route-card__bg) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .route-card :global(.route-card__bg img) {
+    filter: saturate(0.65) brightness(0.5);
+    transition: transform 0.4s;
+  }
+
+  .route-card:hover :global(.route-card__bg img) {
+    transform: scale(1.04);
+  }
+
+  .route-card__veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(42, 18, 26, 0.88) 0%,
+      rgba(42, 18, 26, 0.45) 50%,
+      rgba(42, 18, 26, 0.15) 100%
+    );
+    pointer-events: none;
+  }
+
+  .route-card__body {
+    position: relative;
+    z-index: 2;
+    padding: 34px 36px;
+  }
+
+  .route-card__meta {
+    font-family: var(--font-aux);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--cc-accent);
+    margin-bottom: 10px;
+  }
+
+  .route-card__title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 38px;
+    line-height: 1.02;
+    margin: 0 0 8px;
+    color: var(--cc-text);
+  }
+
+  .route-card__teaser {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--cc-text-soft);
+    line-height: 1.5;
+    max-width: 40ch;
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .route-card {
+      min-height: 260px;
+    }
+
+    .route-card__body {
+      padding: 24px 22px;
+    }
+
+    .route-card__title {
+      font-size: 28px;
+    }
+  }
+</style>

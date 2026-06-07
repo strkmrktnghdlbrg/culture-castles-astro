@@ -1,0 +1,207 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/Hero.astro";
+import Band from "../../components/Band.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import CastleCard from "../../components/CastleCard.astro";
+import OrnamentRule from "../../components/OrnamentRule.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+
+export async function getStaticPaths() {
+  const regions = await getCollection("regions");
+  return regions.map((e) => ({
+    params: { slug: e.id },
+    props: { entry: e },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const { title, teaser, heroImage, order } = entry.data;
+const slug = entry.id;
+
+// All castles belonging to this region, sorted by rank (ascending) then title
+const allCastles = await getCollection("castles");
+const regionCastles = allCastles
+  .filter((c) => c.data.region === slug)
+  .sort((a, b) => {
+    const ra = a.data.rank ?? 9999;
+    const rb = b.data.rank ?? 9999;
+    if (ra !== rb) return ra - rb;
+    return a.data.title.localeCompare(b.data.title, "de");
+  });
+
+const castleCount = regionCastles.length;
+---
+
+<BaseLayout
+  title={`${title} — Burgen & Schlösser`}
+  description={teaser}
+  ogImage={heroImage || undefined}
+>
+  <!-- Hero -->
+  <Hero
+    eyebrow="Region"
+    titleHtml={title}
+    lead={teaser}
+    image={heroImage || undefined}
+  />
+
+  <!-- Breadcrumb -->
+  <div class="container-page" style="padding-top: 2rem; padding-bottom: 0;">
+    <Breadcrumbs
+      items={[
+        { label: "Start", href: "/" },
+        { label: "Regionen", href: "/regionen/" },
+        { label: title },
+      ]}
+    />
+  </div>
+
+  <!-- Region intro (rendered Markdown body) -->
+  <Band>
+    <div class="region-intro">
+      <OrnamentRule label="Über die Region" />
+      <div class="region-prose">
+        <Content />
+      </div>
+    </div>
+  </Band>
+
+  <!-- Castle grid -->
+  {castleCount > 0 && (
+    <Band soft>
+      <SectionHead
+        kicker={`${castleCount} Bauwerk${castleCount !== 1 ? "e" : ""}`}
+        title={`Burgen & Schlösser in ${title}`}
+        subtitle={`Entdecken Sie die bedeutendsten Burgen, Schlösser und Festungen in der Region ${title}.`}
+        align="center"
+      />
+      <div class="castle-grid">
+        {regionCastles.map((castle) => (
+          <CastleCard
+            href={`/burgen/${castle.id}/`}
+            title={castle.data.title}
+            region={castle.data.place ?? title}
+            teaser={castle.data.teaser}
+            image={castle.data.heroImage || undefined}
+            imageAlt={castle.data.title}
+            rank={castle.data.rank}
+            type={castle.data.type}
+          />
+        ))}
+      </div>
+    </Band>
+  )}
+
+  {castleCount === 0 && (
+    <Band soft>
+      <SectionHead
+        title={`Bauwerke in ${title}`}
+        subtitle="Für diese Region werden derzeit Profile erarbeitet. Schauen Sie bald wieder vorbei."
+        align="center"
+      />
+    </Band>
+  )}
+
+  <!-- Bottom ornament + back link -->
+  <Band>
+    <OrnamentRule label="Alle Regionen" />
+    <div class="back-link-wrap">
+      <a href="/regionen/" class="btn-ghost">← Alle Regionen</a>
+    </div>
+  </Band>
+</BaseLayout>
+
+<style>
+  .region-intro {
+    max-width: 72ch;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .region-prose {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--cc-text-soft);
+  }
+
+  .region-prose :global(h2) {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 300;
+    color: var(--cc-text);
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .region-prose :global(p) {
+    margin-bottom: 1.25rem;
+  }
+
+  .region-prose :global(a) {
+    color: var(--cc-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .region-prose :global(a:hover) {
+    color: var(--cc-accent-hi);
+  }
+
+  /* Castle card grid: 3 cols desktop, 2 tablet, 1 mobile */
+  .castle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--cc-line);
+    margin-top: 3.5rem;
+    border: 1px solid var(--cc-line);
+  }
+
+  .castle-grid :global(.castle-card) {
+    border: none;
+    border-radius: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .castle-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .castle-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .back-link-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  .back-link-wrap .btn-ghost {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border: 1px solid var(--cc-text);
+    color: var(--cc-text);
+    font-family: var(--font-aux);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .back-link-wrap .btn-ghost:hover {
+    border-color: var(--cc-accent);
+    color: var(--cc-accent);
+  }
+</style>

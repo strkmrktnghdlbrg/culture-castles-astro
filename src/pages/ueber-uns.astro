@@ -1,0 +1,273 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Band from "../components/Band.astro";
+import SectionHead from "../components/SectionHead.astro";
+import OrnamentRule from "../components/OrnamentRule.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+  title={`Über uns — ${site.brandName}`}
+  description={site.description.short}
+>
+  <!-- Manuskript-Intro -->
+  <Band>
+    <SectionHead
+      kicker="Über Culture Castles"
+      title="Ein Reiseführer,&thinsp;geschrieben mit Leidenschaft"
+      subtitle="Geschichte, Architektur und handfeste Besuchstipps — kuratiert, nicht aggregiert."
+      align="center"
+    />
+
+    <div
+      style="
+        max-width: 72ch;
+        margin: 3.5rem auto 0;
+        font-family: var(--font-sans);
+        font-size: 1.125rem;
+        line-height: 1.85;
+        color: var(--cc-text);
+      "
+    >
+      <p style="margin-bottom: 1.5rem;">
+        {site.description.long}
+      </p>
+
+      <p style="margin-bottom: 1.5rem;">
+        Hinter Culture Castles steckt keine Datenbank-Maschine, sondern echte
+        Neugier: die Überzeugung, dass ein gut geplanter Besuch auf einer Burg
+        mehr hinterlässt als tausend Fotos im Feed. Wir reisen, recherchieren
+        und schreiben — damit du weißt, wann das Licht am schönsten durch die
+        Burgkapelle fällt, welcher Parkplatz vermieden werden sollte und welches
+        Schlosshotel den Aufpreis wirklich wert ist.
+      </p>
+
+      <p style="margin-bottom: 1.5rem;">
+        Europa ist ein Kontinent der Stein gewordenen Geschichte. Von den
+        wuchtigen Wehrbauten des Mittelalters bis zu den verspielten
+        Märchenschlössern des 19. Jahrhunderts erzählt jedes Bauwerk eine
+        eigene Geschichte — von Macht, Verfall, Wiedergeburt und dem täglichen
+        Leben hinter dicken Mauern. Diese Geschichten wollen wir zugänglich
+        machen: für Familien mit neugierigen Kindern ebenso wie für
+        Architektur-Enthusiasten und Brautpaare auf der Suche nach der
+        perfekten Kulisse.
+      </p>
+
+      <p>
+        Wir sind unabhängig. Unsere Empfehlungen entstehen nicht durch
+        Werbekooperationen, sondern durch eigene Erfahrung und sorgfältige
+        Recherche. Affiliate-Links zu Tickets, Führungen und Hotels kennzeichnen
+        wir transparent — sie helfen, dieses Projekt am Leben zu erhalten, ohne
+        die redaktionelle Unabhängigkeit zu gefährden.
+      </p>
+    </div>
+  </Band>
+
+  <OrnamentRule label="Unsere Werte" />
+
+  <!-- Mission & Werte -->
+  <Band soft>
+    <SectionHead
+      kicker="Wofür wir stehen"
+      title="Drei Grundsätze"
+      align="center"
+    />
+
+    <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 2rem;
+        max-width: 960px;
+        margin: 3rem auto 0;
+      "
+    >
+      <!-- Wert 1 -->
+      <div
+        style="
+          border: 1px solid var(--cc-line);
+          padding: 2rem;
+          background: var(--cc-bg);
+        "
+      >
+        <p
+          style="
+            font-family: var(--font-aux);
+            font-size: 11px;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: var(--cc-accent);
+            margin-bottom: 0.75rem;
+          "
+        >
+          I — Kuration
+        </p>
+        <h3
+          style="
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: var(--cc-text);
+            margin-bottom: 1rem;
+          "
+        >
+          Weniger, dafür besser
+        </h3>
+        <p
+          style="
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--cc-text-soft);
+          "
+        >
+          Wir listen nicht alles auf, was irgendwie vier Wände und ein Dach hat.
+          Jede Burg, jedes Schloss, jede Route wird bewusst ausgewählt und mit
+          echten Informationen versehen — damit du nicht selbst sieben Quellen
+          abgleichen musst.
+        </p>
+      </div>
+
+      <!-- Wert 2 -->
+      <div
+        style="
+          border: 1px solid var(--cc-line);
+          padding: 2rem;
+          background: var(--cc-bg);
+        "
+      >
+        <p
+          style="
+            font-family: var(--font-aux);
+            font-size: 11px;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: var(--cc-accent);
+            margin-bottom: 0.75rem;
+          "
+        >
+          II — Kontext
+        </p>
+        <h3
+          style="
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: var(--cc-text);
+            margin-bottom: 1rem;
+          "
+        >
+          Geschichte verstehen
+        </h3>
+        <p
+          style="
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--cc-text-soft);
+          "
+        >
+          Ein Bergfried ist mehr als Stein. Wir erklären die Epoche, den Bauherren
+          und die Ereignisse, die einen Ort geformt haben — knapp und lesbar,
+          ohne akademischen Ballast. Denn ein Besuch mit Hintergrundwissen
+          hinterlässt tiefere Eindrücke.
+        </p>
+      </div>
+
+      <!-- Wert 3 -->
+      <div
+        style="
+          border: 1px solid var(--cc-line);
+          padding: 2rem;
+          background: var(--cc-bg);
+        "
+      >
+        <p
+          style="
+            font-family: var(--font-aux);
+            font-size: 11px;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: var(--cc-accent);
+            margin-bottom: 0.75rem;
+          "
+        >
+          III — Praxisnähe
+        </p>
+        <h3
+          style="
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: var(--cc-text);
+            margin-bottom: 1rem;
+          "
+        >
+          Tipps, die funktionieren
+        </h3>
+        <p
+          style="
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--cc-text-soft);
+          "
+        >
+          Öffnungszeiten, Preise, beste Anreise, Parkplatz-Situationen,
+          Gastronomie in der Nähe: Wir sammeln das, was du vor Ort wirklich
+          brauchst — aktuell gepflegt, sodass du auch dann gut planst, wenn die
+          offizielle Website des Schlosses seit 2019 nicht aktualisiert wurde.
+        </p>
+      </div>
+    </div>
+  </Band>
+
+  <OrnamentRule label="Kontakt" />
+
+  <!-- Abschluss / CTA -->
+  <Band>
+    <div
+      style="
+        max-width: 60ch;
+        margin: 0 auto;
+        text-align: center;
+        font-family: var(--font-sans);
+      "
+    >
+      <p
+        style="
+          font-family: var(--font-serif2);
+          font-style: italic;
+          font-size: 1.35rem;
+          color: var(--cc-text-soft);
+          line-height: 1.7;
+          margin-bottom: 2rem;
+        "
+      >
+        Fragen, Hinweise, Ergänzungen? Wir freuen uns über Nachrichten von
+        Gleichgesinnten — ob Burg-Entdeckung, Fehlerkorrektur oder
+        Kooperationsanfrage.
+      </p>
+
+      <a
+        href="/kontakt/"
+        style="
+          display: inline-block;
+          padding: 0.75rem 2.25rem;
+          border: 1px solid var(--cc-accent);
+          font-family: var(--font-aux);
+          font-size: 11px;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          color: var(--cc-accent);
+          text-decoration: none;
+          transition: background 0.2s, color 0.2s;
+        "
+        onmouseover="this.style.background='var(--cc-accent)';this.style.color='var(--cc-bg)'"
+        onmouseout="this.style.background='transparent';this.style.color='var(--cc-accent)'"
+      >
+        Kontakt aufnehmen
+      </a>
+    </div>
+  </Band>
+</BaseLayout>

@@ -1,0 +1,176 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Band from "../../components/Band.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import CastleCard from "../../components/CastleCard.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import OrnamentRule from "../../components/OrnamentRule.astro";
+
+const castles = await getCollection("castles");
+const regions = await getCollection("regions");
+
+// Sort: featured first (by rank), then alphabetical by title
+const sortedCastles = castles.slice().sort((a, b) => {
+  const aFeatured = a.data.featured ? 1 : 0;
+  const bFeatured = b.data.featured ? 1 : 0;
+  if (bFeatured !== aFeatured) return bFeatured - aFeatured;
+  // Among featured, sort by rank (ascending, unranked last)
+  if (aFeatured && bFeatured) {
+    const aRank = a.data.rank ?? 9999;
+    const bRank = b.data.rank ?? 9999;
+    if (aRank !== bRank) return aRank - bRank;
+  }
+  return a.data.title.localeCompare(b.data.title, "de");
+});
+
+// Build region lookup for display labels
+const regionMap: Record<string, string> = {};
+for (const region of regions) {
+  regionMap[region.id] = region.data.title;
+}
+
+// Sort regions for filter chips: by order, then title
+const sortedRegions = regions.slice().sort((a, b) => {
+  const aOrder = a.data.order ?? 99;
+  const bOrder = b.data.order ?? 99;
+  if (aOrder !== bOrder) return aOrder - bOrder;
+  return a.data.title.localeCompare(b.data.title, "de");
+});
+
+const totalCount = castles.length;
+---
+
+<BaseLayout
+  title="Alle Burgen & Schlösser — Culture Castles"
+  description={`${totalCount} Burgen, Schlösser und Festungen im Überblick — von Neuschwanstein bis Burg Eltz. Entdecke Profil, Geschichte und Besuchstipps für jedes Bauwerk.`}
+>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <div class="container-page">
+      <Breadcrumbs items={[
+        { label: "Start", href: "/" },
+        { label: "Burgen & Schlösser" },
+      ]} />
+    </div>
+  </div>
+
+  <!-- Header Band -->
+  <Band>
+    <SectionHead
+      kicker="Überblick"
+      title="Alle Burgen & Schlösser"
+      subtitle={`${totalCount} kuratierte Bauwerke — Burgen, Schlösser, Festungen und Residenzen aus Deutschland und Europa. Stöbere durch die vollständige Sammlung oder wähle eine Region, um deine Reise zu planen.`}
+    />
+
+    <!-- Region Filter Chips -->
+    {sortedRegions.length > 0 && (
+      <div class="filter-section">
+        <p class="filter-label">Nach Region filtern</p>
+        <div class="filter-chips">
+          {sortedRegions.map((region) => (
+            <a href={`/regionen/${region.id}/`} class="filter-chip">
+              {region.data.title}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <OrnamentRule label={`${totalCount} Bauwerke`} />
+
+    <!-- Castle Card Grid -->
+    <div class="castle-grid">
+      {sortedCastles.map((castle) => {
+        const regionLabel = castle.data.region ? (regionMap[castle.data.region] ?? castle.data.region) : undefined;
+        return (
+          <CastleCard
+            href={`/burgen/${castle.id}/`}
+            title={castle.data.title}
+            region={regionLabel}
+            teaser={castle.data.teaser ?? undefined}
+            image={castle.data.heroImage ?? undefined}
+            imageAlt={castle.data.title}
+            rank={castle.data.rank ?? undefined}
+            type={castle.data.type ?? undefined}
+          />
+        );
+      })}
+    </div>
+  </Band>
+</BaseLayout>
+
+<style>
+  .breadcrumb-bar {
+    background: var(--cc-bg-2);
+    border-bottom: 1px solid var(--cc-line);
+    padding-block: 0.875rem;
+  }
+
+  .filter-section {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .filter-label {
+    font-family: var(--font-aux);
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.36em;
+    color: var(--cc-text-mute);
+    margin: 0 0 1rem;
+  }
+
+  .filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+  }
+
+  .filter-chip {
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid var(--cc-line);
+    background: transparent;
+    font-family: var(--font-aux);
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--cc-text-soft);
+    text-decoration: none;
+    border-radius: 0;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .filter-chip:hover {
+    border-color: var(--cc-accent);
+    color: var(--cc-accent);
+  }
+
+  .castle-grid {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .castle-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .castle-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .castle-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

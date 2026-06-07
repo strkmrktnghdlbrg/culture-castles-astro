@@ -1,0 +1,23 @@
+---
+interface Props {
+  rank: number;
+  variant?: "gold" | "silver" | "bronze" | "default";
+}
+const { rank, variant } = Astro.props;
+// Top-3 visuell hervorheben
+const tone =
+  variant ?? (rank === 1 ? "gold" : rank === 2 ? "silver" : rank === 3 ? "bronze" : "default");
+const colors: Record<string, string> = {
+  gold:    "background: linear-gradient(135deg,#fff4d1 0%,#f5c33b 60%,#b8860b 100%); color: #4a2c00;",
+  silver:  "background: linear-gradient(135deg,#f5f5f5 0%,#cfcfcf 60%,#8a8a8a 100%); color: #1f1f1f;",
+  bronze:  "background: linear-gradient(135deg,#f7d6b0 0%,#c98045 60%,#7a4a1f 100%); color: #2a1a00;",
+  default: "background: var(--color-accent-tint); color: var(--color-accent);",
+};
+---
+<span
+  class="inline-flex items-center justify-center shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-full font-bold text-xl sm:text-2xl shadow-sm ring-2 ring-white"
+  style={`${colors[tone]} font-family: var(--font-display);`}
+  aria-label={`Platz ${rank}`}
+>
+  {rank}
+</span>

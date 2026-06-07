@@ -1,0 +1,107 @@
+---
+/**
+ * Stay22-Map-Widget.
+ * -------------------
+ * Eingebettete Hotel-Karte mit Stay22-Affiliate-Tracking. Funktioniert
+ * sowohl als Stadt-Übersicht (auf /hotels/) als auch als Stadtteil-
+ * spezifische Karte (auf /<stadtteil>-hotels/ zentriert auf den Bezirk).
+ *
+ * Doku: https://stay22.com/help — Standard-Embed via iframe.
+ * Wir nutzen die maincolor-Option, damit Marker/UI im Top10-Gold stehen.
+ *
+ * lmaID kommt aus src/data/affiliate.ts (nicht hardcoden!).
+ */
+import { affiliate, stay22Enabled } from "../data/affiliate";
+
+// Geografisches Zentrum Deutschlands als Fallback, wenn keine
+// Koordinaten übergeben werden (Burg-Pages liefern lat/lng selbst).
+const DEFAULT_CENTER: [number, number] = [50.9, 10.0];
+
+interface Props {
+  /** Karten-Zentrum (Default: Deutschland-Mitte). */
+  lat?: number;
+  lng?: number;
+  /** Zoom-Level (Default 13 für Stadt, 15 für einzelnes Hotel). */
+  zoom?: number;
+  /** Container-Höhe in Tailwind-Klassen. */
+  heightClass?: string;
+  /** Titel über der Karte, optional. */
+  title?: string;
+  /** Lead-Text unter dem Titel. */
+  lead?: string;
+}
+
+const {
+  lat = DEFAULT_CENTER[0],
+  lng = DEFAULT_CENTER[1],
+  zoom = 13,
+  heightClass = "h-[480px] sm:h-[560px]",
+  title,
+  lead,
+} = Astro.props;
+
+/**
+ * Embed-URL-Auflösung:
+ * 1. Wenn affiliate.stay22.mapEmbedId gesetzt → vorkonfiguriertes
+ *    Stay22-Widget verwenden (https://stay22.com/embed/<id>).
+ *    Branding, Pins und Default-View sind dann im Stay22-Dashboard
+ *    gesetzt. Robuster als die Parameter-Variante.
+ * 2. Fallback: Parameter-Schema mit lat/lng/zoom/maincolor.
+ */
+const embedId = affiliate.stay22.mapEmbedId;
+const accentHex = "cdab6d"; // Champagnergold, ohne # für Stay22 maincolor-Parameter
+const fallbackParams = new URLSearchParams({
+  aid: affiliate.stay22.lmaId,
+  lat: String(lat),
+  lng: String(lng),
+  zoom: String(zoom),
+  maincolor: accentHex,
+});
+const embedUrl = embedId
+  ? `https://stay22.com/embed/${embedId}`
+  : `https://www.stay22.com/embed/widget?${fallbackParams.toString()}`;
+---
+
+{stay22Enabled ? (
+  <section class="my-12">
+    {title && (
+      <div class="mb-6 max-w-3xl">
+        <p class="eyebrow mb-2">Hotel-Karte</p>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-2" style="font-family: var(--font-display); color: var(--color-inkwell-purple);">
+          {title}
+        </h2>
+        {lead && (
+          <p class="text-base leading-relaxed" style="color: var(--color-shadow-graphite);">
+            {lead}
+          </p>
+        )}
+      </div>
+    )}
+
+    <div class={`relative rounded-2xl overflow-hidden border border-[var(--color-lavender-ash)] ${heightClass}`}>
+      <iframe
+        src={embedUrl}
+        width="100%"
+        height="100%"
+        loading="lazy"
+        title="Stay22 Hotel-Karte"
+        style="border:0; width:100%; height:100%; display:block;"
+        referrerpolicy="no-referrer-when-downgrade"
+        allow="geolocation"
+      ></iframe>
+    </div>
+
+    <p class="text-[11px] mt-2 text-right" style="color: var(--color-slate-steel);">
+      Karten-Anzeige & Buchungen über Partner Stay22 / Booking.com (Affiliate-Link).
+    </p>
+  </section>
+) : (
+  <section class="my-12">
+    <div class={`relative rounded-2xl overflow-hidden border border-dashed border-[var(--color-lavender-ash)] flex items-center justify-center text-center px-6 ${heightClass}`} style="background: var(--color-porcelain-mist); color: var(--color-slate-steel);">
+      <div>
+        <div class="text-3xl mb-2">🗺️</div>
+        <p class="text-sm">Hotel-Karte (Stay22) — wird aktiviert, sobald die Affiliate-ID konfiguriert ist.</p>
+      </div>
+    </div>
+  </section>
+)}

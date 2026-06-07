@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Band from "../../components/Band.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import OrnamentRule from "../../components/OrnamentRule.astro";
+import ExperienceGrid from "../../components/ExperienceGrid.astro";
+import { experiences } from "../../data/site";
+
+const items = experiences.map((e) => ({
+  href: `/erlebnisse/${e.slug}/`,
+  title: e.title,
+  teaser: e.teaser,
+  icon: e.icon,
+}));
+---
+
+<BaseLayout
+  title="Erlebniswelten — Culture Castles"
+  description="Alle Erlebniswelten im Überblick: Hochzeit im Schloss, Familienausflug, Burgruinen und mehr. Entdecke, was Burgen und Schlösser zu bieten haben."
+>
+  <Band>
+    <SectionHead
+      kicker="Entdecke deine Welt"
+      title="Erlebniswelten"
+      subtitle="Ob romantische Hochzeit, Abenteuer für die ganze Familie oder der Blick auf verwunschene Ruinen — Burgen und Schlösser bieten für jeden das passende Erlebnis."
+    />
+
+    <div style="margin-top: 3.5rem;">
+      <ExperienceGrid items={items} />
+    </div>
+  </Band>
+
+  <OrnamentRule label="Alle Themen auf einen Blick" />
+</BaseLayout>

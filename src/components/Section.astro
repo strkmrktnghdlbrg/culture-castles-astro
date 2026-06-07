@@ -1,0 +1,32 @@
+---
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  align?: "left" | "center";
+  bg?: "white" | "soft";
+}
+const { eyebrow, title, subtitle, align = "left", bg = "white" } = Astro.props;
+const bgClass = bg === "soft" ? "" : "";
+const bgStyle = bg === "soft" ? "background: var(--color-porcelain-mist);" : "";
+---
+<section class={`section ${bgClass}`} style={bgStyle}>
+  <div class="container-page">
+    {(eyebrow || title || subtitle) && (
+      <header class={`mb-10 ${align === "center" ? "text-center" : ""}`}>
+        {eyebrow && <div class="eyebrow mb-2">{eyebrow}</div>}
+        {title && (
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight" style="font-family: var(--font-display); color: var(--color-inkwell-purple);">
+            {title}
+          </h2>
+        )}
+        {subtitle && (
+          <p class={`mt-3 text-base sm:text-lg max-w-3xl ${align === "center" ? "mx-auto" : ""}`} style="color: var(--color-shadow-graphite);">
+            {subtitle}
+          </p>
+        )}
+      </header>
+    )}
+    <slot />
+  </div>
+</section>

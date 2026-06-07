@@ -1,0 +1,14 @@
+---
+interface Props {
+  hue: 1 | 2 | 3 | 4 | 5;
+  label?: string;
+  emoji?: string;
+  class?: string;
+}
+const { hue, label, emoji, class: cls = "" } = Astro.props;
+const gradient = `var(--hue-${hue})`;
+---
+<div class={`flex items-center justify-center text-white ${cls}`} style={`background: ${gradient};`}>
+  {emoji && <span class="text-4xl drop-shadow-md">{emoji}</span>}
+  {label && <span class="ml-2 text-sm font-bold tracking-widest uppercase drop-shadow-md">{label}</span>}
+</div>

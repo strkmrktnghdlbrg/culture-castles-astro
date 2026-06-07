@@ -1,0 +1,479 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CastleImage from "../../components/CastleImage.astro";
+import Band from "../../components/Band.astro";
+import OrnamentRule from "../../components/OrnamentRule.astro";
+import ImageCreditsList from "../../components/ImageCreditsList.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("articles");
+  return entries.map((e) => ({ params: { slug: e.id }, props: { entry: e } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const d = entry.data;
+
+// Zugehörige Artikel desselben Clusters (max. 3, ohne den aktuellen)
+const allArticles = await getCollection("articles");
+const related = allArticles
+  .filter((a) => a.data.cluster === d.cluster && a.id !== entry.id)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
+
+// Datum formatieren: "28. Mai 2026"
+const dateObj = new Date(d.date);
+const dateFormatted = dateObj.toLocaleDateString("de-DE", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<BaseLayout
+  title={d.title}
+  description={d.teaser}
+  ogImage={d.heroImage || undefined}
+>
+
+  <!-- Breadcrumb -->
+  <nav
+    aria-label="Breadcrumb"
+    style="
+      background: var(--cc-bg-2);
+      border-bottom: 1px solid var(--cc-line);
+    "
+  >
+    <div
+      class="container-page"
+      style="
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-aux);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--cc-text-mute);
+      "
+    >
+      <a href="/" style="color: var(--cc-text-soft); text-decoration: none;">Start</a>
+      <span style="color: var(--cc-line);">&rsaquo;</span>
+      <a href="/magazin/" style="color: var(--cc-text-soft); text-decoration: none;">Magazin</a>
+      <span style="color: var(--cc-line);">&rsaquo;</span>
+      <span style="color: var(--cc-accent);">{d.title}</span>
+    </div>
+  </nav>
+
+  <!-- Hero-Bild -->
+  <div style="position: relative; height: clamp(280px, 50vh, 580px); overflow: hidden;">
+    <CastleImage
+      src={d.heroImage}
+      alt={d.title}
+      class="article-hero-img"
+    />
+    <!-- Weingradient-Overlay -->
+    <div
+      aria-hidden="true"
+      style="
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(42,18,26,0.08) 0%,
+          rgba(42,18,26,0.32) 55%,
+          rgba(42,18,26,0.80) 100%
+        );
+      "
+    ></div>
+
+    <!-- Datum + Kategorie + Titel auf dem Bild -->
+    <div
+      class="container-page"
+      style="
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding-bottom: 2.5rem;
+      "
+    >
+      <!-- Datum · Kategorie -->
+      <p
+        style="
+          font-family: var(--font-aux);
+          font-size: 11px;
+          letter-spacing: 0.36em;
+          text-transform: uppercase;
+          color: var(--cc-accent);
+          margin: 0 0 0.75rem;
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+          flex-wrap: wrap;
+        "
+      >
+        <time datetime={d.date}>{dateFormatted}</time>
+        {d.category && (
+          <>
+            <span style="color: var(--cc-line);">·</span>
+            <span>{d.category}</span>
+          </>
+        )}
+      </p>
+
+      <h1
+        style="
+          font-family: var(--font-display);
+          font-size: clamp(30px, 5vw, 62px);
+          font-weight: 300;
+          color: var(--cc-text);
+          margin: 0;
+          line-height: 1.15;
+          max-width: 900px;
+        "
+      >
+        {d.title}
+      </h1>
+    </div>
+  </div>
+
+  <!-- Teaser-Lead -->
+  <div class="container-page" style="padding-top: 2.5rem; padding-bottom: 0;">
+    <p
+      style="
+        font-family: var(--font-sans);
+        font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+        line-height: 1.8;
+        color: var(--cc-text-soft);
+        max-width: 68ch;
+        margin: 0;
+        font-style: italic;
+        border-left: 3px solid var(--cc-accent);
+        padding-left: 1.5rem;
+      "
+    >
+      {d.teaser}
+    </p>
+  </div>
+
+  <!-- Artikel-Prosatext -->
+  <div class="container-page" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <div
+      class="article-prose"
+      style="
+        font-family: var(--font-sans);
+        color: var(--cc-text);
+        max-width: 70ch;
+        line-height: 1.85;
+        font-size: 1rem;
+      "
+    >
+      <Content />
+    </div>
+
+    <!-- Tags -->
+    {d.tags && d.tags.length > 0 && (
+      <div
+        style="
+          margin-top: 3rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid var(--cc-line);
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          align-items: center;
+        "
+      >
+        <span
+          style="
+            font-family: var(--font-aux);
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--cc-text-mute);
+            margin-right: 0.5rem;
+          "
+        >Themen:</span>
+        {d.tags.map((tag: string) => (
+          <span
+            style="
+              font-family: var(--font-aux);
+              font-size: 10px;
+              letter-spacing: 0.22em;
+              text-transform: uppercase;
+              color: var(--cc-accent);
+              border: 1px solid var(--cc-line);
+              padding: 0.25rem 0.65rem;
+            "
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+  </div>
+
+  <!-- Verwandte Artikel -->
+  {related.length > 0 && (
+    <Band soft>
+      <div style="margin-bottom: 2.5rem;">
+        <OrnamentRule label="Weitere Artikel" />
+        <h2
+          style="
+            font-family: var(--font-display);
+            font-size: clamp(26px, 3.5vw, 40px);
+            font-weight: 300;
+            color: var(--cc-text);
+            margin: 1.25rem 0 0.5rem;
+            text-align: center;
+          "
+        >
+          Mehr aus dieser Rubrik
+        </h2>
+        <p
+          style="
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            color: var(--cc-text-mute);
+            text-align: center;
+            margin: 0;
+          "
+        >
+          Weitere Beiträge aus dem Cluster <em style="font-style: italic; color: var(--cc-text-soft);">{d.cluster}</em>
+        </p>
+      </div>
+
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 0;
+          border: 1px solid var(--cc-line);
+        "
+      >
+        {related.map((a) => {
+          const relDateObj = new Date(a.data.date);
+          const relDate = relDateObj.toLocaleDateString("de-DE", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          });
+          return (
+            <article
+              style="
+                border-right: 1px solid var(--cc-line);
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+                background: var(--cc-bg-2);
+                transition: border-color 0.2s ease;
+              "
+            >
+              {/* Miniatur-Bild */}
+              {a.data.heroImage && (
+                <a href={`/magazin/${a.id}/`} style="display: block; text-decoration: none;">
+                  <CastleImage
+                    src={a.data.heroImage}
+                    alt={a.data.title}
+                    class="related-thumb"
+                  />
+                </a>
+              )}
+
+              {/* Datum + Kategorie */}
+              <p
+                style="
+                  font-family: var(--font-aux);
+                  font-size: 10px;
+                  letter-spacing: 0.32em;
+                  text-transform: uppercase;
+                  color: var(--cc-accent);
+                  margin: 0;
+                  display: flex;
+                  gap: 0.5rem;
+                  flex-wrap: wrap;
+                "
+              >
+                <time datetime={a.data.date}>{relDate}</time>
+                {a.data.category && (
+                  <>
+                    <span style="color: var(--cc-line);">·</span>
+                    <span>{a.data.category}</span>
+                  </>
+                )}
+              </p>
+
+              {/* Titel */}
+              <h3 style="margin: 0;">
+                <a
+                  href={`/magazin/${a.id}/`}
+                  style="
+                    font-family: var(--font-display);
+                    font-size: clamp(20px, 2.5vw, 26px);
+                    font-weight: 300;
+                    color: var(--cc-text);
+                    text-decoration: none;
+                    line-height: 1.25;
+                    display: block;
+                    transition: color 0.2s ease;
+                  "
+                >
+                  {a.data.title}
+                </a>
+              </h3>
+
+              {/* Teaser */}
+              {a.data.teaser && (
+                <p
+                  style="
+                    font-family: var(--font-sans);
+                    font-size: 0.875rem;
+                    color: var(--cc-text-soft);
+                    line-height: 1.6;
+                    margin: 0;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                  "
+                >
+                  {a.data.teaser}
+                </p>
+              )}
+
+              {/* Weiterlesen-Link */}
+              <a
+                href={`/magazin/${a.id}/`}
+                style="
+                  font-family: var(--font-aux);
+                  font-size: 10px;
+                  letter-spacing: 0.26em;
+                  text-transform: uppercase;
+                  color: var(--cc-accent);
+                  text-decoration: none;
+                  margin-top: auto;
+                "
+              >
+                Weiterlesen &rarr;
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    </Band>
+  )}
+
+  <!-- Bildnachweise -->
+  <ImageCreditsList
+    credits={[
+      d.heroCredit
+        ? {
+            label: d.title,
+            author: d.heroCredit.author ?? "",
+            license: d.heroCredit.license,
+            licenseUrl: d.heroCredit.licenseUrl,
+            sourceUrl: d.heroCredit.sourceUrl,
+          }
+        : null,
+    ]}
+  />
+
+</BaseLayout>
+
+<style>
+  /* Hero-Bild füllt den Container */
+  .article-hero-img {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Thumbnail in verwandten Artikeln */
+  .related-thumb {
+    width: 100%;
+    height: 160px;
+    display: block;
+    overflow: hidden;
+  }
+
+  /* Prosa-Styling */
+  .article-prose :global(h2) {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 300;
+    color: var(--cc-text);
+    margin: 2.5rem 0 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--cc-line);
+  }
+
+  .article-prose :global(h3) {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.2vw, 24px);
+    font-weight: 300;
+    color: var(--cc-text);
+    margin: 2rem 0 0.5rem;
+  }
+
+  .article-prose :global(p) {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--cc-text);
+    line-height: 1.85;
+    margin: 0 0 1.25rem;
+  }
+
+  .article-prose :global(ul),
+  .article-prose :global(ol) {
+    padding-left: 1.5rem;
+    margin: 0 0 1.25rem;
+    color: var(--cc-text-soft);
+    font-family: var(--font-sans);
+    line-height: 1.75;
+  }
+
+  .article-prose :global(li) {
+    margin-bottom: 0.4rem;
+  }
+
+  .article-prose :global(strong) {
+    color: var(--cc-text);
+    font-weight: 600;
+  }
+
+  .article-prose :global(em) {
+    font-style: italic;
+    color: var(--cc-text-soft);
+  }
+
+  .article-prose :global(a) {
+    color: var(--cc-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .article-prose :global(a:hover) {
+    color: var(--cc-accent-hi);
+  }
+
+  .article-prose :global(blockquote) {
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 3px solid var(--cc-accent);
+    background: var(--cc-bg-2);
+    font-style: italic;
+    color: var(--cc-text-soft);
+  }
+
+  /* Verwandte-Artikel: letzter in Zeile ohne rechten Rand */
+  @media (max-width: 600px) {
+    .related-thumb {
+      height: 130px;
+    }
+  }
+</style>

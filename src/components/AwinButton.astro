@@ -1,0 +1,77 @@
+---
+/**
+ * AwinButton — Affiliate-CTA über das Awin-Netzwerk.
+ * Baut den Deeplink über awinDeeplink() und setzt automatisch die
+ * Pflicht-rel-Attribute. Funktioniert schon vor der Programm-Annahme
+ * (führt dann ungetrackt direkt zum Merchant) — sobald du in
+ * src/data/products.ts deine Publisher-ID + die Merchant-mid einträgst,
+ * wird derselbe Button automatisch zum getrackten Deeplink.
+ *
+ * @example
+ *   <AwinButton merchant="tiqets" destination="https://www.tiqets.com/de/neuschwanstein-c66027/"
+ *               clickref="schloss-neuschwanstein" label="Tickets ab 15 €" />
+ */
+import {
+  awinDeeplink,
+  AFFILIATE_REL,
+  awin,
+  type AwinMerchantKey,
+} from "../data/products";
+
+interface Props {
+  merchant: AwinMerchantKey;
+  /** Ziel-URL beim Merchant. Default: Merchant-Homepage. */
+  destination?: string;
+  /** Sub-ID fürs Reporting (z.B. der Seiten-Slug). */
+  clickref?: string;
+  label?: string;
+  variant?: "gold" | "ghost";
+  class?: string;
+}
+
+const {
+  merchant,
+  destination,
+  clickref,
+  label,
+  variant = "gold",
+  class: cls = "",
+} = Astro.props;
+
+const m = awin.merchants[merchant];
+const href = awinDeeplink(merchant, destination, clickref);
+const text = label ?? (m ? `Zu ${m.name}` : "Zum Angebot");
+---
+
+{m && (
+  <a
+    href={href}
+    target="_blank"
+    rel={AFFILIATE_REL}
+    data-awin-merchant={merchant}
+    class={`cc-awin ${variant} ${cls}`}
+  >
+    <span>{text}</span>
+    <span aria-hidden="true">↗</span>
+  </a>
+)}
+
+<style>
+  .cc-awin {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: var(--font-aux);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 13px 26px;
+    border: 1px solid var(--cc-accent);
+    border-radius: 0;
+    transition: background-color 0.25s, color 0.25s;
+  }
+  .cc-awin.gold { background: var(--cc-accent); color: var(--cc-bg); }
+  .cc-awin.gold:hover { background: var(--cc-accent-hi); }
+  .cc-awin.ghost { background: transparent; color: var(--cc-accent); }
+  .cc-awin.ghost:hover { background: var(--cc-accent); color: var(--cc-bg); }
+</style>

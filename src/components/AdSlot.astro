@@ -1,0 +1,32 @@
+---
+import { adsense, adsenseEnabled } from "../data/adsense";
+
+interface Props {
+  slot: keyof typeof adsense.slots;
+  format?: string;
+  responsive?: boolean;
+  minHeight?: number;
+  label?: string;
+}
+const { slot, format = "auto", responsive = true, minHeight = 250, label = "Anzeige" } = Astro.props;
+const slotId = adsense.slots[slot];
+const show = adsenseEnabled && slotId.length > 0;
+---
+<div
+  class="my-8 mx-auto w-full max-w-3xl flex items-center justify-center text-xs"
+  style={`min-height:${minHeight}px; background: var(--color-porcelain-mist); border-radius: var(--radius-card); color: var(--color-slate-steel);`}
+>
+  {show ? (
+    <ins
+      class="adsbygoogle"
+      style={`display:block;width:100%;min-height:${minHeight}px;`}
+      data-ad-client={adsense.publisherId}
+      data-ad-slot={slotId}
+      data-ad-format={format}
+      data-full-width-responsive={responsive ? "true" : "false"}
+    />
+    <script is:inline>{`(adsbygoogle = window.adsbygoogle || []).push({});`}</script>
+  ) : (
+    <span>{label}</span>
+  )}
+</div>

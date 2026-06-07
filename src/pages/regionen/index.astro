@@ -1,0 +1,73 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Band from "../../components/Band.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import CastleCard from "../../components/CastleCard.astro";
+
+const regions = await getCollection("regions");
+const castles = await getCollection("castles");
+
+// Sort regions by order (ascending)
+const sortedRegions = regions.slice().sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+// Count castles per region slug
+const castleCountByRegion: Record<string, number> = {};
+for (const castle of castles) {
+  const r = castle.data.region;
+  if (r) {
+    castleCountByRegion[r] = (castleCountByRegion[r] ?? 0) + 1;
+  }
+}
+---
+
+<BaseLayout
+  title="Regionen — Culture Castles"
+  description="Entdecke Burgen und Schlösser nach Region: Bayern, Baden-Württemberg, Sachsen, Thüringen und mehr — alle Regionen im Überblick."
+>
+  <Band>
+    <SectionHead
+      kicker="Alle Regionen"
+      title="Regionen"
+      subtitle="Von den Alpen bis zur Ostseeküste — Deutschland, Österreich und die Schweiz beherbergen Hunderte von Burgen und Schlössern. Wähle eine Region und entdecke ihre Bauwerke."
+    />
+
+    <div class="region-grid">
+      {sortedRegions.map((region) => {
+        const count = castleCountByRegion[region.id] ?? 0;
+        const typeLabel = `${count} Bauwerk${count !== 1 ? "e" : ""}`;
+        return (
+          <CastleCard
+            href={`/regionen/${region.id}/`}
+            title={region.data.title}
+            teaser={region.data.teaser}
+            image={region.data.heroImage ?? undefined}
+            imageAlt={region.data.title}
+            type={typeLabel}
+          />
+        );
+      })}
+    </div>
+  </Band>
+</BaseLayout>
+
+<style>
+  .region-grid {
+    margin-top: 3.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .region-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .region-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

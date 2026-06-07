@@ -1,0 +1,240 @@
+---
+import CastleImage from "./CastleImage.astro";
+
+interface StatItem {
+  v: string;
+  l: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  titleHtml: string;
+  lead?: string;
+  image?: string;
+  stats?: StatItem[];
+  showSearch?: boolean;
+}
+
+const { eyebrow, titleHtml, lead, image, stats, showSearch } = Astro.props;
+---
+
+<section class="cc-hero">
+  <CastleImage
+    src={image}
+    alt={eyebrow ?? "Culture Castles"}
+    class="cc-hero__bg"
+  />
+  <div class="cc-hero__veil"></div>
+
+  <div class="container-page cc-hero__inner">
+    {eyebrow && (
+      <p class="cc-hero__eyebrow">{eyebrow}</p>
+    )}
+
+    <h1 class="cc-hero__title" set:html={titleHtml} />
+
+    {lead && (
+      <p class="cc-hero__lead">{lead}</p>
+    )}
+
+    {showSearch && (
+      <form class="cc-hero__searchbar" action="/suche/" method="get">
+        <input
+          type="text"
+          name="q"
+          placeholder="Burg, Schloss oder Region suchen …"
+          aria-label="Suche"
+        />
+        <button type="submit">Entdecken</button>
+      </form>
+    )}
+
+    {stats && stats.length > 0 && (
+      <div class="cc-hero__stats">
+        {stats.map((s) => (
+          <div class="cc-hero__stat">
+            <div class="cc-hero__stat-v">{s.v}</div>
+            <div class="cc-hero__stat-l">{s.l}</div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .cc-hero {
+    position: relative;
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* Full-bleed background via CastleImage */
+  .cc-hero :global(.cc-hero__bg) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .cc-hero :global(.cc-hero__bg img) {
+    filter: saturate(0.68) brightness(0.42);
+    border-radius: 0;
+  }
+
+  /* Wine veil gradient overlay */
+  .cc-hero__veil {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(42, 18, 26, 0.72) 0%,
+        rgba(42, 18, 26, 0.55) 45%,
+        rgba(42, 18, 26, 0.97) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(42, 18, 26, 0.82) 0%,
+        rgba(42, 18, 26, 0.3) 55%,
+        transparent 75%
+      );
+    pointer-events: none;
+  }
+
+  /* Inner content */
+  .cc-hero__inner {
+    position: relative;
+    z-index: 2;
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
+  /* Eyebrow */
+  .cc-hero__eyebrow {
+    font-family: var(--font-aux);
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: var(--cc-accent);
+    margin-bottom: 26px;
+  }
+
+  /* H1 title — set:html means <em> renders gold italic */
+  .cc-hero__title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(48px, 8.5vw, 108px);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    max-width: 14ch;
+    text-wrap: balance;
+    color: var(--cc-text);
+    margin: 0;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+  }
+
+  .cc-hero__title :global(em) {
+    font-style: italic;
+    color: var(--cc-accent);
+  }
+
+  /* Lead */
+  .cc-hero__lead {
+    font-family: var(--font-sans);
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--cc-text-soft);
+    max-width: 46ch;
+    margin: 30px 0 38px;
+  }
+
+  /* Search bar */
+  .cc-hero__searchbar {
+    display: flex;
+    max-width: 540px;
+    border: 1px solid var(--cc-text);
+    background: rgba(42, 18, 26, 0.4);
+    margin-top: 44px;
+    border-radius: 0;
+  }
+
+  .cc-hero__searchbar input {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: var(--cc-text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    padding: 15px 18px;
+    border-radius: 0;
+  }
+
+  .cc-hero__searchbar input::placeholder {
+    color: var(--cc-text-soft);
+  }
+
+  .cc-hero__searchbar button {
+    background: var(--cc-accent);
+    color: var(--cc-bg);
+    border: 0;
+    font-family: var(--font-aux);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding: 0 24px;
+    cursor: pointer;
+    border-radius: 0;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .cc-hero__searchbar button:hover {
+    background: var(--cc-accent-hi);
+  }
+
+  /* Stats row */
+  .cc-hero__stats {
+    display: flex;
+    gap: 54px;
+    margin-top: 54px;
+    flex-wrap: wrap;
+  }
+
+  .cc-hero__stat-v {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 46px;
+    line-height: 1;
+    color: var(--cc-text);
+  }
+
+  .cc-hero__stat-l {
+    font-family: var(--font-aux);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--cc-text-soft);
+    margin-top: 8px;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .cc-hero__inner {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+
+    .cc-hero__stats {
+      gap: 32px;
+    }
+
+    .cc-hero__searchbar {
+      max-width: 100%;
+    }
+  }
+</style>

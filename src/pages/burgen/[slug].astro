@@ -1,0 +1,719 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CastleImage from "../../components/CastleImage.astro";
+import CastleCard from "../../components/CastleCard.astro";
+import OrnamentRule from "../../components/OrnamentRule.astro";
+import StaySection from "../../components/StaySection.astro";
+import ImageCreditsList from "../../components/ImageCreditsList.astro";
+import Band from "../../components/Band.astro";
+import AwinButton from "../../components/AwinButton.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("castles");
+  return entries.map((e) => ({ params: { slug: e.id }, props: { entry: e } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const d = entry.data;
+
+const allCastles = await getCollection("castles");
+const related = allCastles
+  .filter((c) => c.data.region === d.region && c.id !== entry.id)
+  .slice(0, 3);
+
+const lat = d.coordinates?.[0];
+const lng = d.coordinates?.[1];
+
+const gygUrl = d.gygQuery
+  ? `https://www.getyourguide.com/s/?q=${encodeURIComponent(d.gygQuery)}`
+  : `https://www.getyourguide.com/s/?q=${encodeURIComponent(d.title)}`;
+const tiqetsUrl = `https://www.tiqets.com/de/search/?q=${encodeURIComponent(d.gygQuery ?? d.title)}`;
+---
+
+<BaseLayout
+  title={d.title}
+  description={d.teaser}
+  ogImage={d.heroImage || undefined}
+>
+
+  <!-- Breadcrumb -->
+  <nav
+    aria-label="Breadcrumb"
+    style="
+      background: var(--cc-bg-2);
+      border-bottom: 1px solid var(--cc-line);
+    "
+  >
+    <div
+      class="container-page"
+      style="
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-aux);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--cc-text-mute);
+      "
+    >
+      <a
+        href="/"
+        style="color: var(--cc-text-soft); text-decoration: none;"
+      >Start</a>
+      <span style="color: var(--cc-line);">&rsaquo;</span>
+      <a
+        href="/burgen/"
+        style="color: var(--cc-text-soft); text-decoration: none;"
+      >Burgen &amp; Schlösser</a>
+      <span style="color: var(--cc-line);">&rsaquo;</span>
+      <span style="color: var(--cc-accent);">{d.title}</span>
+    </div>
+  </nav>
+
+  <!-- Hero image -->
+  <div style="position: relative; height: clamp(300px, 55vh, 640px); overflow: hidden;">
+    <CastleImage
+      src={d.heroImage}
+      alt={d.title}
+      class="hero-img"
+    />
+    <!-- Wine veil overlay -->
+    <div
+      aria-hidden="true"
+      style="
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(42,18,26,0.1) 0%,
+          rgba(42,18,26,0.35) 60%,
+          rgba(42,18,26,0.75) 100%
+        );
+      "
+    ></div>
+
+    <!-- Hero title block overlaid on image -->
+    <div
+      class="container-page"
+      style="
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding-bottom: 2.5rem;
+      "
+    >
+      <!-- Eyebrow: place · type · built -->
+      <p
+        style="
+          font-family: var(--font-aux);
+          font-size: 11px;
+          letter-spacing: 0.36em;
+          text-transform: uppercase;
+          color: var(--cc-accent);
+          margin: 0 0 0.75rem;
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+          flex-wrap: wrap;
+        "
+      >
+        {d.place && <span>{d.place}</span>}
+        {d.place && (d.type || d.built) && <span style="color:var(--cc-line);">·</span>}
+        {d.type && <span>{d.type}</span>}
+        {d.type && d.built && <span style="color:var(--cc-line);">·</span>}
+        {d.built && <span>erbaut {d.built}</span>}
+      </p>
+
+      <h1
+        style="
+          font-family: var(--font-display);
+          font-size: clamp(36px, 6vw, 72px);
+          font-weight: 300;
+          color: var(--cc-text);
+          margin: 0;
+          line-height: 1.1;
+        "
+      >
+        {d.title}
+      </h1>
+    </div>
+  </div>
+
+  <!-- Teaser lead -->
+  <div
+    class="container-page"
+    style="padding-top: 2.5rem; padding-bottom: 0;"
+  >
+    <p
+      style="
+        font-family: var(--font-sans);
+        font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+        line-height: 1.8;
+        color: var(--cc-text-soft);
+        max-width: 68ch;
+        margin: 0;
+        font-style: italic;
+        border-left: 3px solid var(--cc-accent);
+        padding-left: 1.5rem;
+      "
+    >
+      {d.teaser}
+    </p>
+  </div>
+
+  <!-- Main content area: two-column layout -->
+  <div
+    class="container-page detail-grid"
+    style="
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 3.5rem;
+      align-items: start;
+    "
+  >
+
+    <!-- ── MAIN column ── -->
+    <div>
+
+      <!-- Prose body (rendered Markdown) -->
+      <div
+        class="castle-prose"
+        style="
+          font-family: var(--font-sans);
+          color: var(--cc-text);
+          max-width: 70ch;
+          line-height: 1.8;
+          font-size: 1rem;
+        "
+      >
+        <Content />
+      </div>
+
+      <!-- Highlights -->
+      {d.highlights && d.highlights.length > 0 && (
+        <div style="margin-top: 3rem;">
+          <OrnamentRule label="Highlights" />
+          <ul
+            style="
+              list-style: none;
+              margin: 1.5rem 0 0;
+              padding: 0;
+              display: flex;
+              flex-direction: column;
+              gap: 0.75rem;
+            "
+          >
+            {d.highlights.map((h: string) => (
+              <li
+                style="
+                  display: flex;
+                  gap: 0.9rem;
+                  align-items: flex-start;
+                  padding: 0.75rem 1rem;
+                  border-left: 2px solid var(--cc-accent);
+                  background: var(--cc-bg-2);
+                "
+              >
+                <span
+                  aria-hidden="true"
+                  style="
+                    color: var(--cc-accent);
+                    font-family: var(--font-display);
+                    font-size: 1rem;
+                    flex-shrink: 0;
+                    margin-top: 0.1rem;
+                  "
+                >✦</span>
+                <span
+                  style="
+                    font-family: var(--font-sans);
+                    font-size: 0.9375rem;
+                    color: var(--cc-text-soft);
+                    line-height: 1.6;
+                  "
+                >
+                  {h}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <!-- FAQ -->
+      {d.faq && d.faq.length > 0 && (
+        <div style="margin-top: 3rem;">
+          <OrnamentRule label="Häufige Fragen" />
+          <div
+            style="
+              margin-top: 1.5rem;
+              display: flex;
+              flex-direction: column;
+              gap: 0;
+              border: 1px solid var(--cc-line);
+            "
+          >
+            {d.faq.map((item: { q: string; a: string }) => (
+              <details
+                style="
+                  border-bottom: 1px solid var(--cc-line);
+                  background: var(--cc-bg-2);
+                "
+              >
+                <summary
+                  style="
+                    padding: 1.1rem 1.25rem;
+                    cursor: pointer;
+                    font-family: var(--font-display);
+                    font-size: 1.1rem;
+                    font-weight: 300;
+                    color: var(--cc-text);
+                    list-style: none;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 1rem;
+                    user-select: none;
+                  "
+                >
+                  <span>{item.q}</span>
+                  <span
+                    aria-hidden="true"
+                    style="
+                      color: var(--cc-accent);
+                      font-family: var(--font-aux);
+                      font-size: 0.8rem;
+                      flex-shrink: 0;
+                    "
+                  >+</span>
+                </summary>
+                <div
+                  style="
+                    padding: 0 1.25rem 1.25rem;
+                    font-family: var(--font-sans);
+                    font-size: 0.9375rem;
+                    color: var(--cc-text-soft);
+                    line-height: 1.7;
+                  "
+                >
+                  {item.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      )}
+
+    </div>
+
+    <!-- ── ASIDE column ── -->
+    <aside>
+
+      <!-- Visit info box -->
+      {d.visit && (
+        <div
+          style="
+            border: 1px solid var(--cc-line);
+            background: var(--cc-bg-2);
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+          "
+        >
+          <p
+            style="
+              font-family: var(--font-aux);
+              font-size: 10px;
+              letter-spacing: 0.4em;
+              text-transform: uppercase;
+              color: var(--cc-accent);
+              margin: 0 0 1.25rem;
+            "
+          >
+            Besuchsinfo
+          </p>
+
+          <dl style="margin: 0; display: flex; flex-direction: column; gap: 1rem;">
+
+            {d.visit.duration && (
+              <div>
+                <dt
+                  style="
+                    font-family: var(--font-aux);
+                    font-size: 10px;
+                    letter-spacing: 0.28em;
+                    text-transform: uppercase;
+                    color: var(--cc-text-mute);
+                    margin-bottom: 0.25rem;
+                  "
+                >
+                  Besuchsdauer
+                </dt>
+                <dd
+                  style="
+                    font-family: var(--font-sans);
+                    font-size: 0.9375rem;
+                    color: var(--cc-text);
+                    margin: 0;
+                    line-height: 1.5;
+                  "
+                >
+                  {d.visit.duration}
+                </dd>
+              </div>
+            )}
+
+            {d.visit.price && (
+              <div style="border-top: 1px solid var(--cc-line); padding-top: 1rem;">
+                <dt
+                  style="
+                    font-family: var(--font-aux);
+                    font-size: 10px;
+                    letter-spacing: 0.28em;
+                    text-transform: uppercase;
+                    color: var(--cc-text-mute);
+                    margin-bottom: 0.25rem;
+                  "
+                >
+                  Eintritt
+                </dt>
+                <dd
+                  style="
+                    font-family: var(--font-sans);
+                    font-size: 0.9375rem;
+                    color: var(--cc-text);
+                    margin: 0;
+                    line-height: 1.5;
+                  "
+                >
+                  {d.visit.price}
+                </dd>
+              </div>
+            )}
+
+            {d.visit.bestTime && (
+              <div style="border-top: 1px solid var(--cc-line); padding-top: 1rem;">
+                <dt
+                  style="
+                    font-family: var(--font-aux);
+                    font-size: 10px;
+                    letter-spacing: 0.28em;
+                    text-transform: uppercase;
+                    color: var(--cc-text-mute);
+                    margin-bottom: 0.25rem;
+                  "
+                >
+                  Beste Reisezeit
+                </dt>
+                <dd
+                  style="
+                    font-family: var(--font-sans);
+                    font-size: 0.9375rem;
+                    color: var(--cc-text);
+                    margin: 0;
+                    line-height: 1.5;
+                  "
+                >
+                  {d.visit.bestTime}
+                </dd>
+              </div>
+            )}
+
+            {d.visit.hours && (
+              <div style="border-top: 1px solid var(--cc-line); padding-top: 1rem;">
+                <dt
+                  style="
+                    font-family: var(--font-aux);
+                    font-size: 10px;
+                    letter-spacing: 0.28em;
+                    text-transform: uppercase;
+                    color: var(--cc-text-mute);
+                    margin-bottom: 0.25rem;
+                  "
+                >
+                  Öffnungszeiten
+                </dt>
+                <dd
+                  style="
+                    font-family: var(--font-sans);
+                    font-size: 0.9375rem;
+                    color: var(--cc-text);
+                    margin: 0;
+                    line-height: 1.5;
+                  "
+                >
+                  {d.visit.hours}
+                </dd>
+              </div>
+            )}
+
+          </dl>
+        </div>
+      )}
+
+      <!-- GetYourGuide CTA -->
+      <div
+        style="
+          border: 1px solid var(--cc-accent);
+          background: var(--cc-bg-2);
+          padding: 1.75rem;
+          margin-bottom: 1.5rem;
+          text-align: center;
+        "
+      >
+        <p
+          style="
+            font-family: var(--font-aux);
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--cc-accent);
+            margin: 0 0 0.75rem;
+          "
+        >
+          Touren &amp; Tickets
+        </p>
+        <p
+          style="
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--cc-text);
+            margin: 0 0 1.25rem;
+            line-height: 1.3;
+          "
+        >
+          Führungen &amp; Aktivitäten<br/>
+          <em style="font-style: italic; color: var(--cc-accent);">für {d.title}</em>
+        </p>
+        <a
+          href={gygUrl}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          style="
+            display: block;
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--cc-accent);
+            color: var(--cc-bg);
+            font-family: var(--font-aux);
+            font-size: 11px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            border: 1px solid var(--cc-accent);
+            transition: background 0.2s ease, color 0.2s ease;
+          "
+        >
+          Touren entdecken →
+        </a>
+        <p
+          style="
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--cc-text-mute);
+            margin: 0.75rem 0 0;
+          "
+        >
+          via GetYourGuide
+        </p>
+
+        <div style="height:1px; background: var(--cc-line); margin: 1.25rem 0;"></div>
+
+        <p
+          style="
+            font-family: var(--font-aux);
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--cc-accent);
+            margin: 0 0 0.75rem;
+          "
+        >
+          Tickets ohne Anstehen
+        </p>
+        <AwinButton
+          merchant="tiqets"
+          destination={tiqetsUrl}
+          clickref={entry.id}
+          label={`Tickets für ${d.title}`}
+          variant="ghost"
+          class="cc-detail-awin"
+        />
+        <p
+          style="
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--cc-text-mute);
+            margin: 0.75rem 0 0;
+          "
+        >
+          via Tiqets · Affiliate-Link
+        </p>
+      </div>
+
+    </aside>
+  </div>
+
+  <!-- StaySection: Hotels in der Nähe -->
+  <StaySection
+    title={`Hotels in der Nähe von ${d.title}`}
+    lead={`Übernachte in unmittelbarer Nähe der ${d.title} und erlebe Geschichte hautnah — von charmanten Gasthäusern bis zu eleganten Schlosshotels.`}
+    lat={lat}
+    lng={lng}
+  />
+
+  <!-- Mehr in Region -->
+  {related.length > 0 && (
+    <Band soft>
+      <div style="margin-bottom: 2rem;">
+        <OrnamentRule label={`Mehr in dieser Region`} />
+        <h2
+          style="
+            font-family: var(--font-display);
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 300;
+            color: var(--cc-text);
+            margin: 1.25rem 0 0.5rem;
+            text-align: center;
+          "
+        >
+          Weitere Burgen &amp; Schlösser
+        </h2>
+        <p
+          style="
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            color: var(--cc-text-mute);
+            text-align: center;
+            margin: 0;
+          "
+        >
+          Entdecke mehr historische Bauwerke in derselben Region.
+        </p>
+      </div>
+
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 1.5rem;
+        "
+      >
+        {related.map((c) => (
+          <CastleCard
+            href={`/burgen/${c.id}/`}
+            title={c.data.title}
+            region={c.data.region}
+            teaser={c.data.teaser}
+            image={c.data.heroImage}
+            imageAlt={c.data.title}
+            rank={c.data.rank}
+            type={c.data.type}
+          />
+        ))}
+      </div>
+    </Band>
+  )}
+
+  <!-- Image credits -->
+  <ImageCreditsList
+    credits={[
+      d.heroCredit
+        ? {
+            label: d.title,
+            author: d.heroCredit.author ?? "",
+            license: d.heroCredit.license,
+            licenseUrl: d.heroCredit.licenseUrl,
+            sourceUrl: d.heroCredit.sourceUrl,
+          }
+        : null,
+    ]}
+  />
+
+</BaseLayout>
+
+<style>
+  /* Hero image fill */
+  .hero-img {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Prose styling */
+  .castle-prose :global(h2) {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 300;
+    color: var(--cc-text);
+    margin: 2.5rem 0 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--cc-line);
+  }
+
+  .castle-prose :global(p) {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--cc-text);
+    line-height: 1.8;
+    margin: 0 0 1.25rem;
+  }
+
+  .castle-prose :global(ul),
+  .castle-prose :global(ol) {
+    padding-left: 1.5rem;
+    margin: 0 0 1.25rem;
+    color: var(--cc-text-soft);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+  }
+
+  .castle-prose :global(li) {
+    margin-bottom: 0.4rem;
+  }
+
+  .castle-prose :global(strong) {
+    color: var(--cc-text);
+    font-weight: 600;
+  }
+
+  .castle-prose :global(em) {
+    font-style: italic;
+    color: var(--cc-text-soft);
+  }
+
+  .castle-prose :global(a) {
+    color: var(--cc-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .castle-prose :global(a:hover) {
+    color: var(--cc-accent-hi);
+  }
+
+  /* details/summary chevron reset */
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+  details[open] > summary > span:last-child {
+    transform: rotate(45deg);
+    display: inline-block;
+  }
+
+  /* Responsive: stack grid on mobile */
+  @media (max-width: 900px) {
+    .detail-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

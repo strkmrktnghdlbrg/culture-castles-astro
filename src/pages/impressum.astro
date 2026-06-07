@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { legal } from "../data/legal";
+const op = legal.operator;
+---
+<BaseLayout title="Impressum" description="Impressum nach § 5 DDG." noindex>
+  <article class="container-page section max-w-3xl prose-like">
+    <h1 class="text-3xl sm:text-4xl font-bold mb-6" style="font-family: var(--font-display);">Impressum</h1>
+
+    <h2 class="text-xl font-bold mt-8 mb-3">Angaben gemäß § 5 DDG</h2>
+    <p>{op.name}<br />{op.street}<br />{op.zip} {op.city}<br />{op.country}</p>
+
+    <h2 class="text-xl font-bold mt-8 mb-3">Kontakt</h2>
+    <p>E-Mail: {op.email}<br />Telefon: {op.phone}</p>
+
+    <h2 class="text-xl font-bold mt-8 mb-3">Umsatzsteuer-ID</h2>
+    <p>{op.vatId}</p>
+
+    <h2 class="text-xl font-bold mt-8 mb-3">Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+    <p>{legal.responsibleForContent}</p>
+
+    <h2 class="text-xl font-bold mt-8 mb-3">Haftungsausschluss</h2>
+    <p class="text-sm" style="color: var(--color-shadow-graphite);">
+      Die Inhalte dieser Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit
+      und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Redaktionelle Empfehlungen auf
+      culture-castles.de stellen keine objektive Rangfolge dar.
+    </p>
+  </article>
+</BaseLayout>

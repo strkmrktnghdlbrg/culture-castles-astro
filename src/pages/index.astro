@@ -1,0 +1,439 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import FeatureCastle from "../components/FeatureCastle.astro";
+import Band from "../components/Band.astro";
+import SectionHead from "../components/SectionHead.astro";
+import CastleCard from "../components/CastleCard.astro";
+import RegionGrid from "../components/RegionGrid.astro";
+import RouteCard from "../components/RouteCard.astro";
+import OrnamentRule from "../components/OrnamentRule.astro";
+import ExperienceGrid from "../components/ExperienceGrid.astro";
+import StaySection from "../components/StaySection.astro";
+import Newsletter from "../components/Newsletter.astro";
+import ImageCreditsList from "../components/ImageCreditsList.astro";
+import { site, experiences } from "../data/site";
+
+// ── Collections ──────────────────────────────────────────────────────────────
+const castles = await getCollection("castles");
+const regions = await getCollection("regions");
+const routes  = await getCollection("routes");
+const articles = await getCollection("articles");
+
+// ── Schloss des Monats ────────────────────────────────────────────────────────
+const castleOfMonth = castles.find((c) => c.data.castleOfMonth) ?? castles[0];
+
+// ── Beliebte Burgen (featured, sorted by rank, max 6) ────────────────────────
+const featuredCastles = castles
+  .filter((c) => c.data.featured)
+  .sort((a, b) => (a.data.rank ?? 99) - (b.data.rank ?? 99))
+  .slice(0, 6);
+
+// ── Regionen (sorted by order) ────────────────────────────────────────────────
+const sortedRegions = [...regions].sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+);
+
+// Count castles per region
+const castlesByRegion: Record<string, number> = {};
+for (const c of castles) {
+  const r = c.data.region;
+  castlesByRegion[r] = (castlesByRegion[r] ?? 0) + 1;
+}
+
+// ── Featured Routes ───────────────────────────────────────────────────────────
+const featuredRoutes = routes.filter((r) => r.data.featured);
+
+// ── Magazin (latest 3, non-draft) ────────────────────────────────────────────
+const latestArticles = articles
+  .filter((a) => !a.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+// ── Erlebnisse (first 4 from site.experiences) ───────────────────────────────
+const topExperiences = experiences.slice(0, 4).map((exp) => ({
+  href: `/erlebnisse/${exp.slug}/`,
+  title: exp.title,
+  teaser: exp.teaser,
+  icon: exp.icon,
+}));
+
+// ── Hero stats ────────────────────────────────────────────────────────────────
+const heroStats = [
+  { v: String(castles.length), l: "Burgen & Schlösser" },
+  { v: "7",  l: "Regionen" },
+  { v: "3",  l: "Routen" },
+  { v: "6",  l: "Erlebniswelten" },
+];
+
+// ── RegionGrid props (with zero-padded num "01"…"07") ────────────────────────
+const regionGridItems = sortedRegions.map((r, i) => ({
+  href:  `/regionen/${r.id}/`,
+  title: r.data.title,
+  count: castlesByRegion[r.id] ?? 0,
+  num:   String(i + 1).padStart(2, "0"),
+}));
+
+// ── ImageCreditsList ──────────────────────────────────────────────────────────
+// Collect heroCredit for castleOfMonth + shown castles; deduplicate by title.
+const shownCastles = [castleOfMonth, ...featuredCastles].filter(
+  (c, i, arr) => arr.findIndex((x) => x.id === c.id) === i
+);
+
+const imageCredits = shownCastles.map((c) =>
+  c.data.heroCredit
+    ? {
+        label:      c.data.title,
+        author:     c.data.heroCredit.author,
+        license:    c.data.heroCredit.license,
+        licenseUrl: c.data.heroCredit.licenseUrl,
+        sourceUrl:  c.data.heroCredit.sourceUrl,
+      }
+    : null
+);
+
+// ── Date formatter (DE) ───────────────────────────────────────────────────────
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<BaseLayout
+  title={site.brandName}
+  description={site.description.short}
+  ogImage={castleOfMonth.data.heroImage || undefined}
+>
+
+  {/* ── HERO ── */}
+  <Hero
+    eyebrow="Burgen & Schlösser Europas"
+    titleHtml="Wo Steine <em>Geschichten</em> flüstern."
+    lead={site.description.short}
+    image={castleOfMonth.data.heroImage}
+    showSearch={true}
+    stats={heroStats}
+  />
+
+  {/* ── SCHLOSS DES MONATS ── */}
+  <Band id="schloss-des-monats">
+    <OrnamentRule label="Schloss des Monats" />
+    <div style="margin-top: 3.5rem;">
+      <FeatureCastle
+        href={`/burgen/${castleOfMonth.id}/`}
+        title={castleOfMonth.data.title}
+        image={castleOfMonth.data.heroImage}
+        place={castleOfMonth.data.place}
+        epoch={
+          castleOfMonth.data.built && castleOfMonth.data.lord
+            ? `erbaut ${castleOfMonth.data.built} · ${castleOfMonth.data.lord}`
+            : castleOfMonth.data.epoch ?? undefined
+        }
+        teaser={castleOfMonth.data.teaser}
+        meta={
+          castleOfMonth.data.visit
+            ? [
+                ...(castleOfMonth.data.visit.duration
+                  ? [{ label: "Führung",    value: castleOfMonth.data.visit.duration.split("(")[0].trim() }]
+                  : []),
+                ...(castleOfMonth.data.visit.price
+                  ? [{ label: "Eintritt",   value: castleOfMonth.data.visit.price.split(",")[0].trim() }]
+                  : []),
+                ...(castleOfMonth.data.visit.bestTime
+                  ? [{ label: "Beste Zeit", value: castleOfMonth.data.visit.bestTime.split(";")[0].trim() }]
+                  : []),
+              ]
+            : []
+        }
+        tagLabel="Schloss des Monats"
+      />
+    </div>
+  </Band>
+
+  {/* ── BELIEBTE BURGEN & SCHLÖSSER ── */}
+  <Band soft id="beliebte-burgen">
+    <SectionHead
+      kicker="Meistbesucht"
+      title="Beliebte Burgen & Schlösser"
+      subtitle="Eine kuratierte Auswahl der eindrucksvollsten Bauwerke — jedes mit Geschichte, Besuchsinfos und Hotels in der Nähe."
+    />
+    <div class="cc-castle-grid" style="margin-top: 3.5rem;">
+      {featuredCastles.map((c) => (
+        <CastleCard
+          href={`/burgen/${c.id}/`}
+          title={c.data.title}
+          region={c.data.region}
+          teaser={c.data.teaser}
+          image={c.data.heroImage}
+          imageAlt={c.data.title}
+          rank={c.data.rank}
+          type={c.data.type}
+        />
+      ))}
+    </div>
+    <div style="text-align: center; margin-top: 3rem;">
+      <a
+        href="/burgen/"
+        class="btn-ghost"
+        style="
+          display: inline-block;
+          padding: 0.75rem 2rem;
+          border: 1px solid var(--cc-text);
+          color: var(--cc-text);
+          font-family: var(--font-aux);
+          font-size: 13px;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          text-decoration: none;
+          transition: border-color 0.2s, color 0.2s;
+        "
+      >
+        Alle {castles.length} Burgen &amp; Schlösser
+      </a>
+    </div>
+  </Band>
+
+  {/* ── NACH REGION ENTDECKEN ── */}
+  <Band id="regionen">
+    <SectionHead
+      kicker="Nach Region"
+      title="Wo möchtest du reisen?"
+      subtitle="Entdecke Burgen und Schlösser nach Region — von den bayerischen Alpen bis an den Rhein."
+    />
+    <div style="margin-top: 3.5rem;">
+      <RegionGrid regions={regionGridItems} />
+    </div>
+    <div style="text-align: center; margin-top: 2.5rem;">
+      <a
+        href="/regionen/"
+        class="btn-ghost"
+        style="
+          display: inline-block;
+          padding: 0.75rem 2rem;
+          border: 1px solid var(--cc-text);
+          color: var(--cc-text);
+          font-family: var(--font-aux);
+          font-size: 13px;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          text-decoration: none;
+          transition: border-color 0.2s, color 0.2s;
+        "
+      >
+        Alle Regionen →
+      </a>
+    </div>
+  </Band>
+
+  {/* ── KURATIERTE REISEROUTEN ── */}
+  <Band soft id="routen">
+    <SectionHead
+      kicker="Roadtrips"
+      title="Kuratierte Reiserouten"
+      subtitle="Mehrere Schlösser an einem Strang — fertig geplante Routen mit Etappen, Übernachtung und Karte."
+    />
+    <div class="cc-route-grid" style="margin-top: 3.5rem;">
+      {featuredRoutes.map((r) => (
+        <RouteCard
+          href={`/routen/${r.id}/`}
+          title={r.data.title}
+          image={r.data.heroImage}
+          meta={
+            [
+              r.data.stops  ? `${r.data.stops} Etappen`  : "",
+              r.data.distanceKm ? `${r.data.distanceKm} km` : "",
+              r.data.days   ? r.data.days               : "",
+            ]
+              .filter(Boolean)
+              .join(" · ")
+          }
+          teaser={r.data.teaser}
+        />
+      ))}
+    </div>
+  </Band>
+
+  {/* ── ERLEBNISWELTEN ── */}
+  <Band id="erlebnisse">
+    <OrnamentRule label="Erlebniswelten" />
+    <div style="margin-top: 3.5rem;">
+      <ExperienceGrid items={topExperiences} />
+    </div>
+    <div style="text-align: center; margin-top: 2.5rem;">
+      <a
+        href="/erlebnisse/"
+        class="btn-ghost"
+        style="
+          display: inline-block;
+          padding: 0.75rem 2rem;
+          border: 1px solid var(--cc-text);
+          color: var(--cc-text);
+          font-family: var(--font-aux);
+          font-size: 13px;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          text-decoration: none;
+          transition: border-color 0.2s, color 0.2s;
+        "
+      >
+        Alle Erlebniswelten →
+      </a>
+    </div>
+  </Band>
+
+  {/* ── STAY SECTION ── */}
+  <Band soft id="uebernachten">
+    <StaySection
+      lead="Wir finden für jede Burg die passenden Hotels in Gehweite — vom Schlosshotel bis zur Pension im historischen Ortskern. Live-Preise und Verfügbarkeit."
+    />
+  </Band>
+
+  {/* ── AUS DEM MAGAZIN ── */}
+  <Band id="magazin">
+    <SectionHead
+      kicker="Aus dem Magazin"
+      title="Geschichten & Ratgeber"
+    />
+    <div class="cc-mag-grid" style="margin-top: 3.5rem;">
+      {latestArticles.map((a) => (
+        <a href={`/magazin/${a.id}/`} class="cc-mag-post">
+          <div class="cc-mag-post__date">
+            {formatDate(a.data.date)}
+            {a.data.category && ` · ${a.data.category}`}
+          </div>
+          <h3 class="cc-mag-post__title">{a.data.title}</h3>
+          {a.data.teaser && (
+            <p class="cc-mag-post__teaser">{a.data.teaser}</p>
+          )}
+          <span class="cc-mag-post__cta">Weiterlesen →</span>
+        </a>
+      ))}
+    </div>
+    <div style="text-align: center; margin-top: 3rem;">
+      <a
+        href="/magazin/"
+        class="btn-ghost"
+        style="
+          display: inline-block;
+          padding: 0.75rem 2rem;
+          border: 1px solid var(--cc-text);
+          color: var(--cc-text);
+          font-family: var(--font-aux);
+          font-size: 13px;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          text-decoration: none;
+          transition: border-color 0.2s, color 0.2s;
+        "
+      >
+        Alle Artikel im Magazin
+      </a>
+    </div>
+  </Band>
+
+  {/* ── NEWSLETTER ── */}
+  <Newsletter />
+
+  {/* ── BILDNACHWEISE ── */}
+  <ImageCreditsList credits={imageCredits} />
+
+</BaseLayout>
+
+<style>
+  /* ── Castle card grid (3 columns) ── */
+  .cc-castle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 980px) {
+    .cc-castle-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .cc-castle-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── Route card grid (2 columns) ── */
+  .cc-route-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 760px) {
+    .cc-route-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── Magazine grid (3 columns) ── */
+  .cc-mag-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 860px) {
+    .cc-mag-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── Magazine post card ── */
+  .cc-mag-post {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--cc-line);
+    padding-top: 1.5rem;
+    text-decoration: none;
+    color: var(--cc-text);
+    transition: color 0.2s;
+  }
+
+  .cc-mag-post:hover .cc-mag-post__title {
+    color: var(--cc-accent);
+  }
+
+  .cc-mag-post__date {
+    font-family: var(--font-aux);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cc-accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .cc-mag-post__title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 300;
+    line-height: 1.12;
+    color: var(--cc-text);
+    margin: 0 0 0.625rem;
+    transition: color 0.2s;
+  }
+
+  .cc-mag-post__teaser {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    color: var(--cc-text-soft);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+  }
+
+  .cc-mag-post__cta {
+    display: block;
+    margin-top: 0.875rem;
+    font-family: var(--font-aux);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cc-accent);
+  }
+</style>

@@ -1,0 +1,78 @@
+---
+interface Region {
+  href: string;
+  title: string;
+  count?: number;
+  num: string;
+}
+
+interface Props {
+  regions: Region[];
+}
+
+const { regions } = Astro.props;
+---
+
+<div class="region-grid">
+  {regions.map((region) => (
+    <a class="region-cell" href={region.href}>
+      <div class="region-num">{region.num}</div>
+      <h4 class="region-title">{region.title}</h4>
+      {region.count && (
+        <span class="region-count">{region.count} {region.count === 1 ? "Bauwerk" : "Bauwerke"}</span>
+      )}
+    </a>
+  ))}
+</div>
+
+<style>
+  .region-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--cc-line);
+    border: 1px solid var(--cc-line);
+  }
+
+  @media (max-width: 860px) {
+    .region-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .region-cell {
+    background: var(--cc-bg);
+    padding: 34px 26px;
+    transition: background 0.25s;
+    position: relative;
+    text-decoration: none;
+    color: var(--cc-text);
+    display: block;
+  }
+
+  .region-cell:hover {
+    background: var(--cc-bg-2);
+  }
+
+  .region-num {
+    font-family: var(--font-aux);
+    font-size: 12px;
+    color: var(--cc-accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .region-title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 1.08;
+    margin: 10px 0 6px;
+    color: var(--cc-text);
+  }
+
+  .region-count {
+    font-size: 14px;
+    color: var(--cc-text-soft);
+  }
+</style>

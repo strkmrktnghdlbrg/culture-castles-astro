@@ -1,0 +1,106 @@
+---
+/**
+ * LegacyArticle — Layout für 1:1 übernommene Bestandsseiten/Gastbeiträge
+ * aus dem alten WP-Build. Body wird als geprüftes HTML via set:html
+ * eingesetzt; enthaltene Outbound-Links bleiben EXAKT erhalten
+ * (inkl. dofollow = kein rel). Nicht in die Hauptnav aufnehmen.
+ */
+import BaseLayout from "./BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  category: string;
+  categoryHref?: string;
+  bodyHtml: string;
+}
+const { title, description, category, categoryHref, bodyHtml } = Astro.props;
+const crumbs = [
+  { label: "Start", href: "/" },
+  categoryHref ? { label: category, href: categoryHref } : { label: category },
+  { label: title },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="cc-post">
+    <div class="container-page">
+      <div class="cc-post__head">
+        <Breadcrumbs items={crumbs} />
+        <p class="cc-post__kicker">{category}</p>
+        <h1 class="cc-post__title">{title}</h1>
+      </div>
+      <div class="cc-post__body" set:html={bodyHtml}></div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .cc-post { padding-block: 3.5rem 5rem; }
+  .cc-post__head { max-width: 70ch; margin-inline: auto; margin-bottom: 2.5rem; }
+  .cc-post__kicker {
+    font-family: var(--font-aux);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    color: var(--cc-accent);
+    margin: 1.5rem 0 0.75rem;
+  }
+  .cc-post__title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    color: var(--cc-text);
+    margin: 0;
+  }
+  .cc-post__body { max-width: 70ch; margin-inline: auto; }
+
+  /* set:html-Inhalt bekommt keine Scope-Attribute → :global nötig */
+  .cc-post__body :global(p) {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--cc-text);
+    margin: 0 0 1.5rem;
+  }
+  .cc-post__body :global(h2) {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    color: var(--cc-text);
+    margin: 2.75rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--cc-line);
+  }
+  .cc-post__body :global(h3) {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.35rem;
+    color: var(--cc-text);
+    margin: 2rem 0 0.75rem;
+  }
+  .cc-post__body :global(ul),
+  .cc-post__body :global(ol) {
+    margin: 0 0 1.5rem 1.25rem;
+    color: var(--cc-text);
+    font-family: var(--font-sans);
+    line-height: 1.8;
+  }
+  .cc-post__body :global(li) { margin-bottom: 0.5rem; }
+  .cc-post__body :global(blockquote) {
+    border-left: 2px solid var(--cc-accent);
+    padding-left: 1.25rem;
+    margin: 0 0 1.5rem;
+    color: var(--cc-text-soft);
+    font-style: italic;
+  }
+  .cc-post__body :global(a) {
+    color: var(--cc-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .cc-post__body :global(a:hover) { color: var(--cc-accent-hi); }
+  .cc-post__body :global(strong) { color: var(--cc-text); font-weight: 600; }
+</style>

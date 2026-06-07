@@ -1,0 +1,166 @@
+---
+import Stay22Map from "./Stay22Map.astro";
+
+interface Props {
+  title?: string;
+  lead?: string;
+  lat?: number;
+  lng?: number;
+}
+
+const {
+  title = "Schlaf, wo Könige geherrscht haben.",
+  lead,
+  lat,
+  lng,
+} = Astro.props;
+---
+
+<section
+  style="border: 1px solid var(--cc-accent); background: var(--cc-bg-2);"
+  class="container-page my-16 py-0"
+>
+  <div
+    style="display: grid; grid-template-columns: 1fr 1fr; gap: 0;"
+    class="stay-grid"
+  >
+    <!-- Left column: copy -->
+    <div
+      style="
+        padding: 3rem 2.5rem;
+        border-right: 1px solid var(--cc-line);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1.5rem;
+      "
+    >
+      <p
+        style="
+          font-family: var(--font-aux);
+          font-size: 11px;
+          letter-spacing: 0.36em;
+          text-transform: uppercase;
+          color: var(--cc-accent);
+          margin: 0;
+        "
+      >
+        Übernachten am Schloss
+      </p>
+
+      <h2
+        style="
+          font-family: var(--font-display);
+          font-size: clamp(28px, 3.5vw, 42px);
+          font-weight: 300;
+          color: var(--cc-text);
+          line-height: 1.2;
+          margin: 0;
+        "
+      >
+        {title}
+      </h2>
+
+      {lead && (
+        <p
+          style="
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--cc-text-soft);
+            margin: 0;
+          "
+        >
+          {lead}
+        </p>
+      )}
+
+      <div>
+        <a
+          href="https://www.stay22.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-ghost"
+          style="
+            display: inline-block;
+            padding: 0.65rem 1.6rem;
+            border: 1px solid var(--cc-accent);
+            color: var(--cc-accent);
+            font-family: var(--font-aux);
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-decoration: none;
+          "
+        >
+          Hotels entdecken &rarr;
+        </a>
+      </div>
+    </div>
+
+    <!-- Right column: Stay22Map or placeholder -->
+    <div style="min-height: 400px; position: relative; overflow: hidden;">
+      {(lat && lng) ? (
+        <Stay22Map
+          lat={lat}
+          lng={lng}
+          zoom={14}
+          heightClass="h-full"
+        />
+      ) : (
+        <div
+          style="
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            background: var(--hue-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.75rem;
+            color: var(--cc-text-mute);
+          "
+        >
+          <p
+            style="
+              font-family: var(--font-aux);
+              font-size: 11px;
+              letter-spacing: 0.3em;
+              text-transform: uppercase;
+              color: var(--cc-accent);
+              margin: 0;
+            "
+          >
+            Kartenansicht
+          </p>
+          <p
+            style="
+              font-family: var(--font-sans);
+              font-size: 0.875rem;
+              color: var(--cc-text-mute);
+              margin: 0;
+              text-align: center;
+              padding: 0 1.5rem;
+            "
+          >
+            Koordinaten übergeben, um Hotels in der Nähe anzuzeigen.
+          </p>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Stack columns on mobile */
+  @media (max-width: 767px) {
+    .stay-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .stay-grid > div:first-child {
+      border-right: none !important;
+      border-bottom: 1px solid var(--cc-line);
+    }
+  }
+</style>

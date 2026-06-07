@@ -1,0 +1,241 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Band from "../../components/Band.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import CastleCard from "../../components/CastleCard.astro";
+import OrnamentRule from "../../components/OrnamentRule.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import AwinButton from "../../components/AwinButton.astro";
+import { experiences } from "../../data/site";
+import type { Experience } from "../../data/site";
+
+export async function getStaticPaths() {
+  return experiences.map((experience: Experience) => ({
+    params: { slug: experience.slug },
+    props: { experience },
+  }));
+}
+
+const { experience } = Astro.props as { experience: Experience };
+const { title, intro, tag, icon } = experience;
+
+// Filter castles whose tags include this experience's tag
+const allCastles = await getCollection("castles");
+const taggedCastles = allCastles
+  .filter((c) => Array.isArray(c.data.tags) && c.data.tags.includes(tag))
+  .sort((a, b) => {
+    const ra = a.data.rank ?? 9999;
+    const rb = b.data.rank ?? 9999;
+    if (ra !== rb) return ra - rb;
+    return a.data.title.localeCompare(b.data.title, "de");
+  });
+
+const castleCount = taggedCastles.length;
+---
+
+<BaseLayout
+  title={`${title} — Burgen & Schlösser erleben`}
+  description={intro}
+>
+  <!-- Hero / SectionHead -->
+  <div class="exp-hero">
+    <div class="container-page">
+      <div class="exp-hero__inner">
+        <div class="exp-hero__icon" aria-hidden="true">{icon}</div>
+        <SectionHead
+          kicker="Erlebniswelt"
+          title={title}
+          subtitle={intro}
+          align="center"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Breadcrumb -->
+  <div class="container-page" style="padding-top: 1.5rem; padding-bottom: 0;">
+    <Breadcrumbs
+      items={[
+        { label: "Start", href: "/" },
+        { label: "Erlebnisse", href: "/erlebnisse/" },
+        { label: title },
+      ]}
+    />
+  </div>
+
+  <!-- Castle grid -->
+  {castleCount > 0 && (
+    <Band soft>
+      <OrnamentRule label={`${castleCount} Empfehlung${castleCount !== 1 ? "en" : ""}`} />
+      <div class="castle-grid">
+        {taggedCastles.map((castle) => (
+          <CastleCard
+            href={`/burgen/${castle.id}/`}
+            title={castle.data.title}
+            region={castle.data.place ?? castle.data.region ?? undefined}
+            teaser={castle.data.teaser}
+            image={castle.data.heroImage || undefined}
+            imageAlt={castle.data.title}
+            rank={castle.data.rank}
+            type={castle.data.type}
+          />
+        ))}
+      </div>
+    </Band>
+  )}
+
+  {castleCount === 0 && (
+    <Band soft>
+      <div class="exp-empty">
+        <p class="exp-empty__text">
+          Zu diesem Thema werden derzeit Profiles erarbeitet. Schauen Sie bald wieder vorbei.
+        </p>
+      </div>
+    </Band>
+  )}
+
+  <!-- Affiliate: Erlebnisgeschenke (Awin / mydays) -->
+  <Band soft>
+    <div class="exp-cta">
+      <p class="exp-cta__kicker">Als Erlebnisgeschenk</p>
+      <h2 class="exp-cta__title">{experience.title} verschenken</h2>
+      <p class="exp-cta__text">
+        Gutscheine für Schloss-Erlebnisse, Ritteressen und besondere Übernachtungen — drei Jahre gültig, individuell einlösbar.
+      </p>
+      <AwinButton
+        merchant="mydays"
+        clickref={`erlebnis-${experience.slug}`}
+        label="Erlebnisse bei mydays"
+      />
+    </div>
+  </Band>
+
+  <!-- Back link -->
+  <Band>
+    <OrnamentRule label="Alle Erlebnisse" />
+    <div class="back-link-wrap">
+      <a href="/erlebnisse/" class="btn-ghost-link">← Alle Erlebnisse</a>
+    </div>
+  </Band>
+</BaseLayout>
+
+<style>
+  /* ── Hero ──────────────────────────────────────────────────── */
+  .exp-hero {
+    background: var(--cc-bg-2);
+    padding-block: 5rem 4rem;
+    border-bottom: 1px solid var(--cc-line);
+  }
+
+  .exp-hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .exp-hero__icon {
+    font-size: 3rem;
+    color: var(--cc-accent);
+    line-height: 1;
+    opacity: 0.85;
+  }
+
+  /* ── Castle grid ───────────────────────────────────────────── */
+  .castle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--cc-line);
+    margin-top: 3.5rem;
+    border: 1px solid var(--cc-line);
+  }
+
+  .castle-grid :global(.castle-card) {
+    border: none;
+    border-radius: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .castle-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .castle-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── Empty state ───────────────────────────────────────────── */
+  .exp-empty {
+    max-width: 56ch;
+    margin-inline: auto;
+    text-align: center;
+    padding-block: 2rem;
+  }
+
+  .exp-empty__text {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--cc-text-soft);
+    margin: 0;
+  }
+
+  /* ── Affiliate CTA ─────────────────────────────────────────── */
+  .exp-cta {
+    max-width: 60ch;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .exp-cta__kicker {
+    font-family: var(--font-aux);
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    color: var(--cc-accent);
+    margin: 0 0 0.75rem;
+  }
+  .exp-cta__title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--cc-text);
+    margin: 0 0 1rem;
+  }
+  .exp-cta__text {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--cc-text-soft);
+    margin: 0 0 1.75rem;
+  }
+
+  /* ── Back link ─────────────────────────────────────────────── */
+  .back-link-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  .btn-ghost-link {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border: 1px solid var(--cc-text);
+    color: var(--cc-text);
+    font-family: var(--font-aux);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost-link:hover {
+    border-color: var(--cc-accent);
+    color: var(--cc-accent);
+  }
+</style>

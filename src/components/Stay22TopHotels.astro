@@ -1,0 +1,161 @@
+---
+/**
+ * Stay22 Top-Hotels Live-Block
+ * -----------------------------
+ * Build-Time-Fetch der aktuell bestbewerteten Hotels einer Stadt via
+ * Stay22 Direct Travel API. Die Hotels kommen mit fertig affiliate-
+ * getaggten Deep-Links direkt aus der API — kein Client-Rewrite nötig.
+ *
+ * Fetch passiert beim Astro-Build. GitHub Action sollte alle 6–24h
+ * deployen, damit Daten frisch bleiben (Stay22 ToS erlaubt 60min Cache,
+ * deshalb täglicher Rebuild + s-maxage=3600 vom CDN).
+ *
+ * Graceful Degradation: Wenn STAY22_API_KEY env-Var fehlt oder die API
+ * leer zurückkommt, rendert die Komponente einfach nichts. Die statische
+ * Top-10-Liste auf der Page bleibt sichtbar.
+ */
+import { getTopHotels, type Stay22Accommodation } from "../lib/stay22";
+import { affiliate } from "../data/affiliate";
+
+interface Props {
+  /** Volltext-Adresse für Stay22-Geo-Suche, z.B. "Schloss Neuschwanstein, Deutschland". */
+  address?: string;
+  /** Alternative: lat/lng + radius statt address-Suche. */
+  lat?: number;
+  lng?: number;
+  radius?: number;
+  /** Anzahl Hotels (max 12 sinnvoll für Grid). */
+  limit?: number;
+  /** Headline. */
+  title?: string;
+  /** Lead unter Headline. */
+  lead?: string;
+}
+
+const {
+  address = "Deutschland",
+  lat,
+  lng,
+  radius,
+  limit = 8,
+  title = "Aktuell bestbewertete Hotels in der Nähe",
+  lead = "Live von Booking.com via Stay22 — aktuelle Bewertungen und Preise. Aktualisiert beim letzten Build.",
+} = Astro.props;
+
+let hotels: Stay22Accommodation[] | null = null;
+try {
+  if (lat !== undefined && lng !== undefined) {
+    const { searchAccommodations } = await import("../lib/stay22");
+    hotels = await searchAccommodations({
+      provider: "booking",
+      lat,
+      lng,
+      radius: radius ?? 3000,
+      type: "hotel",
+      minguestrating: 7.5,
+      minstarrating: 3,
+      limit,
+      currency: "EUR",
+      lang: "de",
+      aid: affiliate.stay22.lmaId,
+      campaign: affiliate.stay22.lmaId,
+    });
+  } else {
+    hotels = await getTopHotels(address, affiliate.stay22.lmaId, { limit });
+  }
+} catch (err) {
+  console.error("[Stay22TopHotels] Fehler beim Build-Fetch:", err);
+  hotels = null;
+}
+
+const visible = hotels && hotels.length > 0 ? hotels.slice(0, limit) : [];
+const buildTime = new Date().toLocaleDateString("de-DE", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+// CDN-Cache auf 1h, damit Stay22 ToS (60min Cache OK) eingehalten wird.
+if (visible.length > 0) {
+  Astro.response.headers.set(
+    "Cache-Control",
+    "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400",
+  );
+}
+---
+
+{visible.length > 0 && (
+  <section class="my-12">
+    <div class="mb-6 max-w-3xl">
+      <p class="eyebrow mb-2">Live von Stay22</p>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-2" style="font-family: var(--font-display); color: var(--color-inkwell-purple);">
+        {title}
+      </h2>
+      <p class="text-base leading-relaxed" style="color: var(--color-shadow-graphite);">
+        {lead}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {visible.map((h) => (
+        <a
+          href={h.link || "#"}
+          target="_blank"
+          rel="sponsored noopener nofollow"
+          class="card group block overflow-hidden hover:shadow-lg transition-all"
+        >
+          {h.image && (
+            <div class="aspect-[4/3] overflow-hidden bg-[var(--color-porcelain-mist)]">
+              <img
+                src={h.image}
+                alt={h.name}
+                loading="lazy"
+                decoding="async"
+                referrerpolicy="no-referrer-when-downgrade"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          )}
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-1.5">
+              {h.starRating && (
+                <span class="text-xs font-bold" style="color: var(--color-accent);">
+                  {"★".repeat(Math.round(h.starRating))}
+                </span>
+              )}
+              {h.rating?.score && (
+                <span class="pill-accent text-[10px]">
+                  {h.rating.score.toFixed(1)} / 10
+                </span>
+              )}
+            </div>
+            <h3
+              class="font-bold text-sm leading-tight mb-1.5 group-hover:text-[var(--color-accent)] transition-colors line-clamp-2"
+              style="font-family: var(--font-display); color: var(--color-inkwell-purple);"
+            >
+              {h.name}
+            </h3>
+            {h.address?.areaName && (
+              <p class="text-[11px] mb-2" style="color: var(--color-slate-steel);">
+                {h.address.areaName}
+              </p>
+            )}
+            {(h.price?.formattedPerNight || h.price?.formattedTotal) && (
+              <p class="text-sm font-semibold" style="color: var(--color-inkwell-purple);">
+                {h.price?.formattedPerNight ?? h.price?.formattedTotal}
+                <span class="text-xs font-normal" style="color: var(--color-slate-steel);">
+                  {h.price?.formattedPerNight ? " / Nacht" : ""}
+                </span>
+              </p>
+            )}
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <p class="text-[11px] mt-4 leading-relaxed" style="color: var(--color-slate-steel);">
+      * Sponsored — Buchung läuft über Booking.com via Stay22-Affiliate.
+      Stand: {buildTime}. Preise und Verfügbarkeit ändern sich täglich.
+    </p>
+  </section>
+)}

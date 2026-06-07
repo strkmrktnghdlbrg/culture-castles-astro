@@ -1,0 +1,215 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+  title="Kontakt"
+  description="Schreib uns — Fragen, Kooperationen oder Feedback zu Culture Castles."
+  noindex={true}
+>
+  <div
+    class="container-page"
+    style="padding-top: clamp(4rem, 8vw, 7rem); padding-bottom: clamp(4rem, 8vw, 7rem);"
+  >
+    <!-- Kicker + Titel -->
+    <div style="max-width: 680px; margin: 0 auto; text-align: center; margin-bottom: 3rem;">
+      <p
+        style="font-family: var(--font-aux); font-size: 12px; text-transform: uppercase;
+               letter-spacing: 0.4em; color: var(--cc-accent); margin-bottom: 1rem;"
+      >
+        Kontakt
+      </p>
+      <h1
+        style="font-family: var(--font-display); font-weight: 300;
+               font-size: clamp(36px, 5vw, 58px); color: var(--cc-text);
+               line-height: 1.15; margin-bottom: 1.25rem;"
+      >
+        Schreib uns
+      </h1>
+      <p style="font-family: var(--font-sans); color: var(--cc-text-soft); font-size: 1.05rem; line-height: 1.7;">
+        Fragen, Kooperationsanfragen oder einfach Feedback? Wir freuen uns auf
+        deine Nachricht. Du erreichst uns auch direkt per E-Mail:
+        <a
+          href={`mailto:${site.email}`}
+          style="color: var(--cc-accent); text-decoration: none; border-bottom: 1px solid var(--cc-accent);"
+        >
+          {site.email}
+        </a>
+      </p>
+    </div>
+
+    <!-- Ornament-Linie -->
+    <div class="cc-rule" style="margin-bottom: 3rem; max-width: 680px; margin-left: auto; margin-right: auto;">
+      <span class="mark">Anfrage senden</span>
+    </div>
+
+    <!-- Kontaktformular -->
+    <form
+      action="https://api.web3forms.com/submit"
+      method="POST"
+      style="max-width: 680px; margin: 0 auto;
+             background: var(--cc-bg-2);
+             border: 1px solid var(--cc-line);
+             padding: clamp(2rem, 5vw, 3rem);"
+    >
+      <!-- Hidden fields -->
+      <input type="hidden" name="access_key" value="REPLACE_WEB3FORMS_KEY" />
+      <input type="hidden" name="subject" value="Anfrage culture-castles.de" />
+      <input type="hidden" name="redirect" value="false" />
+      <!-- Honeypot -->
+      <input type="checkbox" name="botcheck" style="display: none;" />
+
+      <!-- Name -->
+      <div style="margin-bottom: 1.5rem;">
+        <label
+          for="cc-name"
+          style="display: block; font-family: var(--font-aux); font-size: 11px;
+                 text-transform: uppercase; letter-spacing: 0.32em;
+                 color: var(--cc-accent); margin-bottom: 0.5rem;"
+        >
+          Name
+        </label>
+        <input
+          id="cc-name"
+          type="text"
+          name="name"
+          required
+          placeholder="Dein vollständiger Name"
+          style="width: 100%; padding: 0.75rem 1rem;
+                 background: var(--cc-bg); border: 1px solid var(--cc-line);
+                 color: var(--cc-text); font-family: var(--font-sans); font-size: 0.95rem;
+                 border-radius: 0; outline: none; box-sizing: border-box;"
+          onfocus="this.style.borderColor='var(--cc-accent)'"
+          onblur="this.style.borderColor='var(--cc-line)'"
+        />
+      </div>
+
+      <!-- E-Mail -->
+      <div style="margin-bottom: 1.5rem;">
+        <label
+          for="cc-email"
+          style="display: block; font-family: var(--font-aux); font-size: 11px;
+                 text-transform: uppercase; letter-spacing: 0.32em;
+                 color: var(--cc-accent); margin-bottom: 0.5rem;"
+        >
+          E-Mail-Adresse
+        </label>
+        <input
+          id="cc-email"
+          type="email"
+          name="email"
+          required
+          placeholder="deine@email.de"
+          style="width: 100%; padding: 0.75rem 1rem;
+                 background: var(--cc-bg); border: 1px solid var(--cc-line);
+                 color: var(--cc-text); font-family: var(--font-sans); font-size: 0.95rem;
+                 border-radius: 0; outline: none; box-sizing: border-box;"
+          onfocus="this.style.borderColor='var(--cc-accent)'"
+          onblur="this.style.borderColor='var(--cc-line)'"
+        />
+      </div>
+
+      <!-- Nachricht -->
+      <div style="margin-bottom: 2rem;">
+        <label
+          for="cc-message"
+          style="display: block; font-family: var(--font-aux); font-size: 11px;
+                 text-transform: uppercase; letter-spacing: 0.32em;
+                 color: var(--cc-accent); margin-bottom: 0.5rem;"
+        >
+          Nachricht
+        </label>
+        <textarea
+          id="cc-message"
+          name="message"
+          required
+          rows="6"
+          placeholder="Deine Nachricht an uns …"
+          style="width: 100%; padding: 0.75rem 1rem;
+                 background: var(--cc-bg); border: 1px solid var(--cc-line);
+                 color: var(--cc-text); font-family: var(--font-sans); font-size: 0.95rem;
+                 border-radius: 0; outline: none; resize: vertical; box-sizing: border-box;"
+          onfocus="this.style.borderColor='var(--cc-accent)'"
+          onblur="this.style.borderColor='var(--cc-line)'"
+        ></textarea>
+      </div>
+
+      <!-- Datenschutz-Hinweis -->
+      <p
+        style="font-family: var(--font-sans); font-size: 0.82rem;
+               color: var(--cc-text-mute); margin-bottom: 1.75rem; line-height: 1.6;"
+      >
+        Mit dem Absenden stimmst du zu, dass deine Angaben zur Beantwortung
+        deiner Anfrage gespeichert werden. Weitere Informationen findest du in
+        unserer{" "}
+        <a
+          href="/datenschutz/"
+          style="color: var(--cc-accent); text-decoration: none; border-bottom: 1px solid var(--cc-line);"
+        >
+          Datenschutzerklärung
+        </a>.
+      </p>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        style="display: inline-block; padding: 0.85rem 2.5rem;
+               background: var(--cc-accent); color: var(--cc-bg);
+               font-family: var(--font-aux); font-size: 12px;
+               text-transform: uppercase; letter-spacing: 0.3em;
+               font-weight: 400; border: none; border-radius: 0;
+               cursor: pointer; transition: background 0.2s ease;"
+        onmouseover="this.style.background='var(--cc-accent-hi)'"
+        onmouseout="this.style.background='var(--cc-accent)'"
+      >
+        Nachricht absenden
+      </button>
+    </form>
+
+    <!-- Erfolgs-/Fehlermeldung via JS -->
+    <div
+      id="cc-form-result"
+      aria-live="polite"
+      style="max-width: 680px; margin: 1.5rem auto 0; display: none;
+             padding: 1rem 1.25rem; border: 1px solid var(--cc-accent);
+             font-family: var(--font-sans); font-size: 0.95rem; color: var(--cc-text);"
+    >
+    </div>
+  </div>
+
+  <script is:inline>
+    const form = document.querySelector("form[action='https://api.web3forms.com/submit']");
+    const result = document.getElementById("cc-form-result");
+
+    if (form && result) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        try {
+          const res = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: data,
+          });
+          const json = await res.json();
+          result.style.display = "block";
+          if (json.success) {
+            result.style.borderColor = "var(--cc-accent)";
+            result.textContent =
+              "Vielen Dank! Deine Nachricht wurde gesendet. Wir melden uns so bald wie möglich.";
+            form.reset();
+          } else {
+            result.style.borderColor = "var(--cc-line)";
+            result.textContent =
+              "Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreib uns direkt per E-Mail.";
+          }
+        } catch {
+          result.style.display = "block";
+          result.style.borderColor = "var(--cc-line)";
+          result.textContent =
+            "Verbindungsfehler. Bitte prüfe deine Internetverbindung oder schreib uns direkt per E-Mail.";
+        }
+      });
+    }
+  </script>
+</BaseLayout>

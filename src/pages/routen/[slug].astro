@@ -1,0 +1,310 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CastleImage from "../../components/CastleImage.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import OrnamentRule from "../../components/OrnamentRule.astro";
+import StaySection from "../../components/StaySection.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("routes");
+  return entries.map((e) => ({ params: { slug: e.id }, props: { entry: e } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const {
+  title,
+  heroImage,
+  teaser,
+  distanceKm,
+  stops,
+  days,
+  etappen,
+} = entry.data;
+---
+
+<BaseLayout title={title} description={teaser} ogImage={heroImage || undefined}>
+
+  <!-- Breadcrumb -->
+  <div
+    class="container-page"
+    style="padding-top: 1.5rem; padding-bottom: 1.5rem;"
+  >
+    <Breadcrumbs
+      items={[
+        { label: "Start", href: "/" },
+        { label: "Routen", href: "/routen/" },
+        { label: title },
+      ]}
+    />
+  </div>
+
+  <!-- Hero -->
+  <header style="position: relative; min-height: 72vh; overflow: hidden; display: flex; align-items: flex-end;">
+    <CastleImage
+      src={heroImage || ""}
+      alt={title}
+      class=""
+    />
+    <!-- Full-bleed image layer -->
+    <div
+      aria-hidden="true"
+      style="
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      "
+    >
+      {heroImage && (
+        <img
+          src={heroImage}
+          alt={title}
+          loading="eager"
+          onerror="this.style.display='none'"
+          style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;"
+        />
+      )}
+      <!-- Wine veil gradient -->
+      <div
+        style="
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            to top,
+            var(--cc-bg) 0%,
+            rgba(42, 18, 26, 0.75) 40%,
+            rgba(42, 18, 26, 0.25) 100%
+          );
+        "
+      ></div>
+    </div>
+
+    <!-- Hero content -->
+    <div
+      class="container-page"
+      style="position: relative; z-index: 1; padding-bottom: 3.5rem; width: 100%;"
+    >
+      <!-- Meta line: stops · km · days -->
+      <p
+        style="
+          font-family: var(--font-aux);
+          font-size: 11px;
+          letter-spacing: 0.42em;
+          text-transform: uppercase;
+          color: var(--cc-accent);
+          margin: 0 0 1rem 0;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem 1rem;
+          align-items: center;
+        "
+      >
+        {stops != null && (
+          <span>{stops} Stationen</span>
+        )}
+        {stops != null && distanceKm != null && (
+          <span style="color: var(--cc-line);">·</span>
+        )}
+        {distanceKm != null && (
+          <span>{distanceKm} km</span>
+        )}
+        {((stops != null || distanceKm != null) && days) && (
+          <span style="color: var(--cc-line);">·</span>
+        )}
+        {days && (
+          <span>{days}</span>
+        )}
+      </p>
+
+      <h1
+        style="
+          font-family: var(--font-display);
+          font-size: clamp(40px, 7vw, 88px);
+          font-weight: 300;
+          color: var(--cc-text);
+          line-height: 1.1;
+          margin: 0;
+          max-width: 16ch;
+        "
+      >
+        {title}
+      </h1>
+    </div>
+  </header>
+
+  <!-- Intro prose (Content) -->
+  <section style="padding: 4rem 0;">
+    <div
+      class="container-page"
+      style="max-width: 70ch; margin-left: auto; margin-right: auto;"
+    >
+      <div
+        class="route-prose"
+        style="
+          font-family: var(--font-sans);
+          font-size: 1.0625rem;
+          line-height: 1.85;
+          color: var(--cc-text);
+        "
+      >
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  <OrnamentRule label="Etappen" />
+
+  <!-- Numbered Etappen list -->
+  <section style="padding: 3.5rem 0 4rem;">
+    <div class="container-page">
+      <ol
+        style="
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+        "
+      >
+        {(etappen ?? []).map((etappe, i) => (
+          <li
+            style="
+              display: grid;
+              grid-template-columns: 3.5rem 1fr;
+              gap: 0;
+              border-top: 1px solid var(--cc-line);
+              padding: 2rem 0;
+            "
+          >
+            <!-- Number badge -->
+            <div
+              aria-hidden="true"
+              style="
+                display: flex;
+                align-items: flex-start;
+                padding-top: 0.15rem;
+              "
+            >
+              <span
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 2rem;
+                  height: 2rem;
+                  border: 1px solid var(--cc-accent);
+                  font-family: var(--font-display);
+                  font-size: 1.1rem;
+                  font-weight: 300;
+                  color: var(--cc-accent);
+                  flex-shrink: 0;
+                "
+              >
+                {i + 1}
+              </span>
+            </div>
+
+            <!-- Title + note -->
+            <div style="padding-right: 1rem;">
+              <h2
+                style="
+                  font-family: var(--font-display);
+                  font-size: clamp(22px, 3vw, 30px);
+                  font-weight: 300;
+                  color: var(--cc-text);
+                  margin: 0 0 0.5rem 0;
+                  line-height: 1.2;
+                "
+              >
+                {etappe.castle ? (
+                  <a
+                    href={`/burgen/${etappe.castle}/`}
+                    style="
+                      color: inherit;
+                      text-decoration: none;
+                      border-bottom: 1px solid var(--cc-line);
+                      transition: border-color 0.2s, color 0.2s;
+                    "
+                    onmouseover="this.style.color='var(--cc-accent)';this.style.borderColor='var(--cc-accent)'"
+                    onmouseout="this.style.color='';this.style.borderColor='var(--cc-line)'"
+                  >
+                    {etappe.title}
+                  </a>
+                ) : (
+                  etappe.title
+                )}
+              </h2>
+
+              {etappe.note && (
+                <p
+                  style="
+                    font-family: var(--font-sans);
+                    font-size: 0.9375rem;
+                    line-height: 1.75;
+                    color: var(--cc-text-soft);
+                    margin: 0;
+                  "
+                >
+                  {etappe.note}
+                </p>
+              )}
+
+              {etappe.castle && (
+                <a
+                  href={`/burgen/${etappe.castle}/`}
+                  style="
+                    display: inline-block;
+                    margin-top: 0.75rem;
+                    font-family: var(--font-aux);
+                    font-size: 10px;
+                    letter-spacing: 0.2em;
+                    text-transform: uppercase;
+                    color: var(--cc-accent);
+                    text-decoration: none;
+                  "
+                >
+                  Profil ansehen &rarr;
+                </a>
+              )}
+            </div>
+          </li>
+        ))}
+        <!-- Close border at bottom -->
+        <li style="border-top: 1px solid var(--cc-line); height: 0; padding: 0;"></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Stay section (no coordinates for route-level) -->
+  <StaySection
+    title="Unterwegs übernachten"
+    lead={`Entlang der ${title} warten charmante Hotels und Gasthöfe in historischen Gemäuern. Buchen Sie Ihre Unterkunft direkt in der Nähe Ihrer nächsten Etappe.`}
+  />
+
+</BaseLayout>
+
+<style>
+  /* Prose headings */
+  .route-prose :global(h2) {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 300;
+    color: var(--cc-text);
+    margin: 2.5rem 0 0.75rem;
+    line-height: 1.25;
+  }
+  .route-prose :global(p) {
+    margin: 0 0 1.25rem;
+  }
+  .route-prose :global(a) {
+    color: var(--cc-accent);
+    text-underline-offset: 3px;
+  }
+  .route-prose :global(strong) {
+    color: var(--cc-accent-hi);
+    font-weight: 500;
+  }
+</style>

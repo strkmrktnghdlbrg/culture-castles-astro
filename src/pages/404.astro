@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="404 — Seite nicht gefunden" description="Diese Seite gibt es nicht." noindex>
+  <section class="container-page section text-center max-w-2xl">
+    <div class="text-6xl mb-4">🥨</div>
+    <h1 class="text-4xl font-bold mb-3" style="font-family: var(--font-display);">404 — verlaufen.</h1>
+    <p class="mb-8" style="color: var(--color-shadow-graphite);">
+      Diese Seite gibt's nicht. Aber wir haben hier <strong>60 Top-10-Listen</strong> — schau mal rüber.
+    </p>
+    <div class="flex gap-3 justify-center">
+      <a href="/" class="btn-primary">Zur Startseite</a>
+      <a href="/thema/" class="btn-outline">Alle Themen</a>
+    </div>
+  </section>
+</BaseLayout>

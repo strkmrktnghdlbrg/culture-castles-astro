@@ -1,0 +1,377 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Band from "../../components/Band.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import OrnamentRule from "../../components/OrnamentRule.astro";
+import StaySection from "../../components/StaySection.astro";
+import AwinButton from "../../components/AwinButton.astro";
+
+const hubCards = [
+  {
+    href: "/routen/",
+    icon: "✦",
+    kicker: "Fertig geplant",
+    title: "Routen",
+    teaser:
+      "Folge unseren kuratierten Rundreisen durch Burgen- und Schlosslandschaften — mit Etappenplan, Entfernungen und Übernachtungstipps.",
+    cta: "Alle Routen →",
+  },
+  {
+    href: "/regionen/",
+    icon: "✧",
+    kicker: "Nach Lage entdecken",
+    title: "Regionen",
+    teaser:
+      "Durchstöbere Burgen und Schlösser nach Bundesland oder Region: von Bayern über das Rheintal bis nach Sachsen und Thüringen.",
+    cta: "Alle Regionen →",
+  },
+  {
+    href: "/erlebnisse/",
+    icon: "❦",
+    kicker: "Nach Thema filtern",
+    title: "Erlebnisse",
+    teaser:
+      "Hochzeit im Schloss, Familienausflug, mittelalterliche Wehranlagen oder königliche Übernachtung — wähle dein Erlebnis.",
+    cta: "Alle Erlebnisse →",
+  },
+];
+
+const reisezeitData = [
+  {
+    season: "Frühling (März – Mai)",
+    text:
+      "Burgenwanderungen im frischen Grün: Die Vegetation erwacht, Kirschblüten in Schlossgärten setzen goldene Akzente. Besucherströme sind noch moderat, Tickets oft ohne Wartezeit erhältlich. Besonders empfehlenswert für Gartenanlagen wie die des Schlosses Schwerin oder die Terrassen rund um die Heidelberger Schlossruine.",
+  },
+  {
+    season: "Sommer (Juni – August)",
+    text:
+      "Hochsaison mit langen Öffnungszeiten, Burgfestspielen und Mittelaltermärkten. Früh aufbrechen lohnt sich: Vor 10 Uhr sind die Innenhöfe noch kühl und kaum besetzt. Schlösser mit Außenanlagen — Sanssouci, Linderhof, Hohenschwangau — entfalten bei sommerlichem Licht ihre volle Bilderbuchpracht.",
+  },
+  {
+    season: "Herbst (September – November)",
+    text:
+      "Die fotogenste Jahreszeit: Goldenes Laub, Nebelwaben über Berghängen, dramatische Wolkenformationen. Herbst ist die Empfehlung für Burgruinen wie die Burg Eltz oder die Ruinen im Saarland. Weinregionen entlang von Rhein, Mosel und Neckar verbinden Burgbesichtigung mit Weinlese.",
+  },
+  {
+    season: "Winter (Dezember – Februar)",
+    text:
+      "Schneebedeckte Zinnen, leere Burgwege, stille Innenhöfe — wer Besucherandrang meidet, entdeckt Burgen von einer ganz anderen Seite. Viele Innenräume (Hofburg Wien, Wartburg, Burg Hohenzollern) sind auch im Winter zugänglich. Adventszeit bedeutet stimmungsvolle Weihnachtsmärkte auf historischen Schlosshöfen.",
+  },
+];
+---
+
+<BaseLayout
+  title="Reiseplanung — Burgen & Schlösser | Culture Castles"
+  description="Alles für deine Burgen-Reise: fertige Routen, Regionen, Erlebnisse und die besten Reisetipps nach Jahreszeit. Plane dein Schloss-Abenteuer auf Culture Castles."
+>
+  <!-- Hero / Intro -->
+  <Band>
+    <SectionHead
+      kicker="Dein Schloss-Abenteuer"
+      title="Reiseplanung"
+      subtitle="Ob Spontantrip oder mehrtägige Schlossrundreise — hier findest du alle Werkzeuge für deine perfekte Burgenreise: kuratierte Routen, regionaler Überblick und Erlebniswelten für jeden Reisestil."
+    />
+  </Band>
+
+  <OrnamentRule label="Wo möchtest du beginnen?" />
+
+  <!-- Drei Hub-Cards: Routen / Regionen / Erlebnisse -->
+  <Band soft>
+    <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--cc-line);
+        border: 1px solid var(--cc-line);
+        margin-top: 0;
+      "
+      class="hub-grid"
+    >
+      {hubCards.map((card) => (
+        <a
+          href={card.href}
+          class="hub-card"
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            padding: 2.75rem 2.25rem;
+            background: var(--cc-bg-2);
+            text-decoration: none;
+            transition: background 0.2s ease, border-color 0.2s ease;
+            border: 1px solid transparent;
+          "
+        >
+          <span
+            style="
+              font-size: 2.25rem;
+              color: var(--cc-accent);
+              line-height: 1;
+            "
+          >
+            {card.icon}
+          </span>
+
+          <p
+            style="
+              font-family: var(--font-aux);
+              font-size: 11px;
+              letter-spacing: 0.36em;
+              text-transform: uppercase;
+              color: var(--cc-accent);
+              margin: 0;
+            "
+          >
+            {card.kicker}
+          </p>
+
+          <h2
+            style="
+              font-family: var(--font-display);
+              font-size: clamp(28px, 3vw, 38px);
+              font-weight: 300;
+              color: var(--cc-text);
+              margin: 0;
+              line-height: 1.15;
+            "
+          >
+            {card.title}
+          </h2>
+
+          <p
+            style="
+              font-family: var(--font-sans);
+              font-size: 0.9375rem;
+              line-height: 1.7;
+              color: var(--cc-text-soft);
+              margin: 0;
+              flex: 1;
+            "
+          >
+            {card.teaser}
+          </p>
+
+          <span
+            style="
+              font-family: var(--font-aux);
+              font-size: 11px;
+              letter-spacing: 0.18em;
+              text-transform: uppercase;
+              color: var(--cc-accent);
+              margin-top: auto;
+            "
+          >
+            {card.cta}
+          </span>
+        </a>
+      ))}
+    </div>
+  </Band>
+
+  <OrnamentRule label="Beste Reisezeit" />
+
+  <!-- Beste Reisezeit — Manuskript-Stil -->
+  <Band>
+    <div
+      style="
+        max-width: 72ch;
+        margin-inline: auto;
+      "
+    >
+      <h2
+        style="
+          font-family: var(--font-display);
+          font-size: clamp(28px, 3.5vw, 42px);
+          font-weight: 300;
+          color: var(--cc-text);
+          margin: 0 0 0.5rem;
+          text-align: center;
+        "
+      >
+        Wann ist die beste Reisezeit für Burgen?
+      </h2>
+
+      <p
+        style="
+          font-family: var(--font-sans);
+          font-size: 1rem;
+          line-height: 1.8;
+          color: var(--cc-text-soft);
+          text-align: center;
+          margin: 0 0 3rem;
+        "
+      >
+        Burgen und Schlösser sind zu jeder Jahreszeit sehenswert — aber je nach Saison unterscheidet sich das Erlebnis erheblich. Hier ein kurzer Überblick für deine Planung.
+      </p>
+
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          gap: 2.5rem;
+        "
+      >
+        {reisezeitData.map((entry) => (
+          <div
+            style="
+              border-left: 1px solid var(--cc-accent);
+              padding-left: 1.75rem;
+            "
+          >
+            <h3
+              style="
+                font-family: var(--font-display);
+                font-size: clamp(20px, 2.25vw, 26px);
+                font-weight: 300;
+                color: var(--cc-text);
+                margin: 0 0 0.6rem;
+              "
+            >
+              {entry.season}
+            </h3>
+            <p
+              style="
+                font-family: var(--font-sans);
+                font-size: 0.9375rem;
+                line-height: 1.8;
+                color: var(--cc-text-soft);
+                margin: 0;
+              "
+            >
+              {entry.text}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Praktische Tipps -->
+      <div
+        style="
+          margin-top: 3.5rem;
+          padding: 2rem 2.25rem;
+          border: 1px solid var(--cc-line);
+          background: var(--cc-bg-2);
+        "
+      >
+        <p
+          style="
+            font-family: var(--font-aux);
+            font-size: 11px;
+            letter-spacing: 0.36em;
+            text-transform: uppercase;
+            color: var(--cc-accent);
+            margin: 0 0 1rem;
+          "
+        >
+          Praktische Hinweise
+        </p>
+        <ul
+          style="
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            line-height: 1.85;
+            color: var(--cc-text-soft);
+            margin: 0;
+            padding-left: 1.25rem;
+            list-style: disc;
+          "
+        >
+          <li>Tickets für beliebte Ziele (Neuschwanstein, Sanssouci) immer online vorbuchen — vor Ort sind Tageskontingente oft schnell vergriffen.</li>
+          <li>Öffnungszeiten der Innenräume weichen oft von den Parkzeiten ab; Montagsschließung ist häufig.</li>
+          <li>Wetterfeste Kleidung einplanen: Burg­höfe bieten kaum Schutz, mittelalterliche Treppen werden bei Nässe rutschig.</li>
+          <li>Kinder unter 6 Jahren haben in den meisten staatlichen Schlössern freien Eintritt.</li>
+          <li>Schlossgärten sind oft separat zugänglich und bieten auch ohne Innen­besichtigung ein vollständiges Erlebnis.</li>
+        </ul>
+      </div>
+    </div>
+  </Band>
+
+  <OrnamentRule label="Reise-Essentials" />
+
+  <!-- Affiliate: Anreise & Lektüre (Awin) -->
+  <Band>
+    <div class="ess-grid">
+      <div class="ess-card">
+        <p class="ess-kicker">Anreise</p>
+        <h3 class="ess-title">Klimafreundlich mit der Bahn</h3>
+        <p class="ess-text">Viele Burgen sind bequem per Zug erreichbar. Plane deine Anreise und sichere dir Sparpreise.</p>
+        <AwinButton merchant="bahn" clickref="reiseplanung-anreise" label="Verbindung & Tickets" variant="ghost" />
+      </div>
+      <div class="ess-card">
+        <p class="ess-kicker">Zur Einstimmung</p>
+        <h3 class="ess-title">Reiseführer & Burgenbücher</h3>
+        <p class="ess-text">Geschichte, Architektur und die schönsten Routen zum Nachlesen — Reiseführer und Bildbände.</p>
+        <AwinButton
+          merchant="thalia"
+          destination="https://www.thalia.de/suche?sq=Burgen%20und%20Schl%C3%B6sser%20Reisef%C3%BChrer"
+          clickref="reiseplanung-buecher"
+          label="Bücher bei Thalia"
+          variant="ghost"
+        />
+      </div>
+    </div>
+  </Band>
+
+  <OrnamentRule label="Übernachten" />
+
+  <!-- Stay22 Section -->
+  <StaySection
+    title="Hotels in Schlossnähe finden"
+    lead="Viele der schönsten Burgen und Schlösser Europas liegen in kleinen Ortschaften mit charmanten Unterkünften. Finde das passende Hotel für deine Schlossreise — vom historischen Stadthaus bis zum Boutique-Hotel direkt am Burgtor."
+  />
+</BaseLayout>
+
+<style>
+  .ess-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--cc-line);
+    border: 1px solid var(--cc-line);
+  }
+  @media (max-width: 700px) { .ess-grid { grid-template-columns: 1fr; } }
+  .ess-card {
+    background: var(--cc-bg);
+    padding: 2.5rem 2rem;
+  }
+  .ess-kicker {
+    font-family: var(--font-aux);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    color: var(--cc-accent);
+    margin: 0 0 0.75rem;
+  }
+  .ess-title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 1.6rem;
+    color: var(--cc-text);
+    margin: 0 0 0.75rem;
+  }
+  .ess-text {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--cc-text-soft);
+    margin: 0 0 1.5rem;
+  }
+
+  .hub-card:hover {
+    background: var(--cc-bg) !important;
+    border-color: var(--cc-accent) !important;
+  }
+
+  @media (max-width: 767px) {
+    .hub-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .hub-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+</style>

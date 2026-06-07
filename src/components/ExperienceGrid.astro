@@ -1,0 +1,95 @@
+---
+interface Item {
+  href: string;
+  title: string;
+  teaser: string;
+  icon: string;
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="experience-grid">
+  {items.map((item) => (
+    <a href={item.href} class="experience-tile">
+      <span class="experience-icon" aria-hidden="true">{item.icon}</span>
+      <h3 class="experience-title">{item.title}</h3>
+      {item.teaser && <p class="experience-teaser">{item.teaser}</p>}
+    </a>
+  ))}
+</div>
+
+<style>
+  .experience-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--cc-line);
+  }
+
+  @media (max-width: 900px) {
+    .experience-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .experience-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .experience-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem 1.75rem;
+    background: var(--cc-bg);
+    border: none;
+    text-decoration: none;
+    color: var(--cc-text);
+    transition: background 0.2s ease, color 0.2s ease;
+    outline: none;
+  }
+
+  .experience-tile:hover {
+    background: var(--cc-bg-2);
+    color: var(--cc-accent);
+  }
+
+  .experience-tile:hover .experience-title {
+    color: var(--cc-accent);
+  }
+
+  .experience-icon {
+    display: block;
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--cc-accent);
+    margin-bottom: 1rem;
+    font-style: normal;
+  }
+
+  .experience-title {
+    font-family: var(--font-display);
+    font-size: 25px;
+    font-weight: 300;
+    color: var(--cc-text);
+    margin: 0 0 0.75rem 0;
+    line-height: 1.2;
+    transition: color 0.2s ease;
+  }
+
+  .experience-teaser {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--cc-text-soft);
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>

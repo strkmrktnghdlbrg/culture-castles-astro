@@ -1,0 +1,61 @@
+---
+interface Props {
+  kicker?: string;
+  title: string;
+  subtitle?: string;
+  align?: "center" | "left";
+}
+
+const { kicker, title, subtitle, align = "center" } = Astro.props;
+---
+
+<div
+  class="section-head"
+  style={`text-align: ${align};`}
+>
+  {kicker && (
+    <p class="section-head__kicker">{kicker}</p>
+  )}
+  <h2 class="section-head__title">{title}</h2>
+  {subtitle && (
+    <p class="section-head__subtitle">{subtitle}</p>
+  )}
+</div>
+
+<style>
+  .section-head {
+    max-width: 680px;
+    margin-inline: auto;
+  }
+
+  .section-head[style*="left"] {
+    margin-inline-start: 0;
+  }
+
+  .section-head__kicker {
+    font-family: var(--font-aux);
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.36em;
+    color: var(--cc-accent);
+    margin: 0 0 0.75rem;
+  }
+
+  .section-head__title {
+    font-family: var(--font-display);
+    font-size: clamp(34px, 5vw, 56px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--cc-text);
+    margin: 0 0 1rem;
+  }
+
+  .section-head__subtitle {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--cc-text-soft);
+    margin: 0;
+  }
+</style>

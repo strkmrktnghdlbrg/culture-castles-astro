@@ -1,0 +1,15 @@
+/burgen-und-schloesser/  /burgen/  301
+/burgen-und-schloesser/geschichte-deutscher-burgen/  /magazin/geschichte-deutscher-burgen/  301
+/burgen-und-schloesser/schloesser-in-bayern/  /magazin/schloesser-in-bayern/  301
+/burgen-und-schloesser/mittelalterliche-burgen/  /erlebnisse/mittelalterliche-burgen/  301
+/burgen-und-schloesser/burgruinen-deutschland/  /erlebnisse/burgruinen/  301
+/burgen-und-schloesser/familienausflug-burg/  /erlebnisse/familienausflug/  301
+/burgen-und-schloesser/burgfuehrungen-deutschland/  /burgen/  301
+/burgen-und-schloesser/schlossfuehrungen/  /burgen/  301
+/burgen-und-schloesser/romantische-schloesser/  /erlebnisse/maerchenschloesser/  301
+/burgen-und-schloesser/europaeische-schloesser/  /regionen/  301
+/burgen-und-schloesser/burgen-in-deutschland/  /burgen/  301
+# Bestandsseiten mit bezahlten Outbound-Links — NICHT umleiten (vor dem Splat, 200 = ausliefern)
+/burgen-und-schloesser/10-schoenste-spektakulaere-bauwerke-deutschland/  /burgen-und-schloesser/10-schoenste-spektakulaere-bauwerke-deutschland/  200
+/burgen-und-schloesser/schoenste-schloesser-oesterreich/  /burgen-und-schloesser/schoenste-schloesser-oesterreich/  200
+/burgen-und-schloesser/*  /burgen/  301

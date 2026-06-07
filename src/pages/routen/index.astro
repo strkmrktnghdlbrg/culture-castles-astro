@@ -1,0 +1,138 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Band from "../../components/Band.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import RouteCard from "../../components/RouteCard.astro";
+import OrnamentRule from "../../components/OrnamentRule.astro";
+
+const routes = await getCollection("routes");
+
+// Featured routes first, then alphabetical
+const sorted = [...routes].sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return a.data.title.localeCompare(b.data.title, "de");
+});
+---
+
+<BaseLayout
+  title="Reiserouten"
+  description="Alle Reiserouten zu Burgen und Schlössern in Deutschland und Europa — von der Burgenstraße bis zu Ludwigs Märchenschlössern."
+>
+  <!-- Hero-lite Band -->
+  <Band>
+    <SectionHead
+      kicker="Reiserouten entdecken"
+      title="Reiserouten"
+      subtitle="Von der ältesten Ferienstraße Deutschlands bis zu Ludwigs Märchenschlössern: Folgen Sie unseren kuratierten Routen zu den schönsten Burgen und Schlössern Europas."
+    />
+  </Band>
+
+  <OrnamentRule label="Alle Routen" />
+
+  <!-- RouteCard grid -->
+  <Band soft>
+    {sorted.length > 0 ? (
+      <div class="routes-grid">
+        {sorted.map((route) => {
+          const stops = route.data.stops;
+          const distanceKm = route.data.distanceKm;
+          const metaParts: string[] = [];
+          if (stops != null) metaParts.push(`${stops} Etappen`);
+          if (distanceKm != null) metaParts.push(`${distanceKm} km`);
+          const meta = metaParts.length > 0 ? metaParts.join(" · ") : undefined;
+
+          return (
+            <RouteCard
+              href={`/routen/${route.id}/`}
+              title={route.data.title}
+              image={route.data.heroImage || undefined}
+              meta={meta}
+              teaser={route.data.teaser}
+            />
+          );
+        })}
+      </div>
+    ) : (
+      <p class="no-routes">Noch keine Routen verfügbar — schauen Sie bald wieder vorbei.</p>
+    )}
+  </Band>
+
+  <!-- Teaser: detail pages -->
+  <Band>
+    <div class="routes-cta">
+      <p class="routes-cta__lead">
+        Jede Route enthält genaue Etappenbeschreibungen, Tipps zu Öffnungszeiten und Unterkünfte direkt an der Strecke.
+      </p>
+      <a href="/reiseplanung/" class="btn-ghost">Zur Reiseplanung</a>
+    </div>
+  </Band>
+</BaseLayout>
+
+<style>
+  .routes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--cc-line);
+  }
+
+  @media (min-width: 640px) {
+    .routes-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .routes-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .routes-grid > :global(*) {
+    background: var(--cc-bg);
+  }
+
+  .no-routes {
+    font-family: var(--font-sans);
+    color: var(--cc-text-soft);
+    text-align: center;
+    padding: 3rem 0;
+  }
+
+  .routes-cta {
+    text-align: center;
+    max-width: 600px;
+    margin-inline: auto;
+    border: 1px solid var(--cc-line);
+    padding: 3rem;
+  }
+
+  .routes-cta__lead {
+    font-family: var(--font-sans);
+    color: var(--cc-text-soft);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    margin: 0 0 2rem;
+  }
+
+  .btn-ghost {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border: 1px solid var(--cc-text);
+    color: var(--cc-text);
+    font-family: var(--font-aux);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--cc-accent);
+    color: var(--cc-accent);
+  }
+</style>

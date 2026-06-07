@@ -1,0 +1,124 @@
+---
+// Newsletter.astro — "Der Burgbrief" newsletter block (static, no props)
+---
+
+<section class="nl-band">
+  <div class="container-page">
+    <div class="nl-box">
+      <div class="nl-ornament">❧ ⚜ ❧</div>
+      <h2 class="nl-title">Der Burgbrief</h2>
+      <p class="nl-lead">Jeden Monat ein neues Schloss, eine Route und ein Stück Geschichte — direkt in dein Postfach.</p>
+      <form class="nl-form" action="#" method="post" onsubmit="return false">
+        <input
+          type="email"
+          name="email"
+          class="nl-input"
+          placeholder="deine@email.de"
+          aria-label="E-Mail-Adresse"
+          required
+        />
+        <button type="submit" class="nl-submit">Abonnieren</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .nl-band {
+    padding: 110px 0;
+  }
+
+  .nl-box {
+    text-align: center;
+    border: 1px solid var(--cc-line);
+    padding: 70px 30px;
+    background: rgba(52, 23, 33, 0.4);
+  }
+
+  .nl-ornament {
+    color: var(--cc-accent);
+    font-size: 20px;
+    letter-spacing: 0.3em;
+    opacity: 0.8;
+    margin-bottom: 22px;
+    font-family: var(--font-aux);
+  }
+
+  .nl-title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.03;
+    color: var(--cc-text);
+    margin: 0;
+  }
+
+  .nl-lead {
+    color: var(--cc-text-soft);
+    font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 18px auto 34px;
+    max-width: 50ch;
+  }
+
+  .nl-form {
+    display: flex;
+    max-width: 480px;
+    margin: 0 auto;
+    border: 1px solid var(--cc-text);
+  }
+
+  .nl-input {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: var(--cc-text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    padding: 15px 18px;
+    border-radius: 0;
+  }
+
+  .nl-input::placeholder {
+    color: var(--cc-text-soft);
+  }
+
+  .nl-submit {
+    background: var(--cc-accent);
+    color: var(--cc-bg);
+    border: 0;
+    border-radius: 0;
+    font-family: var(--font-aux);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding: 0 26px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+
+  .nl-submit:hover {
+    background: var(--cc-accent-hi);
+  }
+
+  @media (max-width: 520px) {
+    .nl-box {
+      padding: 52px 20px;
+    }
+
+    .nl-form {
+      flex-direction: column;
+    }
+
+    .nl-input {
+      border-bottom: 1px solid var(--cc-line);
+    }
+
+    .nl-submit {
+      padding: 15px 26px;
+    }
+  }
+</style>

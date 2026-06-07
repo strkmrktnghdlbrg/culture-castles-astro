@@ -1,0 +1,107 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  date: string;
+  category?: string;
+  teaser?: string;
+}
+
+const { href, title, date, category, teaser } = Astro.props;
+
+// Format date as "DD. Monat YYYY"
+const dateObj = new Date(date);
+const formatted = dateObj.toLocaleDateString("de-DE", {
+  day: "2-digit",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<article class="magazine-card">
+  <header class="magazine-card__meta">
+    <span class="magazine-card__date">{formatted}</span>
+    {category && <span class="magazine-card__sep">·</span>}
+    {category && <span class="magazine-card__category">{category}</span>}
+  </header>
+  <h2 class="magazine-card__title">
+    <a href={href} class="magazine-card__link">{title}</a>
+  </h2>
+  {teaser && <p class="magazine-card__teaser">{teaser}</p>}
+  <a href={href} class="magazine-card__cta" aria-label={`${title} lesen`}>
+    Weiterlesen →
+  </a>
+</article>
+
+<style>
+  .magazine-card {
+    border-top: 1px solid var(--cc-line);
+    padding: 2rem 0 2.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .magazine-card:hover {
+    border-top-color: var(--cc-accent);
+  }
+
+  .magazine-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .magazine-card__date,
+  .magazine-card__sep,
+  .magazine-card__category {
+    font-family: var(--font-aux);
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.36em;
+    color: var(--cc-accent);
+  }
+
+  .magazine-card__title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.2;
+    margin: 0 0 0.875rem;
+    color: var(--cc-text);
+  }
+
+  .magazine-card__link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .magazine-card__link:hover {
+    color: var(--cc-accent-hi);
+  }
+
+  .magazine-card__teaser {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--cc-text-soft);
+    margin: 0 0 1.25rem;
+    max-width: 70ch;
+  }
+
+  .magazine-card__cta {
+    font-family: var(--font-aux);
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--cc-accent);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .magazine-card__cta:hover {
+    color: var(--cc-accent-hi);
+  }
+</style>

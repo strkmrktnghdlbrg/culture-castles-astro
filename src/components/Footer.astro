@@ -1,0 +1,63 @@
+---
+import { site } from "../data/site";
+
+const year = 2026;
+---
+
+<footer class="mt-auto border-t" style="border-color: var(--cc-line);">
+  <div class="container-page py-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <div class="flex items-center gap-2">
+        <span style="color: var(--cc-accent); font-size: 24px;">♜</span>
+        <span style="font-family: var(--font-display); font-size: 26px; color: var(--cc-text);">Culture Castles</span>
+      </div>
+      <p class="mt-4 text-sm" style="color: var(--cc-text-soft); max-width: 34ch;">
+        Dein kuratierter Reiseführer durch die schönsten Burgen, Schlösser und Festungen Europas.
+      </p>
+    </div>
+    <div>
+      <div class="cc-foot-h">Entdecken</div>
+      <ul class="space-y-2.5 text-sm">
+        <li><a href="/burgen/" class="cc-foot-l">Burgen &amp; Schlösser</a></li>
+        <li><a href="/regionen/" class="cc-foot-l">Regionen</a></li>
+        <li><a href="/routen/" class="cc-foot-l">Routen</a></li>
+        <li><a href="/erlebnisse/" class="cc-foot-l">Erlebnisse</a></li>
+        <li><a href="/reiseplanung/" class="cc-foot-l">Reiseplanung</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="cc-foot-h">Magazin</div>
+      <ul class="space-y-2.5 text-sm">
+        <li><a href="/magazin/" class="cc-foot-l">Alle Artikel</a></li>
+        <li><a href="/erlebnisse/hochzeit-im-schloss/" class="cc-foot-l">Hochzeit</a></li>
+        <li><a href="/erlebnisse/familienausflug/" class="cc-foot-l">Familienausflug</a></li>
+        <li><a href="/erlebnisse/uebernachten-im-schloss/" class="cc-foot-l">Übernachten</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="cc-foot-h">Portal</div>
+      <ul class="space-y-2.5 text-sm">
+        <li><a href="/ueber-uns/" class="cc-foot-l">Über uns</a></li>
+        <li><a href="/kontakt/" class="cc-foot-l">Kontakt</a></li>
+        <li><a href="/impressum/" class="cc-foot-l">Impressum</a></li>
+        <li><a href="/datenschutz/" class="cc-foot-l">Datenschutz</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t" style="border-color: var(--cc-line);">
+    <div class="container-page py-5 flex flex-wrap items-center justify-between gap-3" style="font-family: var(--font-aux); font-size: 12px; letter-spacing: .08em; color: var(--cc-text-mute);">
+      <span>© {year} {site.brandName}. Alle Angaben ohne Gewähr.</span>
+      <span>Gestaltet im Geist mittelalterlicher Handschriften</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .cc-foot-h {
+    font-family: var(--font-aux);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    font-size: 12px; color: var(--cc-accent); margin-bottom: 16px;
+  }
+  .cc-foot-l { color: var(--cc-text-soft); transition: color .2s; }
+  .cc-foot-l:hover { color: var(--cc-text); }
+</style>
