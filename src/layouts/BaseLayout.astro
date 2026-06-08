@@ -29,6 +29,11 @@ const fullTitle =
   title === site.brandName
     ? `${site.brandName} — Burgen & Schlösser erleben`
     : `${title} · ${site.brandName}`;
+
+// Default-Social-Image, falls die Seite keins setzt
+const DEFAULT_OG =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Neuschwanstein_Castle_2024-02.jpg/1200px-Neuschwanstein_Castle_2024-02.jpg";
+const ogImg = ogImage ?? DEFAULT_OG;
 ---
 
 <!doctype html>
@@ -48,7 +53,13 @@ const fullTitle =
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:locale" content="de_DE" />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:site_name" content={site.brandName} />
+    <meta property="og:image" content={ogImg} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImg} />
 
     <!-- Manuskript-Schriften -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

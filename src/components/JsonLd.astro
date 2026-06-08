@@ -1,0 +1,11 @@
+---
+/**
+ * Rendert ein JSON-LD-Schema (schema.org) als <script type="application/ld+json">.
+ * is:inline verhindert, dass Astro das Script als JS-Modul bündelt.
+ */
+interface Props {
+  schema: Record<string, unknown>;
+}
+const { schema } = Astro.props;
+---
+<script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />

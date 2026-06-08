@@ -13,7 +13,33 @@ import ExperienceGrid from "../components/ExperienceGrid.astro";
 import StaySection from "../components/StaySection.astro";
 import Newsletter from "../components/Newsletter.astro";
 import ImageCreditsList from "../components/ImageCreditsList.astro";
+import JsonLd from "../components/JsonLd.astro";
 import { site, experiences } from "../data/site";
+
+// ── Structured Data: WebSite (Sitelinks-Suche) + Organization ────────────────
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.brandName,
+  url: site.domain,
+  inLanguage: "de-DE",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${site.domain}/suche/?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.brandName,
+  url: site.domain,
+  email: site.email,
+  description: site.description.short,
+};
 
 // ── Collections ──────────────────────────────────────────────────────────────
 const castles = await getCollection("castles");
@@ -103,6 +129,8 @@ const formatDate = (d: Date) =>
   description={site.description.short}
   ogImage={castleOfMonth.data.heroImage || undefined}
 >
+  <JsonLd schema={websiteSchema} />
+  <JsonLd schema={orgSchema} />
 
   {/* ── HERO ── */}
   <Hero

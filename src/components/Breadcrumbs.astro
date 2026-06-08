@@ -1,7 +1,23 @@
 ---
+import { site } from "../data/site";
 interface Crumb { label: string; href?: string }
 interface Props { items: Crumb[] }
 const { items } = Astro.props;
+
+// BreadcrumbList JSON-LD (absolute URLs). Deckt automatisch alle Seiten ab,
+// die Breadcrumbs nutzen (Burg-, Artikel-, Region-, Routen-, Legacy-Seiten).
+const abs = (h?: string) =>
+  new URL(h ?? Astro.url.pathname, site.domain).toString();
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: items.map((c, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: c.label,
+    item: abs(c.href),
+  })),
+};
 ---
 <nav aria-label="Breadcrumb" class="text-xs" style="color: var(--color-slate-steel);">
   <ol class="flex flex-wrap items-center gap-1.5">
@@ -17,3 +33,4 @@ const { items } = Astro.props;
     ))}
   </ol>
 </nav>
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbLd)} />

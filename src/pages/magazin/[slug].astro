@@ -5,6 +5,8 @@ import CastleImage from "../../components/CastleImage.astro";
 import Band from "../../components/Band.astro";
 import OrnamentRule from "../../components/OrnamentRule.astro";
 import ImageCreditsList from "../../components/ImageCreditsList.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import { site } from "../../data/site";
 
 export async function getStaticPaths() {
   const entries = await getCollection("articles");
@@ -30,6 +32,30 @@ const dateFormatted = dateObj.toLocaleDateString("de-DE", {
   month: "long",
   year: "numeric",
 });
+
+// ── Structured Data (schema.org) ──────────────────────────────────────────────
+const pageUrl = new URL(Astro.url.pathname, site.domain).toString();
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: d.title,
+  description: d.teaser,
+  ...(d.heroImage ? { image: d.heroImage } : {}),
+  datePublished: dateObj.toISOString(),
+  ...(d.category ? { articleSection: d.category } : {}),
+  author: { "@type": "Organization", name: site.brandName, url: site.domain },
+  publisher: { "@type": "Organization", name: site.brandName, url: site.domain },
+  mainEntityOfPage: pageUrl,
+};
+const articleCrumbs = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Start", item: new URL("/", site.domain).toString() },
+    { "@type": "ListItem", position: 2, name: "Magazin", item: new URL("/magazin/", site.domain).toString() },
+    { "@type": "ListItem", position: 3, name: d.title, item: pageUrl },
+  ],
+};
 ---
 
 <BaseLayout
@@ -37,6 +63,8 @@ const dateFormatted = dateObj.toLocaleDateString("de-DE", {
   description={d.teaser}
   ogImage={d.heroImage || undefined}
 >
+  <JsonLd schema={articleSchema} />
+  <JsonLd schema={articleCrumbs} />
 
   <!-- Breadcrumb -->
   <nav

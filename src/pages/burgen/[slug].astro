@@ -8,6 +8,8 @@ import StaySection from "../../components/StaySection.astro";
 import ImageCreditsList from "../../components/ImageCreditsList.astro";
 import Band from "../../components/Band.astro";
 import AwinButton from "../../components/AwinButton.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import { site } from "../../data/site";
 
 export async function getStaticPaths() {
   const entries = await getCollection("castles");
@@ -31,6 +33,35 @@ const gygUrl = d.gygQuery
   ? `https://www.getyourguide.com/s/?q=${encodeURIComponent(d.gygQuery)}`
   : `https://www.getyourguide.com/s/?q=${encodeURIComponent(d.title)}`;
 const tiqetsUrl = `https://www.tiqets.com/de/search/?q=${encodeURIComponent(d.gygQuery ?? d.title)}`;
+
+// ── Structured Data (schema.org) ──────────────────────────────────────────────
+const pageUrl = new URL(Astro.url.pathname, site.domain).toString();
+const castleSchema = {
+  "@context": "https://schema.org",
+  "@type": "TouristAttraction",
+  name: d.title,
+  description: d.teaser,
+  url: pageUrl,
+  ...(d.heroImage ? { image: d.heroImage } : {}),
+  ...(lat != null && lng != null
+    ? { geo: { "@type": "GeoCoordinates", latitude: lat, longitude: lng } }
+    : {}),
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "DE",
+    ...(d.place ? { addressRegion: d.place } : {}),
+  },
+  ...(d.type ? { touristType: d.type } : {}),
+};
+const castleCrumbs = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Start", item: new URL("/", site.domain).toString() },
+    { "@type": "ListItem", position: 2, name: "Burgen & Schlösser", item: new URL("/burgen/", site.domain).toString() },
+    { "@type": "ListItem", position: 3, name: d.title, item: pageUrl },
+  ],
+};
 ---
 
 <BaseLayout
@@ -38,6 +69,8 @@ const tiqetsUrl = `https://www.tiqets.com/de/search/?q=${encodeURIComponent(d.gy
   description={d.teaser}
   ogImage={d.heroImage || undefined}
 >
+  <JsonLd schema={castleSchema} />
+  <JsonLd schema={castleCrumbs} />
 
   <!-- Breadcrumb -->
   <nav
