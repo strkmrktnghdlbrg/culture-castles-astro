@@ -40,6 +40,10 @@ const orgSchema = {
   email: site.email,
   description: site.description.short,
 };
+const homeAlternates = [
+  { hreflang: "de", href: new URL("/", site.domain).toString() },
+  { hreflang: "en", href: new URL("/en/", site.domain).toString() },
+];
 
 // ── Collections ──────────────────────────────────────────────────────────────
 const castles = await getCollection("castles");
@@ -128,6 +132,7 @@ const formatDate = (d: Date) =>
   title={site.brandName}
   description={site.description.short}
   ogImage={castleOfMonth.data.heroImage || undefined}
+  alternates={homeAlternates}
 >
   <JsonLd schema={websiteSchema} />
   <JsonLd schema={orgSchema} />

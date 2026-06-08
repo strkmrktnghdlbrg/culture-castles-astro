@@ -1,17 +1,32 @@
 ---
 import { site, nav } from "../data/site";
+
+interface Props { lang?: "de" | "en"; switchHref?: string }
+const { lang = "de", switchHref = lang === "en" ? "/" : "/en/" } = Astro.props;
+const isEn = lang === "en";
+const homeHref = isEn ? "/en/" : "/";
+const navItems = isEn
+  ? [
+      { href: "/en/", label: "Home" },
+      { href: "/en/#castles", label: "Castles" },
+    ]
+  : nav;
+const switchLabel = isEn ? "DE" : "EN";
+const switchTitle = isEn ? "Auf Deutsch ansehen" : "View in English";
+const searchLabel = isEn ? "Search" : "Schloss suchen";
+const searchHref = isEn ? "/en/#castles" : "/suche/";
 ---
 
 <header class="sticky top-0 z-40 border-b" style="background: rgba(42,18,26,.85); backdrop-filter: blur(8px); border-color: var(--cc-line);">
   <div class="container-page">
     <div class="flex items-center justify-between h-[78px] gap-4">
-      <a href="/" class="flex items-center gap-3 shrink-0" aria-label={`${site.brandName} Startseite`}>
+      <a href={homeHref} class="flex items-center gap-3 shrink-0" aria-label={`${site.brandName} ${isEn ? "Home" : "Startseite"}`}>
         <span style="color: var(--cc-accent); font-size: 26px; line-height: 1;">♜</span>
         <span style="font-family: var(--font-display); font-weight: 400; font-size: 26px; letter-spacing: .04em; color: var(--cc-text);">Culture&nbsp;<b style="font-weight:400; color: var(--cc-accent);">Castles</b></span>
       </a>
 
       <nav class="hidden lg:flex items-center gap-7" aria-label="Hauptnavigation">
-        {nav.map((item) => (
+        {navItems.map((item) => (
           <a
             href={item.href}
             class="cc-navlink"
@@ -19,8 +34,9 @@ import { site, nav } from "../data/site";
         ))}
       </nav>
 
-      <div class="flex items-center gap-2 shrink-0">
-        <a href="/suche/" class="hidden lg:inline-flex items-center" style="font-family: var(--font-aux); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--cc-accent); border: 1px solid var(--cc-accent); padding: 9px 18px;">Schloss suchen</a>
+      <div class="flex items-center gap-3 shrink-0">
+        <a href={switchHref} title={switchTitle} class="hidden lg:inline-flex items-center cc-langswitch" aria-label={switchTitle}>{switchLabel}</a>
+        <a href={searchHref} class="hidden lg:inline-flex items-center" style="font-family: var(--font-aux); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--cc-accent); border: 1px solid var(--cc-accent); padding: 9px 18px;">{searchLabel}</a>
         <button
           type="button"
           id="mobile-menu-toggle"
@@ -85,8 +101,9 @@ import { site, nav } from "../data/site";
       </ul>
     </nav>
 
-    <div class="px-5 py-4 border-t shrink-0" style="border-color: var(--cc-line);">
-      <a href="/suche/" class="btn-ghost w-full justify-center" style="border-color: var(--cc-accent); color: var(--cc-accent);">Schloss suchen</a>
+    <div class="px-5 py-4 border-t shrink-0 flex flex-col gap-3" style="border-color: var(--cc-line);">
+      <a href={searchHref} class="btn-ghost w-full justify-center" style="border-color: var(--cc-accent); color: var(--cc-accent);">{searchLabel}</a>
+      <a href={switchHref} class="cc-langswitch w-full text-center">{isEn ? "Auf Deutsch" : "View in English"}</a>
     </div>
   </aside>
 </header>
@@ -103,6 +120,17 @@ import { site, nav } from "../data/site";
     transition: color .2s, border-color .2s;
   }
   .cc-navlink:hover { color: var(--cc-text); border-bottom-color: var(--cc-accent); }
+
+  .cc-langswitch {
+    font-family: var(--font-aux);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--cc-text-soft);
+    border: 1px solid var(--cc-line);
+    padding: 8px 12px;
+    transition: color .2s, border-color .2s;
+  }
+  .cc-langswitch:hover { color: var(--cc-accent); border-color: var(--cc-accent); }
 
   .mobile-menu-backdrop {
     position: fixed; inset: 0;

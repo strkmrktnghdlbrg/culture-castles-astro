@@ -62,12 +62,23 @@ const castleCrumbs = {
     { "@type": "ListItem", position: 3, name: d.title, item: pageUrl },
   ],
 };
+
+// Reziproke hreflang-Verknüpfung, falls eine englische Übersetzung existiert
+const enCastles = await getCollection("castlesEn");
+const hasEn = enCastles.some((c) => c.id === entry.id);
+const castleAlternates = hasEn
+  ? [
+      { hreflang: "de", href: pageUrl },
+      { hreflang: "en", href: new URL(`/en/castles/${entry.id}/`, site.domain).toString() },
+    ]
+  : [];
 ---
 
 <BaseLayout
   title={d.title}
   description={d.teaser}
   ogImage={d.heroImage || undefined}
+  alternates={castleAlternates}
 >
   <JsonLd schema={castleSchema} />
   <JsonLd schema={castleCrumbs} />

@@ -1,0 +1,131 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import CastleImage from "../../../components/CastleImage.astro";
+import Band from "../../../components/Band.astro";
+import StaySection from "../../../components/StaySection.astro";
+import ImageCreditsList from "../../../components/ImageCreditsList.astro";
+import AwinButton from "../../../components/AwinButton.astro";
+import JsonLd from "../../../components/JsonLd.astro";
+import { site } from "../../../data/site";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("castlesEn");
+  return entries.map((e) => ({ params: { slug: e.id }, props: { entry: e } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+
+const lat = d.coordinates?.[0];
+const lng = d.coordinates?.[1];
+const gygUrl = `https://www.getyourguide.com/s/?q=${encodeURIComponent(d.gygQuery ?? d.title)}`;
+const tiqetsUrl = `https://www.tiqets.com/en/search/?q=${encodeURIComponent(d.gygQuery ?? d.title)}`;
+
+const enUrl = new URL(`/en/castles/${entry.id}/`, site.domain).toString();
+const deUrl = new URL(`/burgen/${entry.id}/`, site.domain).toString();
+
+const castleSchema = {
+  "@context": "https://schema.org",
+  "@type": "TouristAttraction",
+  name: d.title,
+  description: d.teaser,
+  url: enUrl,
+  ...(d.heroImage ? { image: d.heroImage } : {}),
+  ...(lat != null && lng != null
+    ? { geo: { "@type": "GeoCoordinates", latitude: lat, longitude: lng } }
+    : {}),
+  address: { "@type": "PostalAddress", addressCountry: "DE", ...(d.place ? { addressRegion: d.place } : {}) },
+  ...(d.type ? { touristType: d.type } : {}),
+};
+
+const metaLine = [d.place, d.type, d.built].filter(Boolean).join(" · ");
+const credits = d.heroCredit ? [{ label: d.title, ...d.heroCredit }] : [];
+---
+
+<BaseLayout
+  title={d.title}
+  description={d.teaser}
+  ogImage={d.heroImage || undefined}
+  lang="en"
+  alternates={[{ hreflang: "de", href: deUrl }, { hreflang: "en", href: enUrl }]}
+>
+  <JsonLd schema={castleSchema} />
+
+  <div style="background: var(--cc-bg-2); border-bottom: 1px solid var(--cc-line);">
+    <div class="container-page" style="padding: 1rem 0;">
+      <Breadcrumbs items={[{ label: "Home", href: "/en/" }, { label: "Castles", href: "/en/#castles" }, { label: d.title }]} />
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section style="position: relative; height: 60vh; min-height: 420px; overflow: hidden;">
+    <CastleImage src={d.heroImage} alt={d.title} class="cc-en-herobg" />
+    <div style="position:absolute; inset:0; background: linear-gradient(180deg, rgba(42,18,26,.45), rgba(42,18,26,.92));"></div>
+    <div class="container-page" style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:2.5rem;">
+      {metaLine && <p style="font-family: var(--font-aux); letter-spacing:.24em; text-transform:uppercase; font-size:12px; color: var(--cc-accent); margin-bottom:.75rem;">{metaLine}</p>}
+      <h1 style="font-family: var(--font-display); font-weight:300; font-size: clamp(2.5rem,6vw,4.5rem); line-height:1.02; color: var(--cc-text); margin:0; max-width:18ch;">{d.title}</h1>
+    </div>
+  </section>
+
+  <Band>
+    <div style="display:grid; grid-template-columns: 1fr; gap: 3rem; max-width: 70ch; margin-inline:auto;">
+      <p style="font-family: var(--font-serif2); font-style:italic; font-size:1.3rem; line-height:1.6; color: var(--cc-text-soft); margin:0;">{d.teaser}</p>
+      <div class="cc-en-prose"><Content /></div>
+
+      {d.highlights.length > 0 && (
+        <div>
+          <h2 style="font-family: var(--font-display); font-weight:300; font-size:1.8rem; color: var(--cc-text); border-bottom:1px solid var(--cc-line); padding-bottom:.5rem; margin-bottom:1rem;">Highlights</h2>
+          <ul style="list-style:none; padding:0; margin:0;">
+            {d.highlights.map((h) => (
+              <li style="font-family: var(--font-sans); color: var(--cc-text); line-height:1.7; padding-left:1.5rem; position:relative; margin-bottom:.6rem;">
+                <span style="position:absolute; left:0; color: var(--cc-accent);">✦</span>{h}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <!-- Tickets & tours -->
+      <div style="border:1px solid var(--cc-line); padding:1.75rem;">
+        <p style="font-family: var(--font-aux); letter-spacing:.3em; text-transform:uppercase; font-size:11px; color: var(--cc-accent); margin:0 0 .5rem;">Tickets &amp; tours</p>
+        <p style="font-family: var(--font-display); font-weight:300; font-size:1.4rem; color: var(--cc-text); margin:0 0 1.25rem;">Guided tours &amp; activities for {d.title}</p>
+        <div style="display:flex; flex-wrap:wrap; gap:.75rem;">
+          <a href={gygUrl} target="_blank" rel="sponsored noopener nofollow" style="font-family: var(--font-aux); font-size:12px; letter-spacing:.2em; text-transform:uppercase; background: var(--cc-accent); color: var(--cc-bg); padding:.8rem 1.5rem;">Find tours →</a>
+          <AwinButton merchant="tiqets" destination={tiqetsUrl} clickref={`en-${entry.id}`} label={`Tickets for ${d.title}`} variant="ghost" />
+        </div>
+        <p style="font-family: var(--font-sans); font-size:.75rem; color: var(--cc-text-mute); margin:.75rem 0 0;">via GetYourGuide / Tiqets · affiliate links</p>
+      </div>
+
+      {(d.visit?.duration || d.visit?.price || d.visit?.bestTime || d.visit?.hours) && (
+        <div style="border:1px solid var(--cc-line); padding:1.75rem;">
+          <h2 style="font-family: var(--font-display); font-weight:300; font-size:1.6rem; color: var(--cc-text); margin:0 0 1rem;">Visitor information</h2>
+          <dl style="display:grid; grid-template-columns: max-content 1fr; gap:.5rem 1.5rem; margin:0; font-family: var(--font-sans); color: var(--cc-text);">
+            {d.visit?.duration && (<><dt style="color: var(--cc-accent);">Duration</dt><dd style="margin:0;">{d.visit.duration}</dd></>)}
+            {d.visit?.price && (<><dt style="color: var(--cc-accent);">Admission</dt><dd style="margin:0;">{d.visit.price}</dd></>)}
+            {d.visit?.bestTime && (<><dt style="color: var(--cc-accent);">Best time</dt><dd style="margin:0;">{d.visit.bestTime}</dd></>)}
+            {d.visit?.hours && (<><dt style="color: var(--cc-accent);">Opening hours</dt><dd style="margin:0;">{d.visit.hours}</dd></>)}
+          </dl>
+        </div>
+      )}
+    </div>
+  </Band>
+
+  <StaySection
+    title={`Hotels near ${d.title}`}
+    lead={`Stay within easy reach of ${d.title} and experience history first-hand — from charming guesthouses to elegant castle hotels.`}
+    lat={lat}
+    lng={lng}
+  />
+
+  <ImageCreditsList credits={credits} heading="Image credits" />
+</BaseLayout>
+
+<style>
+  section :global(.cc-en-herobg) { position:absolute; inset:0; width:100%; height:100%; }
+  section :global(.cc-en-herobg img) { filter: saturate(.7) brightness(.7); }
+  .cc-en-prose :global(p) { font-family: var(--font-sans); font-size:1.0625rem; line-height:1.8; color: var(--cc-text); margin:0 0 1.5rem; }
+  .cc-en-prose :global(h2) { font-family: var(--font-display); font-weight:300; font-size: clamp(1.5rem,3.5vw,2rem); color: var(--cc-text); margin:2.5rem 0 1rem; padding-bottom:.5rem; border-bottom:1px solid var(--cc-line); }
+</style>

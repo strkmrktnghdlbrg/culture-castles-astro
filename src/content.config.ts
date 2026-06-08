@@ -21,9 +21,7 @@ const credit = z
   })
   .optional();
 
-const castles = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/castles" }),
-  schema: z.object({
+const castleSchema = z.object({
     title: z.string(),
     region: z.string(), // Region-Slug (→ regions collection)
     place: z.string().optional(), // Ort/Landstrich für Eyebrow
@@ -53,7 +51,17 @@ const castles = defineCollection({
     castleOfMonth: z.boolean().default(false),
     rank: z.number().optional(),
     faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
-  }),
+});
+
+const castles = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/castles" }),
+  schema: castleSchema,
+});
+
+// Englische Übersetzungen (gleiche Slugs wie de). Top-Burgen zuerst.
+const castlesEn = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/castles-en" }),
+  schema: castleSchema,
 });
 
 const regions = defineCollection({
@@ -101,4 +109,4 @@ const articles = defineCollection({
   }),
 });
 
-export const collections = { castles, regions, routes, articles };
+export const collections = { castles, castlesEn, regions, routes, articles };

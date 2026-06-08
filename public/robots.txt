@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://top10-heidelberg.de/sitemap-index.xml
+Sitemap: https://culture-castles.de/sitemap-index.xml

@@ -1,0 +1,99 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/Hero.astro";
+import Band from "../../components/Band.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import CastleCard from "../../components/CastleCard.astro";
+import StaySection from "../../components/StaySection.astro";
+import ImageCreditsList from "../../components/ImageCreditsList.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import { site } from "../../data/site";
+
+const castlesEn = (await getCollection("castlesEn")).sort(
+  (a, b) => (a.data.rank ?? 99) - (b.data.rank ?? 99),
+);
+const featured = castlesEn.find((c) => c.data.castleOfMonth) ?? castlesEn[0];
+
+const enUrl = new URL("/en/", site.domain).toString();
+const deUrl = new URL("/", site.domain).toString();
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.brandName,
+  url: enUrl,
+  inLanguage: "en",
+};
+
+const credits = castlesEn
+  .filter((c) => c.data.heroCredit)
+  .map((c) => ({ label: c.data.title, ...c.data.heroCredit! }));
+---
+
+<BaseLayout
+  title={site.brandName}
+  description="Your curated travel guide to the most beautiful castles, palaces and fortresses of Europe — history, visiting tips, tours and hotels nearby."
+  ogImage={featured?.data.heroImage || undefined}
+  lang="en"
+  alternates={[{ hreflang: "de", href: deUrl }, { hreflang: "en", href: enUrl }]}
+>
+  <JsonLd schema={websiteSchema} />
+
+  <Hero
+    eyebrow="Castles & Palaces of Europe"
+    titleHtml="Where stones <em>whisper</em> stories."
+    lead="A curated travel guide through the finest castles, palaces and fortresses — with visiting tips, guided tours and places to stay nearby."
+    image={featured?.data.heroImage}
+    stats={[
+      { v: String(castlesEn.length), l: "Castles in English" },
+      { v: "7", l: "Regions" },
+      { v: "3", l: "Routes" },
+      { v: "6", l: "Experiences" },
+    ]}
+  />
+
+  <Band id="castles">
+    <SectionHead
+      kicker="Most visited"
+      title="Popular Castles & Palaces"
+      subtitle="A curated selection of the most impressive landmarks — each with history, visiting information and hotels nearby."
+    />
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1.5rem;" class="cc-en-grid">
+      {castlesEn.map((c) => (
+        <CastleCard
+          href={`/en/castles/${c.id}/`}
+          title={c.data.title}
+          region={c.data.place ?? c.data.country}
+          teaser={c.data.teaser}
+          image={c.data.heroImage}
+          rank={c.data.rank}
+          type={c.data.type}
+        />
+      ))}
+    </div>
+  </Band>
+
+  <Band soft>
+    <div style="text-align:center; max-width:60ch; margin-inline:auto;">
+      <p style="font-family: var(--font-aux); letter-spacing:.3em; text-transform:uppercase; font-size:.7rem; color: var(--cc-accent); margin-bottom:1rem;">More to come</p>
+      <h2 style="font-family: var(--font-display); font-weight:300; font-size: clamp(1.8rem,4vw,2.75rem); color: var(--cc-text); margin:0 0 1rem;">Hundreds more castles — in our German guide</h2>
+      <p style="font-family: var(--font-sans); font-size:1.0625rem; line-height:1.7; color: var(--cc-text-soft); margin:0 0 1.75rem;">
+        Our English edition is growing. In the meantime, explore the full collection of 240+ castles, regions and curated routes in the German guide.
+      </p>
+      <a href="/" style="display:inline-flex; align-items:center; gap:.6em; font-family: var(--font-aux); font-size:13px; letter-spacing:.18em; text-transform:uppercase; color: var(--cc-accent); border:1px solid var(--cc-accent); padding:.85rem 1.75rem;">Zum deutschen Reiseführer →</a>
+    </div>
+  </Band>
+
+  <StaySection
+    title="Sleep where kings once ruled"
+    lead="For every castle we find the right hotels within walking distance — from castle hotels to charming guesthouses in the historic centre."
+  />
+
+  <ImageCreditsList credits={credits} heading="Image credits" />
+</BaseLayout>
+
+<style>
+  @media (max-width: 980px) { .cc-en-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+  @media (max-width: 600px) { .cc-en-grid { grid-template-columns: 1fr !important; } }
+</style>

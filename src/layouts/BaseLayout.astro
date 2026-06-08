@@ -8,12 +8,16 @@ import { affiliate, stay22Enabled, gygEnabled } from "../data/affiliate";
 import { adsense, adsenseEnabled } from "../data/adsense";
 import { analytics, gtmEnabled } from "../data/analytics";
 
+interface Alternate { hreflang: string; href: string }
 interface Props {
   title: string;
   description?: string;
   noindex?: boolean;
   canonical?: string;
   ogImage?: string;
+  lang?: "de" | "en";
+  /** hreflang-Alternativen (z.B. EN-Pendant). x-default wird ergänzt. */
+  alternates?: Alternate[];
 }
 
 const {
@@ -22,9 +26,18 @@ const {
   noindex = false,
   canonical,
   ogImage,
+  lang = "de",
+  alternates = [],
 } = Astro.props;
 
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site.domain).toString();
+const ogLocale = lang === "en" ? "en_US" : "de_DE";
+
+// Sprachumschalter-Ziel: das Pendant der jeweils anderen Sprache (sonst Home).
+const otherLang = lang === "en" ? "de" : "en";
+const switchHref =
+  alternates.find((a) => a.hreflang === otherLang)?.href ??
+  (lang === "en" ? "/" : "/en/");
 const fullTitle =
   title === site.brandName
     ? `${site.brandName} — Burgen & Schlösser erleben`
@@ -37,13 +50,20 @@ const ogImg = ogImage ?? DEFAULT_OG;
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+    ))}
+    {alternates.length > 0 && (
+      <link rel="alternate" hreflang="x-default" href={alternates.find((a) => a.hreflang === "de")?.href ?? canonicalUrl} />
+    )}
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
@@ -52,7 +72,7 @@ const ogImg = ogImage ?? DEFAULT_OG;
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:locale" content="de_DE" />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:site_name" content={site.brandName} />
     <meta property="og:image" content={ogImg} />
 
@@ -108,7 +128,7 @@ const ogImg = ogImage ?? DEFAULT_OG;
         ></iframe>
       </noscript>
     )}
-    <Header />
+    <Header lang={lang} switchHref={switchHref} />
     <main class="flex-1">
       <slot />
     </main>
