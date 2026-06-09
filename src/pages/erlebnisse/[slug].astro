@@ -7,7 +7,7 @@ import CastleCard from "../../components/CastleCard.astro";
 import OrnamentRule from "../../components/OrnamentRule.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import AwinButton from "../../components/AwinButton.astro";
-import { experiences } from "../../data/site";
+import { experiences, site } from "../../data/site";
 import type { Experience } from "../../data/site";
 
 export async function getStaticPaths() {
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 }
 
 const { experience } = Astro.props as { experience: Experience };
-const { title, intro, tag, icon } = experience;
+const { title, intro, tag, icon, slug } = experience;
 
 // Filter castles whose tags include this experience's tag
 const allCastles = await getCollection("castles");
@@ -37,6 +37,10 @@ const castleCount = taggedCastles.length;
 <BaseLayout
   title={`${title} — Burgen & Schlösser erleben`}
   description={intro}
+  alternates={[
+    { hreflang: "de", href: new URL(`/erlebnisse/${slug}/`, site.domain).toString() },
+    { hreflang: "en", href: new URL(`/en/experiences/${slug}/`, site.domain).toString() },
+  ]}
 >
   <!-- Hero / SectionHead -->
   <div class="exp-hero">

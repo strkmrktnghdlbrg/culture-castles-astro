@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Band from "../../../components/Band.astro";
+import SectionHead from "../../../components/SectionHead.astro";
+import OrnamentRule from "../../../components/OrnamentRule.astro";
+import ExperienceGrid from "../../../components/ExperienceGrid.astro";
+import { experiencesEn } from "../../../data/experiences-en";
+import { site } from "../../../data/site";
+
+const items = experiencesEn.map((e) => ({
+  href: `/en/experiences/${e.slug}/`,
+  title: e.title,
+  teaser: e.teaser,
+  icon: e.icon,
+}));
+---
+
+<BaseLayout
+  title="Experiences"
+  description="All experience worlds at a glance: a wedding at a castle, family days out, ruins and more. Discover what castles and palaces have to offer."
+  lang="en"
+  alternates={[
+    { hreflang: "de", href: new URL("/erlebnisse/", site.domain).toString() },
+    { hreflang: "en", href: new URL("/en/experiences/", site.domain).toString() },
+  ]}
+>
+  <Band>
+    <SectionHead
+      kicker="Find your kind of trip"
+      title="Experiences"
+      subtitle="Whether a romantic wedding, an adventure for the whole family or a look at enchanted ruins — castles and palaces offer the right experience for everyone."
+    />
+    <div style="margin-top: 3.5rem;">
+      <ExperienceGrid items={items} />
+    </div>
+  </Band>
+
+  <OrnamentRule label="Every theme at a glance" />
+</BaseLayout>

@@ -35,6 +35,10 @@ const dateFormatted = dateObj.toLocaleDateString("de-DE", {
 
 // ── Structured Data (schema.org) ──────────────────────────────────────────────
 const pageUrl = new URL(Astro.url.pathname, site.domain).toString();
+const articleAlternates = [
+  { hreflang: "de", href: pageUrl },
+  { hreflang: "en", href: new URL(`/en/magazine/${entry.id}/`, site.domain).toString() },
+];
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -62,6 +66,7 @@ const articleCrumbs = {
   title={d.title}
   description={d.teaser}
   ogImage={d.heroImage || undefined}
+  alternates={articleAlternates}
 >
   <JsonLd schema={articleSchema} />
   <JsonLd schema={articleCrumbs} />

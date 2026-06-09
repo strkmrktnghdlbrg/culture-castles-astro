@@ -1,0 +1,115 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import CastleImage from "../../../components/CastleImage.astro";
+import Band from "../../../components/Band.astro";
+import OrnamentRule from "../../../components/OrnamentRule.astro";
+import ImageCreditsList from "../../../components/ImageCreditsList.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import JsonLd from "../../../components/JsonLd.astro";
+import { site } from "../../../data/site";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("articlesEn");
+  return entries.map((e) => ({ params: { slug: e.id }, props: { entry: e } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const slug = entry.id;
+
+const dateObj = new Date(d.date);
+const dateFormatted = dateObj.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+
+const allArticles = await getCollection("articlesEn");
+const related = allArticles
+  .filter((a) => a.data.cluster === d.cluster && a.id !== entry.id)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const enUrl = new URL(`/en/magazine/${slug}/`, site.domain).toString();
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: d.title,
+  description: d.teaser,
+  ...(d.heroImage ? { image: d.heroImage } : {}),
+  datePublished: dateObj.toISOString(),
+  ...(d.category ? { articleSection: d.category } : {}),
+  inLanguage: "en",
+  author: { "@type": "Organization", name: site.brandName, url: site.domain },
+  publisher: { "@type": "Organization", name: site.brandName, url: site.domain },
+  mainEntityOfPage: enUrl,
+};
+const credits = d.heroCredit ? [{ label: d.title, ...d.heroCredit }] : [];
+---
+
+<BaseLayout
+  title={d.title}
+  description={d.teaser}
+  ogImage={d.heroImage || undefined}
+  lang="en"
+  alternates={[
+    { hreflang: "de", href: new URL(`/magazin/${slug}/`, site.domain).toString() },
+    { hreflang: "en", href: enUrl },
+  ]}
+>
+  <JsonLd schema={articleSchema} />
+
+  <div style="background: var(--cc-bg-2); border-bottom: 1px solid var(--cc-line);">
+    <div class="container-page" style="padding: 1rem 0;">
+      <Breadcrumbs items={[{ label: "Home", href: "/en/" }, { label: "Magazine", href: "/en/magazine/" }, { label: d.title }]} />
+    </div>
+  </div>
+
+  <article class="cc-art">
+    <div class="container-page">
+      <div class="cc-art__head">
+        <p class="cc-art__meta">{d.category} · {dateFormatted}</p>
+        <h1 class="cc-art__title">{d.title}</h1>
+      </div>
+    </div>
+
+    {d.heroImage && (
+      <div class="cc-art__hero">
+        <CastleImage src={d.heroImage} alt={d.title} class="cc-art__heroimg" />
+      </div>
+    )}
+
+    <div class="container-page">
+      <div class="cc-art__body"><Content /></div>
+    </div>
+  </article>
+
+  {related.length > 0 && (
+    <Band soft>
+      <OrnamentRule label="More from this topic" />
+      <ul class="cc-related">
+        {related.map((r) => (
+          <li><a href={`/en/magazine/${r.id}/`}>{r.data.title}</a></li>
+        ))}
+      </ul>
+    </Band>
+  )}
+
+  <ImageCreditsList credits={credits} heading="Image credits" />
+</BaseLayout>
+
+<style>
+  .cc-art { padding-block: 2.5rem 4rem; }
+  .cc-art__head { max-width: 70ch; margin-inline: auto; }
+  .cc-art__meta { font-family: var(--font-aux); letter-spacing: .2em; text-transform: uppercase; font-size: .7rem; color: var(--cc-accent); margin: 0 0 .75rem; }
+  .cc-art__title { font-family: var(--font-display); font-weight: 300; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.05; color: var(--cc-text); margin: 0; }
+  .cc-art__hero { max-width: 980px; margin: 2.5rem auto; height: 420px; }
+  .cc-art :global(.cc-art__heroimg) { width: 100%; height: 100%; }
+  .cc-art :global(.cc-art__heroimg img) { filter: saturate(.8); }
+  .cc-art__body { max-width: 70ch; margin-inline: auto; }
+  .cc-art__body :global(p) { font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.8; color: var(--cc-text); margin: 0 0 1.5rem; }
+  .cc-art__body :global(h2) { font-family: var(--font-display); font-weight: 300; font-size: clamp(1.5rem,3.5vw,2rem); color: var(--cc-text); margin: 2.5rem 0 1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--cc-line); }
+  .cc-art__body :global(a) { color: var(--cc-accent); text-decoration: underline; text-underline-offset: 3px; }
+  .cc-related { list-style: none; padding: 0; max-width: 70ch; margin: 2rem auto 0; }
+  .cc-related li { border-top: 1px solid var(--cc-line); padding: 1rem 0; }
+  .cc-related a { font-family: var(--font-display); font-size: 1.4rem; font-weight: 300; color: var(--cc-text); text-decoration: none; }
+  .cc-related a:hover { color: var(--cc-accent); }
+</style>

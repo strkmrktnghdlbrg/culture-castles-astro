@@ -105,9 +105,7 @@ const routesEn = defineCollection({
   schema: routeSchema,
 });
 
-const articles = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/articles" }),
-  schema: z.object({
+const articleSchema = z.object({
     title: z.string(),
     date: z.coerce.date(),
     category: z.string().default("Ratgeber"), // Geschichte | Fotografie | Ratgeber | Hochzeit
@@ -118,7 +116,15 @@ const articles = defineCollection({
     legacyUrl: z.string().optional(), // alte WP-URL für 301
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
-  }),
 });
 
-export const collections = { castles, castlesEn, regions, regionsEn, routes, routesEn, articles };
+const articles = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/articles" }),
+  schema: articleSchema,
+});
+const articlesEn = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/articles-en" }),
+  schema: articleSchema,
+});
+
+export const collections = { castles, castlesEn, regions, regionsEn, routes, routesEn, articles, articlesEn };

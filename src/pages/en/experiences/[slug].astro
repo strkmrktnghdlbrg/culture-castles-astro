@@ -1,0 +1,112 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Band from "../../../components/Band.astro";
+import SectionHead from "../../../components/SectionHead.astro";
+import CastleCard from "../../../components/CastleCard.astro";
+import OrnamentRule from "../../../components/OrnamentRule.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import AwinButton from "../../../components/AwinButton.astro";
+import { experiencesEn } from "../../../data/experiences-en";
+import type { Experience } from "../../../data/site";
+import { site } from "../../../data/site";
+
+export async function getStaticPaths() {
+  return experiencesEn.map((experience: Experience) => ({
+    params: { slug: experience.slug },
+    props: { experience },
+  }));
+}
+
+const { experience } = Astro.props as { experience: Experience };
+const { title, intro, tag, icon, slug } = experience;
+
+const allCastles = await getCollection("castlesEn");
+const taggedCastles = allCastles
+  .filter((c) => Array.isArray(c.data.tags) && c.data.tags.includes(tag))
+  .sort((a, b) => {
+    const ra = a.data.rank ?? 9999;
+    const rb = b.data.rank ?? 9999;
+    if (ra !== rb) return ra - rb;
+    return a.data.title.localeCompare(b.data.title, "en");
+  });
+const castleCount = taggedCastles.length;
+---
+
+<BaseLayout
+  title={`${title} — Castle Experiences`}
+  description={intro}
+  lang="en"
+  alternates={[
+    { hreflang: "de", href: new URL(`/erlebnisse/${slug}/`, site.domain).toString() },
+    { hreflang: "en", href: new URL(`/en/experiences/${slug}/`, site.domain).toString() },
+  ]}
+>
+  <div class="exp-hero">
+    <div class="container-page">
+      <div class="exp-hero__inner">
+        <div class="exp-hero__icon" aria-hidden="true">{icon}</div>
+        <SectionHead kicker="Experience" title={title} subtitle={intro} align="center" />
+      </div>
+    </div>
+  </div>
+
+  <div class="container-page" style="padding-top: 1.5rem; padding-bottom: 0;">
+    <Breadcrumbs
+      items={[{ label: "Home", href: "/en/" }, { label: "Experiences", href: "/en/experiences/" }, { label: title }]}
+    />
+  </div>
+
+  {castleCount > 0 && (
+    <Band soft>
+      <OrnamentRule label={`${castleCount} ${castleCount !== 1 ? "recommendations" : "recommendation"}`} />
+      <div class="castle-grid">
+        {taggedCastles.map((castle) => (
+          <CastleCard
+            href={`/en/castles/${castle.id}/`}
+            title={castle.data.title}
+            region={castle.data.place ?? castle.data.region ?? undefined}
+            teaser={castle.data.teaser}
+            image={castle.data.heroImage || undefined}
+            imageAlt={castle.data.title}
+            rank={castle.data.rank}
+            type={castle.data.type}
+          />
+        ))}
+      </div>
+    </Band>
+  )}
+
+  <Band soft>
+    <div class="exp-cta">
+      <p class="exp-cta__kicker">As an experience gift</p>
+      <h2 class="exp-cta__title">Give {title.toLowerCase()}</h2>
+      <p class="exp-cta__text">
+        Vouchers for castle experiences, medieval banquets and special overnight stays — valid for three years, redeemable individually.
+      </p>
+      <AwinButton merchant="mydays" clickref={`en-experience-${slug}`} label="Experiences at mydays" />
+    </div>
+  </Band>
+
+  <Band>
+    <OrnamentRule label="All experiences" />
+    <div class="back-link-wrap"><a href="/en/experiences/" class="btn-ghost">← All experiences</a></div>
+  </Band>
+</BaseLayout>
+
+<style>
+  .exp-hero { background: var(--cc-bg-2); padding-block: 5rem 4rem; border-bottom: 1px solid var(--cc-line); }
+  .exp-hero__inner { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+  .exp-hero__icon { font-size: 3rem; color: var(--cc-accent); line-height: 1; opacity: 0.85; }
+  .castle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--cc-line); margin-top: 3.5rem; border: 1px solid var(--cc-line); }
+  .castle-grid :global(.castle-card) { border: none; border-radius: 0; }
+  @media (max-width: 1024px) { .castle-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .castle-grid { grid-template-columns: 1fr; } }
+  .exp-cta { max-width: 60ch; margin-inline: auto; text-align: center; }
+  .exp-cta__kicker { font-family: var(--font-aux); letter-spacing: 0.36em; text-transform: uppercase; font-size: 0.7rem; color: var(--cc-accent); margin-bottom: 0.75rem; }
+  .exp-cta__title { font-family: var(--font-display); font-weight: 300; font-size: clamp(1.75rem, 4vw, 2.5rem); color: var(--cc-text); margin: 0 0 1rem; }
+  .exp-cta__text { font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.7; color: var(--cc-text-soft); margin: 0 0 1.75rem; }
+  .back-link-wrap { display: flex; justify-content: center; margin-top: 2.5rem; }
+  .back-link-wrap .btn-ghost { display: inline-block; padding: 0.75rem 2rem; border: 1px solid var(--cc-text); color: var(--cc-text); font-family: var(--font-aux); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+  .back-link-wrap .btn-ghost:hover { border-color: var(--cc-accent); color: var(--cc-accent); }
+</style>

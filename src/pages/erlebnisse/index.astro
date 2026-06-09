@@ -4,7 +4,7 @@ import Band from "../../components/Band.astro";
 import SectionHead from "../../components/SectionHead.astro";
 import OrnamentRule from "../../components/OrnamentRule.astro";
 import ExperienceGrid from "../../components/ExperienceGrid.astro";
-import { experiences } from "../../data/site";
+import { experiences, site } from "../../data/site";
 
 const items = experiences.map((e) => ({
   href: `/erlebnisse/${e.slug}/`,
@@ -17,6 +17,10 @@ const items = experiences.map((e) => ({
 <BaseLayout
   title="Erlebniswelten — Culture Castles"
   description="Alle Erlebniswelten im Überblick: Hochzeit im Schloss, Familienausflug, Burgruinen und mehr. Entdecke, was Burgen und Schlösser zu bieten haben."
+  alternates={[
+    { hreflang: "de", href: new URL("/erlebnisse/", site.domain).toString() },
+    { hreflang: "en", href: new URL("/en/experiences/", site.domain).toString() },
+  ]}
 >
   <Band>
     <SectionHead

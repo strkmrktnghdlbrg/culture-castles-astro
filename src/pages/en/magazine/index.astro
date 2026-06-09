@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Band from "../../../components/Band.astro";
+import SectionHead from "../../../components/SectionHead.astro";
+import MagazineCard from "../../../components/MagazineCard.astro";
+import OrnamentRule from "../../../components/OrnamentRule.astro";
+import { site } from "../../../data/site";
+
+const allArticles = await getCollection("articlesEn");
+const articles = allArticles
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout
+  title="Magazine"
+  description="Stories, guides and photography tips about castles and palaces in Germany and Europe — the Culture Castles magazine."
+  lang="en"
+  alternates={[
+    { hreflang: "de", href: new URL("/magazin/", site.domain).toString() },
+    { hreflang: "en", href: new URL("/en/magazine/", site.domain).toString() },
+  ]}
+>
+  <Band>
+    <SectionHead
+      kicker="From our editors"
+      title="Magazine"
+      subtitle="Stories of stone and history: guides for castle visits, photography tips and background on a thousand years of European castle culture."
+    />
+  </Band>
+
+  <OrnamentRule label="All articles" />
+
+  <Band soft>
+    {articles.length > 0 ? (
+      <div class="magazine-list">
+        {articles.map((entry) => (
+          <MagazineCard
+            href={`/en/magazine/${entry.id}/`}
+            title={entry.data.title}
+            date={entry.data.date.toISOString()}
+            category={entry.data.category}
+            teaser={entry.data.teaser}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="magazine-empty">No articles available yet — please check back soon.</p>
+    )}
+  </Band>
+</BaseLayout>
+
+<style>
+  .magazine-list { max-width: 820px; margin-inline: auto; }
+  .magazine-list > :global(.magazine-card:first-child) { border-top: none; }
+  .magazine-empty { font-family: var(--font-sans); color: var(--cc-text-soft); text-align: center; padding: 4rem 0; }
+</style>

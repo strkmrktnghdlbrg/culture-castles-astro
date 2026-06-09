@@ -5,6 +5,7 @@ import Band from "../../components/Band.astro";
 import SectionHead from "../../components/SectionHead.astro";
 import MagazineCard from "../../components/MagazineCard.astro";
 import OrnamentRule from "../../components/OrnamentRule.astro";
+import { site } from "../../data/site";
 
 // Fetch all non-draft articles, sorted by date descending
 const allArticles = await getCollection("articles");
@@ -16,6 +17,10 @@ const articles = allArticles
 <BaseLayout
   title="Magazin"
   description="Geschichten, Ratgeber und Fotografietipps rund um Burgen und Schlösser in Deutschland und Europa — im Magazin von Culture Castles."
+  alternates={[
+    { hreflang: "de", href: new URL("/magazin/", site.domain).toString() },
+    { hreflang: "en", href: new URL("/en/magazine/", site.domain).toString() },
+  ]}
 >
   <!-- Intro Band -->
   <Band>
