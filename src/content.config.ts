@@ -64,21 +64,25 @@ const castlesEn = defineCollection({
   schema: castleSchema,
 });
 
-const regions = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/regions" }),
-  schema: z.object({
+const regionSchema = z.object({
     title: z.string(),
     country: z.string().default("Deutschland"),
     order: z.number().default(99),
     teaser: z.string(),
     heroImage: z.string(),
     heroCredit: credit,
-  }),
 });
 
-const routes = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/routes" }),
-  schema: z.object({
+const regions = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/regions" }),
+  schema: regionSchema,
+});
+const regionsEn = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/regions-en" }),
+  schema: regionSchema,
+});
+
+const routeSchema = z.object({
     title: z.string(),
     distanceKm: z.number().optional(),
     stops: z.number().optional(),
@@ -90,7 +94,15 @@ const routes = defineCollection({
     etappen: z
       .array(z.object({ title: z.string(), castle: z.string().optional(), note: z.string().optional() }))
       .default([]),
-  }),
+});
+
+const routes = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/routes" }),
+  schema: routeSchema,
+});
+const routesEn = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/routes-en" }),
+  schema: routeSchema,
 });
 
 const articles = defineCollection({
@@ -109,4 +121,4 @@ const articles = defineCollection({
   }),
 });
 
-export const collections = { castles, castlesEn, regions, routes, articles };
+export const collections = { castles, castlesEn, regions, regionsEn, routes, routesEn, articles };

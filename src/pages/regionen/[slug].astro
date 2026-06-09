@@ -7,6 +7,7 @@ import SectionHead from "../../components/SectionHead.astro";
 import CastleCard from "../../components/CastleCard.astro";
 import OrnamentRule from "../../components/OrnamentRule.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { site } from "../../data/site";
 
 export async function getStaticPaths() {
   const regions = await getCollection("regions");
@@ -34,12 +35,21 @@ const regionCastles = allCastles
   });
 
 const castleCount = regionCastles.length;
+
+const enRegions = await getCollection("regionsEn");
+const regionAlternates = enRegions.some((r) => r.id === slug)
+  ? [
+      { hreflang: "de", href: new URL(`/regionen/${slug}/`, site.domain).toString() },
+      { hreflang: "en", href: new URL(`/en/regions/${slug}/`, site.domain).toString() },
+    ]
+  : [];
 ---
 
 <BaseLayout
   title={`${title} — Burgen & Schlösser`}
   description={teaser}
   ogImage={heroImage || undefined}
+  alternates={regionAlternates}
 >
   <!-- Hero -->
   <Hero

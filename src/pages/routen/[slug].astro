@@ -5,6 +5,7 @@ import CastleImage from "../../components/CastleImage.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import OrnamentRule from "../../components/OrnamentRule.astro";
 import StaySection from "../../components/StaySection.astro";
+import { site } from "../../data/site";
 
 export async function getStaticPaths() {
   const entries = await getCollection("routes");
@@ -23,9 +24,18 @@ const {
   days,
   etappen,
 } = entry.data;
+const slug = entry.id;
+
+const enRoutes = await getCollection("routesEn");
+const routeAlternates = enRoutes.some((r) => r.id === slug)
+  ? [
+      { hreflang: "de", href: new URL(`/routen/${slug}/`, site.domain).toString() },
+      { hreflang: "en", href: new URL(`/en/routes/${slug}/`, site.domain).toString() },
+    ]
+  : [];
 ---
 
-<BaseLayout title={title} description={teaser} ogImage={heroImage || undefined}>
+<BaseLayout title={title} description={teaser} ogImage={heroImage || undefined} alternates={routeAlternates}>
 
   <!-- Breadcrumb -->
   <div

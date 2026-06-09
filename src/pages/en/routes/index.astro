@@ -1,0 +1,67 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Band from "../../../components/Band.astro";
+import SectionHead from "../../../components/SectionHead.astro";
+import RouteCard from "../../../components/RouteCard.astro";
+import OrnamentRule from "../../../components/OrnamentRule.astro";
+import { site } from "../../../data/site";
+
+const routes = await getCollection("routesEn");
+const sorted = [...routes].sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return a.data.title.localeCompare(b.data.title, "en");
+});
+---
+
+<BaseLayout
+  title="Travel routes"
+  description="All travel routes to castles and palaces in Germany and Europe — from the Castle Road to Ludwig's fairy-tale palaces."
+  lang="en"
+  alternates={[
+    { hreflang: "de", href: new URL("/routen/", site.domain).toString() },
+    { hreflang: "en", href: new URL("/en/routes/", site.domain).toString() },
+  ]}
+>
+  <Band>
+    <SectionHead
+      kicker="Discover travel routes"
+      title="Travel routes"
+      subtitle="From Germany's oldest scenic route to Ludwig's fairy-tale palaces: follow our curated routes to the finest castles and palaces of Europe."
+    />
+  </Band>
+
+  <OrnamentRule label="All routes" />
+
+  <Band soft>
+    {sorted.length > 0 ? (
+      <div class="routes-grid">
+        {sorted.map((route) => {
+          const parts: string[] = [];
+          if (route.data.stops != null) parts.push(`${route.data.stops} stops`);
+          if (route.data.distanceKm != null) parts.push(`${route.data.distanceKm} km`);
+          return (
+            <RouteCard
+              href={`/en/routes/${route.id}/`}
+              title={route.data.title}
+              image={route.data.heroImage || undefined}
+              meta={parts.length ? parts.join(" · ") : undefined}
+              teaser={route.data.teaser}
+            />
+          );
+        })}
+      </div>
+    ) : (
+      <p class="no-routes">No routes available yet — please check back soon.</p>
+    )}
+  </Band>
+</BaseLayout>
+
+<style>
+  .routes-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--cc-line); }
+  @media (min-width: 640px) { .routes-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .routes-grid { grid-template-columns: repeat(3, 1fr); } }
+  .routes-grid > :global(*) { background: var(--cc-bg); }
+  .no-routes { font-family: var(--font-sans); color: var(--cc-text-soft); text-align: center; padding: 3rem 0; }
+</style>

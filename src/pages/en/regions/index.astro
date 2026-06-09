@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Band from "../../../components/Band.astro";
+import SectionHead from "../../../components/SectionHead.astro";
+import CastleCard from "../../../components/CastleCard.astro";
+import { site } from "../../../data/site";
+
+const regions = await getCollection("regionsEn");
+const castles = await getCollection("castlesEn");
+
+const sortedRegions = regions.slice().sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+const countByRegion: Record<string, number> = {};
+for (const c of castles) {
+  if (c.data.region) countByRegion[c.data.region] = (countByRegion[c.data.region] ?? 0) + 1;
+}
+---
+
+<BaseLayout
+  title="Regions"
+  description="Discover castles and palaces by region: Bavaria, Baden-Württemberg, Saxony, Thuringia and more — all regions at a glance."
+  lang="en"
+  alternates={[
+    { hreflang: "de", href: new URL("/regionen/", site.domain).toString() },
+    { hreflang: "en", href: new URL("/en/regions/", site.domain).toString() },
+  ]}
+>
+  <Band>
+    <SectionHead
+      kicker="All regions"
+      title="Regions"
+      subtitle="From the Alps to the Baltic coast — Germany is home to hundreds of castles and palaces. Choose a region and explore its landmarks."
+    />
+    <div class="region-grid">
+      {sortedRegions.map((region) => {
+        const count = countByRegion[region.id] ?? 0;
+        return (
+          <CastleCard
+            href={`/en/regions/${region.id}/`}
+            title={region.data.title}
+            teaser={region.data.teaser}
+            image={region.data.heroImage ?? undefined}
+            imageAlt={region.data.title}
+            type={`${count} ${count === 1 ? "castle" : "castles"}`}
+          />
+        );
+      })}
+    </div>
+  </Band>
+</BaseLayout>
+
+<style>
+  .region-grid { margin-top: 3.5rem; display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+  @media (min-width: 640px) { .region-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .region-grid { grid-template-columns: repeat(3, 1fr); } }
+</style>
