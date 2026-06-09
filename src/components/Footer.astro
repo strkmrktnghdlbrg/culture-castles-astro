@@ -1,7 +1,75 @@
 ---
 import { site } from "../data/site";
 
+interface Props { lang?: "de" | "en" }
+const { lang = "de" } = Astro.props;
+const isEn = lang === "en";
 const year = 2026;
+
+const tagline = isEn
+  ? "Your curated travel guide to the most beautiful castles, palaces and fortresses of Europe."
+  : "Dein kuratierter Reiseführer durch die schönsten Burgen, Schlösser und Festungen Europas.";
+
+const cols = isEn
+  ? [
+      {
+        heading: "Discover",
+        links: [
+          { href: "/en/", label: "Castles & Palaces" },
+          { href: "/en/#castles", label: "Popular castles" },
+          { href: "/", label: "Deutsche Seite (DE)" },
+        ],
+      },
+      {
+        heading: "Portal",
+        links: [
+          { href: "/ueber-uns/", label: "About" },
+          { href: "/kontakt/", label: "Contact" },
+          { href: "/impressum/", label: "Imprint" },
+          { href: "/datenschutz/", label: "Privacy" },
+        ],
+      },
+    ]
+  : [
+      {
+        heading: "Entdecken",
+        links: [
+          { href: "/burgen/", label: "Burgen & Schlösser" },
+          { href: "/regionen/", label: "Regionen" },
+          { href: "/routen/", label: "Routen" },
+          { href: "/erlebnisse/", label: "Erlebnisse" },
+          { href: "/reiseplanung/", label: "Reiseplanung" },
+        ],
+      },
+      {
+        heading: "Magazin",
+        links: [
+          { href: "/magazin/", label: "Alle Artikel" },
+          { href: "/erlebnisse/hochzeit-im-schloss/", label: "Hochzeit" },
+          { href: "/erlebnisse/familienausflug/", label: "Familienausflug" },
+          { href: "/erlebnisse/uebernachten-im-schloss/", label: "Übernachten" },
+        ],
+      },
+      {
+        heading: "Portal",
+        links: [
+          { href: "/ueber-uns/", label: "Über uns" },
+          { href: "/kontakt/", label: "Kontakt" },
+          { href: "/impressum/", label: "Impressum" },
+          { href: "/datenschutz/", label: "Datenschutz" },
+        ],
+      },
+    ];
+
+const disclosure = isEn
+  ? "Transparency notice: Culture Castles contains affiliate and partner links (incl. Stay22, GetYourGuide, Awin). If you book or buy via a marked link, we may earn a commission — at no extra cost to you."
+  : "Transparenz-Hinweis: Culture Castles enthält Affiliate- und Partnerlinks (u. a. Stay22, GetYourGuide, Awin). Buchst oder kaufst du über einen entsprechend gekennzeichneten Link, erhalten wir ggf. eine Provision — für dich ohne Mehrkosten.";
+const copyright = isEn
+  ? `© ${year} ${site.brandName}. All information without guarantee.`
+  : `© ${year} ${site.brandName}. Alle Angaben ohne Gewähr.`;
+const motto = isEn
+  ? "Crafted in the spirit of medieval manuscripts"
+  : "Gestaltet im Geist mittelalterlicher Handschriften";
 ---
 
 <footer class="mt-auto border-t" style="border-color: var(--cc-line);">
@@ -11,48 +79,26 @@ const year = 2026;
         <span style="color: var(--cc-accent); font-size: 24px;">♜</span>
         <span style="font-family: var(--font-display); font-size: 26px; color: var(--cc-text);">Culture Castles</span>
       </div>
-      <p class="mt-4 text-sm" style="color: var(--cc-text-soft); max-width: 34ch;">
-        Dein kuratierter Reiseführer durch die schönsten Burgen, Schlösser und Festungen Europas.
-      </p>
+      <p class="mt-4 text-sm" style="color: var(--cc-text-soft); max-width: 34ch;">{tagline}</p>
     </div>
-    <div>
-      <div class="cc-foot-h">Entdecken</div>
-      <ul class="space-y-2.5 text-sm">
-        <li><a href="/burgen/" class="cc-foot-l">Burgen &amp; Schlösser</a></li>
-        <li><a href="/regionen/" class="cc-foot-l">Regionen</a></li>
-        <li><a href="/routen/" class="cc-foot-l">Routen</a></li>
-        <li><a href="/erlebnisse/" class="cc-foot-l">Erlebnisse</a></li>
-        <li><a href="/reiseplanung/" class="cc-foot-l">Reiseplanung</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="cc-foot-h">Magazin</div>
-      <ul class="space-y-2.5 text-sm">
-        <li><a href="/magazin/" class="cc-foot-l">Alle Artikel</a></li>
-        <li><a href="/erlebnisse/hochzeit-im-schloss/" class="cc-foot-l">Hochzeit</a></li>
-        <li><a href="/erlebnisse/familienausflug/" class="cc-foot-l">Familienausflug</a></li>
-        <li><a href="/erlebnisse/uebernachten-im-schloss/" class="cc-foot-l">Übernachten</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="cc-foot-h">Portal</div>
-      <ul class="space-y-2.5 text-sm">
-        <li><a href="/ueber-uns/" class="cc-foot-l">Über uns</a></li>
-        <li><a href="/kontakt/" class="cc-foot-l">Kontakt</a></li>
-        <li><a href="/impressum/" class="cc-foot-l">Impressum</a></li>
-        <li><a href="/datenschutz/" class="cc-foot-l">Datenschutz</a></li>
-      </ul>
-    </div>
+    {cols.map((col) => (
+      <div>
+        <div class="cc-foot-h">{col.heading}</div>
+        <ul class="space-y-2.5 text-sm">
+          {col.links.map((l) => (
+            <li><a href={l.href} class="cc-foot-l">{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    ))}
   </div>
   <div class="container-page pb-6">
-    <p style="font-family: var(--font-aux); font-size: 11px; line-height: 1.6; letter-spacing: .03em; color: var(--cc-text-mute); max-width: 75ch;">
-      Transparenz-Hinweis: Culture Castles enthält Affiliate- und Partnerlinks (u. a. Stay22, GetYourGuide, Awin). Buchst oder kaufst du über einen entsprechend gekennzeichneten Link, erhalten wir ggf. eine Provision — für dich ohne Mehrkosten.
-    </p>
+    <p style="font-family: var(--font-aux); font-size: 11px; line-height: 1.6; letter-spacing: .03em; color: var(--cc-text-mute); max-width: 75ch;">{disclosure}</p>
   </div>
   <div class="border-t" style="border-color: var(--cc-line);">
     <div class="container-page py-5 flex flex-wrap items-center justify-between gap-3" style="font-family: var(--font-aux); font-size: 12px; letter-spacing: .08em; color: var(--cc-text-mute);">
-      <span>© {year} {site.brandName}. Alle Angaben ohne Gewähr.</span>
-      <span>Gestaltet im Geist mittelalterlicher Handschriften</span>
+      <span>{copyright}</span>
+      <span>{motto}</span>
     </div>
   </div>
 </footer>
