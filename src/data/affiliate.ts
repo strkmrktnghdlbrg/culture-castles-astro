@@ -17,7 +17,7 @@
 export const affiliate = {
   stay22: {
     /** Affiliate-ID aus dem Stay22-Dashboard. Vor Go-Live setzen. */
-    lmaId: "6a18cda7a63bc123f3b6d2f0",
+    lmaId: "687915d20d1617d25ef7787e",
     enabled: true,
     /**
      * Optionale, im Stay22-Dashboard vorgebaute Widget-ID für die

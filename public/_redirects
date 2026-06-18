@@ -9,6 +9,8 @@
 /burgen-und-schloesser/romantische-schloesser/  /erlebnisse/maerchenschloesser/  301
 /burgen-und-schloesser/europaeische-schloesser/  /regionen/  301
 /burgen-und-schloesser/burgen-in-deutschland/  /burgen/  301
+# Entfernte Bestandsseite -> thematisch naechste Live-Seite
+/hochzeit/hochzeitsplanung-was-bedacht-werden/  /magazin/heiraten-im-schloss/  301
 # Bestandsseiten mit bezahlten Outbound-Links — NICHT umleiten (vor dem Splat, 200 = ausliefern)
 /burgen-und-schloesser/10-schoenste-spektakulaere-bauwerke-deutschland/  /burgen-und-schloesser/10-schoenste-spektakulaere-bauwerke-deutschland/  200
 /burgen-und-schloesser/schoenste-schloesser-oesterreich/  /burgen-und-schloesser/schoenste-schloesser-oesterreich/  200
