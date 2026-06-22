@@ -58,8 +58,8 @@ const fallbackParams = new URLSearchParams({
   maincolor: accentHex,
 });
 const embedUrl = embedId
-  ? `https://stay22.com/embed/${embedId}`
-  : `https://www.stay22.com/embed/widget?${fallbackParams.toString()}`;
+  ? `https://www.stay22.com/embed/${embedId}`
+  : `https://www.stay22.com/embed/gm?${fallbackParams.toString()}`;
 ---
 
 {stay22Enabled ? (
