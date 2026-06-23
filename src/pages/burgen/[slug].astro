@@ -26,6 +26,17 @@ const related = allCastles
   .filter((c) => c.data.region === d.region && c.id !== entry.id)
   .slice(0, 3);
 
+// Fetch the region entry to get its title for the breadcrumb
+const allRegions = await getCollection("regions");
+const regionEntry = allRegions.find((r) => r.id === d.region);
+const regionTitle = regionEntry?.data?.title ?? d.region;
+
+// Find routes that pass through this castle (via etappen[].castle field)
+const allRoutes = await getCollection("routes");
+const relatedRoutes = allRoutes.filter((r) =>
+  (r.data.etappen ?? []).some((e: { castle?: string }) => e.castle === entry.id)
+);
+
 const lat = d.coordinates?.[0];
 const lng = d.coordinates?.[1];
 
@@ -59,7 +70,8 @@ const castleCrumbs = {
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Start", item: new URL("/", site.domain).toString() },
     { "@type": "ListItem", position: 2, name: "Burgen & Schlösser", item: new URL("/burgen/", site.domain).toString() },
-    { "@type": "ListItem", position: 3, name: d.title, item: pageUrl },
+    { "@type": "ListItem", position: 3, name: regionTitle, item: new URL(`/regionen/${d.region}/`, site.domain).toString() },
+    { "@type": "ListItem", position: 4, name: d.title, item: pageUrl },
   ],
 };
 
@@ -115,6 +127,11 @@ const castleAlternates = hasEn
         href="/burgen/"
         style="color: var(--cc-text-soft); text-decoration: none;"
       >Burgen &amp; Schlösser</a>
+      <span style="color: var(--cc-line);">&rsaquo;</span>
+      <a
+        href={`/regionen/${d.region}/`}
+        style="color: var(--cc-text-soft); text-decoration: none;"
+      >{regionTitle}</a>
       <span style="color: var(--cc-line);">&rsaquo;</span>
       <span style="color: var(--cc-accent);">{d.title}</span>
     </div>
@@ -386,6 +403,35 @@ const castleAlternates = hasEn
           </p>
 
           <dl style="margin: 0; display: flex; flex-direction: column; gap: 1rem;">
+
+            <div>
+              <dt
+                style="
+                  font-family: var(--font-aux);
+                  font-size: 10px;
+                  letter-spacing: 0.28em;
+                  text-transform: uppercase;
+                  color: var(--cc-text-mute);
+                  margin-bottom: 0.25rem;
+                "
+              >
+                Region
+              </dt>
+              <dd
+                style="
+                  font-family: var(--font-sans);
+                  font-size: 0.9375rem;
+                  color: var(--cc-text);
+                  margin: 0;
+                  line-height: 1.5;
+                "
+              >
+                <a
+                  href={`/regionen/${d.region}/`}
+                  style="color: var(--cc-accent); text-decoration: underline; text-underline-offset: 3px;"
+                >{regionTitle}</a>
+              </dd>
+            </div>
 
             {d.visit.duration && (
               <div>
@@ -664,6 +710,101 @@ const castleAlternates = hasEn
             rank={c.data.rank}
             type={c.data.type}
           />
+        ))}
+      </div>
+    </Band>
+  )}
+
+  <!-- Teil der Route: back-links to routes that include this castle -->
+  {relatedRoutes.length > 0 && (
+    <Band>
+      <div style="margin-bottom: 1.5rem;">
+        <OrnamentRule label="Teil der Route" />
+        <h2
+          style="
+            font-family: var(--font-display);
+            font-size: clamp(24px, 3.5vw, 36px);
+            font-weight: 300;
+            color: var(--cc-text);
+            margin: 1.25rem 0 0.5rem;
+            text-align: center;
+          "
+        >
+          Auf diesen Routen
+        </h2>
+        <p
+          style="
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            color: var(--cc-text-mute);
+            text-align: center;
+            margin: 0;
+          "
+        >
+          {d.title} ist Station auf diesen Burgenreisen.
+        </p>
+      </div>
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 1.5rem;
+        "
+      >
+        {relatedRoutes.map((r) => (
+          <a
+            href={`/routen/${r.id}/`}
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+              border: 1px solid var(--cc-line);
+              padding: 1.5rem 1.75rem;
+              text-decoration: none;
+              color: var(--cc-text);
+              transition: border-color 0.2s;
+            "
+            onmouseover="this.style.borderColor='var(--cc-accent)'"
+            onmouseout="this.style.borderColor='var(--cc-line)'"
+          >
+            <span
+              style="
+                font-family: var(--font-aux);
+                font-size: 10px;
+                letter-spacing: 0.3em;
+                text-transform: uppercase;
+                color: var(--cc-accent);
+              "
+            >Route</span>
+            <span
+              style="
+                font-family: var(--font-display);
+                font-size: clamp(20px, 2.5vw, 26px);
+                font-weight: 300;
+                line-height: 1.2;
+              "
+            >{r.data.title}</span>
+            {r.data.teaser && (
+              <span
+                style="
+                  font-family: var(--font-sans);
+                  font-size: 0.875rem;
+                  color: var(--cc-text-soft);
+                  line-height: 1.6;
+                "
+              >{r.data.teaser}</span>
+            )}
+            <span
+              style="
+                font-family: var(--font-aux);
+                font-size: 10px;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--cc-accent);
+                margin-top: 0.5rem;
+              "
+            >Route ansehen &rarr;</span>
+          </a>
         ))}
       </div>
     </Band>

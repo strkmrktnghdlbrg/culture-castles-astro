@@ -7,6 +7,7 @@ import SectionHead from "../../components/SectionHead.astro";
 import CastleCard from "../../components/CastleCard.astro";
 import OrnamentRule from "../../components/OrnamentRule.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import MagazineCard from "../../components/MagazineCard.astro";
 import { site } from "../../data/site";
 
 export async function getStaticPaths() {
@@ -35,6 +36,15 @@ const regionCastles = allCastles
   });
 
 const castleCount = regionCastles.length;
+
+// Related Magazin articles: match by tags including region slug OR cluster === 'regionen'
+const allArticles = await getCollection("articles");
+const relatedArticles = allArticles
+  .filter((a) => {
+    const tags: string[] = a.data.tags ?? [];
+    return tags.includes(slug) || a.data.cluster === "regionen";
+  })
+  .slice(0, 3);
 
 const enRegions = await getCollection("regionsEn");
 const regionAlternates = enRegions.some((r) => r.id === slug)
@@ -113,6 +123,35 @@ const regionAlternates = enRegions.some((r) => r.id === slug)
         subtitle="Für diese Region werden derzeit Profile erarbeitet. Schauen Sie bald wieder vorbei."
         align="center"
       />
+    </Band>
+  )}
+
+  <!-- Magazin-Artikel zur Region -->
+  {relatedArticles.length > 0 && (
+    <Band>
+      <OrnamentRule label="Magazin" />
+      <h2
+        style="
+          font-family: var(--font-display);
+          font-size: clamp(24px, 3.5vw, 36px);
+          font-weight: 300;
+          color: var(--cc-text);
+          margin: 1.25rem 0 2rem;
+        "
+      >
+        Mehr aus dem Magazin
+      </h2>
+      <div>
+        {relatedArticles.map((a) => (
+          <MagazineCard
+            href={`/magazin/${a.id}/`}
+            title={a.data.title}
+            date={a.data.date instanceof Date ? a.data.date.toISOString() : String(a.data.date)}
+            category={a.data.category}
+            teaser={a.data.teaser}
+          />
+        ))}
+      </div>
     </Band>
   )}
 

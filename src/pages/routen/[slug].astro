@@ -5,6 +5,8 @@ import CastleImage from "../../components/CastleImage.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import OrnamentRule from "../../components/OrnamentRule.astro";
 import StaySection from "../../components/StaySection.astro";
+import Band from "../../components/Band.astro";
+import RouteCard from "../../components/RouteCard.astro";
 import { site } from "../../data/site";
 
 export async function getStaticPaths() {
@@ -33,6 +35,12 @@ const routeAlternates = enRoutes.some((r) => r.id === slug)
       { hreflang: "en", href: new URL(`/en/routes/${slug}/`, site.domain).toString() },
     ]
   : [];
+
+// Weitere Routen (Geschwister-Routen ohne die aktuelle)
+const allRoutes = await getCollection("routes");
+const weitereRouten = allRoutes
+  .filter((r) => r.id !== slug)
+  .slice(0, 3);
 ---
 
 <BaseLayout title={title} description={teaser} ogImage={heroImage || undefined} alternates={routeAlternates}>
@@ -293,6 +301,55 @@ const routeAlternates = enRoutes.some((r) => r.id === slug)
     title="Unterwegs übernachten"
     lead={`Entlang der ${title} warten charmante Hotels und Gasthöfe in historischen Gemäuern. Buchen Sie Ihre Unterkunft direkt in der Nähe Ihrer nächsten Etappe.`}
   />
+
+  <!-- Weitere Routen -->
+  {weitereRouten.length > 0 && (
+    <Band soft>
+      <div style="margin-bottom: 2.5rem;">
+        <OrnamentRule label="Weitere Routen" />
+        <h2
+          style="
+            font-family: var(--font-display);
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 300;
+            color: var(--cc-text);
+            margin: 1.25rem 0 0.5rem;
+            text-align: center;
+          "
+        >
+          Das könnte dich auch interessieren
+        </h2>
+        <p
+          style="
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            color: var(--cc-text-mute);
+            text-align: center;
+            margin: 0;
+          "
+        >
+          Weitere Burgenreisen durch Deutschland entdecken.
+        </p>
+      </div>
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 1.5rem;
+        "
+      >
+        {weitereRouten.map((r) => (
+          <RouteCard
+            href={`/routen/${r.id}/`}
+            title={r.data.title}
+            image={r.data.heroImage || undefined}
+            meta={[r.data.stops != null ? `${r.data.stops} Stationen` : null, r.data.distanceKm != null ? `${r.data.distanceKm} km` : null].filter(Boolean).join(" · ")}
+            teaser={r.data.teaser}
+          />
+        ))}
+      </div>
+    </Band>
+  )}
 
 </BaseLayout>
 
