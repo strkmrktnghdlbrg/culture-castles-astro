@@ -106,6 +106,10 @@ const ogImg = ogImage ?? DEFAULT_OG;
     )}
 
     {adsenseEnabled && !noindex && (
+      <meta name="google-adsense-account" content={adsense.publisherId} />
+    )}
+
+    {adsenseEnabled && !noindex && (
       <script
         async
         src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsense.publisherId}`}
