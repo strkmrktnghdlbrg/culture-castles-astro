@@ -21,13 +21,13 @@ Das spanische Wort für Burg, castillo, hat sogar einer ganzen Region ihren Name
 
 ## Die maurischen Paläste: Alhambra und Alcázar von Sevilla
 
-Das berühmteste Bauwerk des islamischen Spaniens ist die [Alhambra in Granada](https://www.getyourguide.com/s/?q=Alhambra%20Granada), ein weitläufiger Palast- und Festungskomplex über der Stadt. Ihre Nasridenpaläste mit den kunstvoll durchbrochenen Wänden, den Muqarnas-Gewölben und dem Löwenhof gelten als Höhepunkt der maurischen Kunst in Europa. Wegen des enormen Andrangs sind Tickets für die Alhambra oft Wochen im Voraus ausverkauft, eine frühzeitige Buchung ist unbedingt zu empfehlen.
+Das berühmteste Bauwerk des islamischen Spaniens ist die [Alhambra in Granada](https://www.getyourguide.com/s/?q=Alhambra%20Granada&partner_id=1UPZQQB), ein weitläufiger Palast- und Festungskomplex über der Stadt. Ihre Nasridenpaläste mit den kunstvoll durchbrochenen Wänden, den Muqarnas-Gewölben und dem Löwenhof gelten als Höhepunkt der maurischen Kunst in Europa. Wegen des enormen Andrangs sind Tickets für die Alhambra oft Wochen im Voraus ausverkauft, eine frühzeitige Buchung ist unbedingt zu empfehlen.
 
-Kaum weniger prächtig ist der [Alcázar von Sevilla](https://www.getyourguide.com/s/?q=Alcazar%20Sevilla), eine noch immer genutzte Königsresidenz und der älteste in Betrieb befindliche Palast Europas. Seine Innenhöfe und Gärten im Mudéjar-Stil dienten in jüngerer Zeit auch als Filmkulisse und ziehen Besucher aus aller Welt an.
+Kaum weniger prächtig ist der [Alcázar von Sevilla](https://www.getyourguide.com/s/?q=Alcazar%20Sevilla&partner_id=1UPZQQB), eine noch immer genutzte Königsresidenz und der älteste in Betrieb befindliche Palast Europas. Seine Innenhöfe und Gärten im Mudéjar-Stil dienten in jüngerer Zeit auch als Filmkulisse und ziehen Besucher aus aller Welt an.
 
 ## Die Märchenburgen Kastiliens
 
-Wer sich das klassische Bild einer Ritterburg vorstellt, findet es im [Alcázar von Segovia](https://www.getyourguide.com/s/?q=Alcazar%20Segovia) verwirklicht. Auf einem Felssporn über dem Zusammenfluss zweier Flüsse gelegen, gleicht er mit seinen spitzen Türmen einem schwimmenden Schiff und soll zu den Inspirationen für die Märchenschlösser des 20. Jahrhunderts gehört haben.
+Wer sich das klassische Bild einer Ritterburg vorstellt, findet es im [Alcázar von Segovia](https://www.getyourguide.com/s/?q=Alcazar%20Segovia&partner_id=1UPZQQB) verwirklicht. Auf einem Felssporn über dem Zusammenfluss zweier Flüsse gelegen, gleicht er mit seinen spitzen Türmen einem schwimmenden Schiff und soll zu den Inspirationen für die Märchenschlösser des 20. Jahrhunderts gehört haben.
 
 Weiter nördlich erhebt sich das Castillo de Coca, ein Meisterwerk der Mudéjar-Backsteinarchitektur, und in der Provinz Segovia liegt zudem das mächtige Castillo de Cuéllar. Über die kastilische Meseta verteilt bewachen unzählige weitere Burgen wie das Castillo de la Mota bei Medina del Campo die alten Grenzen der Königreiche.
 

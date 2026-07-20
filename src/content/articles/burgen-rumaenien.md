@@ -21,13 +21,13 @@ Diese bewegte Geschichte hat eine der dichtesten und dramatischsten Burgenlandsc
 
 ## Schloss Bran: Das Draculaschloss
 
-Kein Bauwerk Rumäniens ist international so bekannt wie [Schloss Bran](https://www.getyourguide.com/s/?q=Schloss%20Bran%20Dracula), weltweit vermarktet als Draculaschloss. Die trutzige Burg auf einem Felsen am gleichnamigen Pass wurde im 14. Jahrhundert zur Sicherung der Grenze und des Handelswegs zwischen Transsilvanien und der Walachei errichtet.
+Kein Bauwerk Rumäniens ist international so bekannt wie [Schloss Bran](https://www.getyourguide.com/s/?q=Schloss%20Bran%20Dracula&partner_id=1UPZQQB), weltweit vermarktet als Draculaschloss. Die trutzige Burg auf einem Felsen am gleichnamigen Pass wurde im 14. Jahrhundert zur Sicherung der Grenze und des Handelswegs zwischen Transsilvanien und der Walachei errichtet.
 
 Die Verbindung zu Bram Stokers Roman Dracula und zum historischen Fürsten Vlad Țepeș ist historisch umstritten und beruht mehr auf Vermarktung als auf belegten Aufenthalten. Dennoch ist Bran ein lohnendes Ziel: Die verwinkelten Räume, die steilen Treppen und die Aussicht über die Karpaten machen den Besuch zu einem Erlebnis. Wegen der Popularität empfiehlt sich ein Besuch außerhalb der Hauptsaison oder am frühen Morgen.
 
 ## Schloss Peleș: Das Märchen der Karpaten
 
-Ganz anders präsentiert sich [Schloss Peleș](https://www.getyourguide.com/s/?q=Schloss%20Peles%20Sinaia) bei Sinaia. Der rumänische König Karl I. ließ die Sommerresidenz Ende des 19. Jahrhunderts im Stil der Neorenaissance errichten. Mit seinen Fachwerkgiebeln, Türmchen und der prachtvollen Ausstattung aus Holzschnitzereien, Waffensammlungen und kostbaren Interieurs gilt Peleș als eines der schönsten Schlösser Europas. Es war zudem eines der ersten Schlösser des Kontinents mit elektrischem Licht und Zentralheizung.
+Ganz anders präsentiert sich [Schloss Peleș](https://www.getyourguide.com/s/?q=Schloss%20Peles%20Sinaia&partner_id=1UPZQQB) bei Sinaia. Der rumänische König Karl I. ließ die Sommerresidenz Ende des 19. Jahrhunderts im Stil der Neorenaissance errichten. Mit seinen Fachwerkgiebeln, Türmchen und der prachtvollen Ausstattung aus Holzschnitzereien, Waffensammlungen und kostbaren Interieurs gilt Peleș als eines der schönsten Schlösser Europas. Es war zudem eines der ersten Schlösser des Kontinents mit elektrischem Licht und Zentralheizung.
 
 ## Kirchenburgen und Wehrbauten der Siebenbürger Sachsen
 

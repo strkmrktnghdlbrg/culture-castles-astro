@@ -1,5 +1,5 @@
 /**
- * Affiliate-Konfiguration für top10-heidelberg.de.
+ * Affiliate-Konfiguration für culture-castles.de.
  * --------------------------------------------------
  * Hier landen alle Affiliate-IDs für dieses Stadtportal. Aktivierungs-
  * Flags lassen Snippets bewusst NICHT laden, solange enabled=false
@@ -34,10 +34,12 @@ export const affiliate = {
     locale: "de-DE",
     enabled: true,
     /**
-     * Default-Query für das Städte-Widget. GYG löst "Heidelberg" via
-     * eigener Geo-Suche zur Heidelberg-City-ID auf.
+     * Default-Query für das Touren-Widget, falls eine Seite keinen
+     * spezifischeren Begriff übergibt. Die eigentlichen Tour-Feeds laufen
+     * pro Seite über gygQuery (Burg-Detailseiten) bzw. die Städte-Namen
+     * in den "Burgen um <Stadt>"-Artikeln.
      */
-    cityQuery: "Heidelberg",
+    cityQuery: "Burgen und Schlösser",
   },
 };
 

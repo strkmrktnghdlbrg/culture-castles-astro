@@ -10,6 +10,7 @@ import Band from "../../components/Band.astro";
 import AwinButton from "../../components/AwinButton.astro";
 import JsonLd from "../../components/JsonLd.astro";
 import { site } from "../../data/site";
+import { affiliate } from "../../data/affiliate";
 
 export async function getStaticPaths() {
   const entries = await getCollection("castles");
@@ -40,9 +41,9 @@ const relatedRoutes = allRoutes.filter((r) =>
 const lat = d.coordinates?.[0];
 const lng = d.coordinates?.[1];
 
-const gygUrl = d.gygQuery
-  ? `https://www.getyourguide.com/s/?q=${encodeURIComponent(d.gygQuery)}`
-  : `https://www.getyourguide.com/s/?q=${encodeURIComponent(d.title)}`;
+const gygPartner = affiliate.getYourGuide.partnerId;
+const gygQ = encodeURIComponent(d.gygQuery ?? d.title);
+const gygUrl = `https://www.getyourguide.com/s/?q=${gygQ}${gygPartner ? `&partner_id=${gygPartner}` : ""}`;
 const tiqetsUrl = `https://www.tiqets.com/de/search/?q=${encodeURIComponent(d.gygQuery ?? d.title)}`;
 
 // ── Structured Data (schema.org) ──────────────────────────────────────────────

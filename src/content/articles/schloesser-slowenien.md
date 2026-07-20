@@ -21,11 +21,11 @@ Von den Julischen Alpen im Nordwesten bis zum Karst im Südwesten reicht ein Net
 
 ## Höhlenburg Predjama: In den Fels gebaut
 
-Das spektakulärste Bauwerk Sloweniens ist zweifellos die [Höhlenburg Predjama](https://www.getyourguide.com/s/?q=Predjama), auf Deutsch auch Höhlenburg Lueg genannt. In eine 123 Meter hohe, senkrechte Felswand gebaut, verschmilzt die Burg vollständig mit dem Karstgestein. Dahinter verbirgt sich ein Höhlensystem, das der Anlage einst geheime Fluchtwege und eine fast uneinnehmbare Lage bescherte. Um die Burg rankt sich die Legende des Raubritters Erasmus von Lueg, der hier einer langen Belagerung getrotzt haben soll. Predjama gilt als die größte Höhlenburg der Welt und liegt nur wenige Kilometer von der berühmten Höhle von Postojna entfernt.
+Das spektakulärste Bauwerk Sloweniens ist zweifellos die [Höhlenburg Predjama](https://www.getyourguide.com/s/?q=Predjama&partner_id=1UPZQQB), auf Deutsch auch Höhlenburg Lueg genannt. In eine 123 Meter hohe, senkrechte Felswand gebaut, verschmilzt die Burg vollständig mit dem Karstgestein. Dahinter verbirgt sich ein Höhlensystem, das der Anlage einst geheime Fluchtwege und eine fast uneinnehmbare Lage bescherte. Um die Burg rankt sich die Legende des Raubritters Erasmus von Lueg, der hier einer langen Belagerung getrotzt haben soll. Predjama gilt als die größte Höhlenburg der Welt und liegt nur wenige Kilometer von der berühmten Höhle von Postojna entfernt.
 
 ## Die Burg über dem Bleder See
 
-Nicht weniger berühmt ist die [Burg von Bled](https://www.getyourguide.com/s/?q=Bled%20Castle), die auf einem steilen Felsen hoch über dem türkisblauen Bleder See thront. Sie gilt als eine der ältesten Burgen Sloweniens und bietet von ihren Mauern einen der schönsten Ausblicke des Landes: hinab auf die kleine Insel mit der Wallfahrtskirche und die umliegenden Gipfel der Julischen Alpen. Die Burg beherbergt ein Museum, eine historische Druckerei und eine Weinkellerei und ist das meistfotografierte Motiv Sloweniens.
+Nicht weniger berühmt ist die [Burg von Bled](https://www.getyourguide.com/s/?q=Bled%20Castle&partner_id=1UPZQQB), die auf einem steilen Felsen hoch über dem türkisblauen Bleder See thront. Sie gilt als eine der ältesten Burgen Sloweniens und bietet von ihren Mauern einen der schönsten Ausblicke des Landes: hinab auf die kleine Insel mit der Wallfahrtskirche und die umliegenden Gipfel der Julischen Alpen. Die Burg beherbergt ein Museum, eine historische Druckerei und eine Weinkellerei und ist das meistfotografierte Motiv Sloweniens.
 
 ## Schlösser und Wehrbauten im Landesinneren
 

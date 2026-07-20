@@ -2,12 +2,14 @@
 /**
  * GetYourGuide Touren-Widget.
  * ---------------------------
- * Rendert ein konfiguriertes GYG-Widget mit Heidelberg-Location-ID
- * (49069). Zwei Varianten:
+ * Rendert ein konfiguriertes GYG-Widget. Zwei Varianten:
  *  - "search-query" (default): nutzt data-gyg-q="<query>" für thematisch
- *    fokussierte Tour-Listen ("Heidelberg Castle Tour" etc.)
- *  - "auto-city": KEIN data-gyg-q, nur location-id — zeigt GYGs eigenen
- *    Default-Feed für Heidelberg (breit + ranking-getrieben)
+ *    fokussierte Tour-Listen (z.B. "Schloss Neuschwanstein Tour")
+ *  - "auto-city": KEIN data-gyg-q, nur location-id, zeigt GYGs eigenen
+ *    Default-Feed der Location (breit + ranking-getrieben)
+ *
+ * Query und Location kommen pro Seite von der einbettenden Page
+ * (Burg-Detailseite: gygQuery; Stadt-Artikel: Stadtname).
  *
  * Optional headline + lead direkt über dem Widget — falls die einbettende
  * Page nichts eigenes drumherum baut.
@@ -30,8 +32,8 @@ interface Props {
 
 const {
   variant = "search-query",
-  query = "Heidelberg",
-  locationId = "49069",
+  query = "Burgen und Schlösser",
+  locationId,
   numberOfItems = 6,
   headline,
   lead,

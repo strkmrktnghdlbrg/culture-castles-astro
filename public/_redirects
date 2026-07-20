@@ -22,27 +22,26 @@
 /burgen-und-schloesser/schlossfuehrungen/  /magazin/mittelalterliche-burgen-erleben/  301
 /burgen-und-schloesser/europaeische-schloesser/  /burgen/  301
 
-# -- /burgen-und-schloesser/ - Laender-Listicles (Wette 2 restauriert = eigener Magazin-Artikel;
-#    Rest interim auf /burgen/, bis der jeweilige Artikel steht) --
+# -- /burgen-und-schloesser/ - Laender-Listicles (Wette 2: alle als Magazin-Artikel restauriert) --
 /burgen-und-schloesser/majestaetischen-schloesser-spanien/  /magazin/schloesser-spanien/  301
 /burgen-und-schloesser/beeindruckenden-burgen-rumaenien/  /magazin/burgen-rumaenien/  301
 /burgen-und-schloesser/historische-burgen-frankreich/  /magazin/schloesser-frankreich/  301
 /burgen-und-schloesser/schloesser-burgen-niederlande/  /magazin/schloesser-niederlande/  301
 /burgen-und-schloesser/schoensten-schloesser-slowenien/  /magazin/schloesser-slowenien/  301
 /burgen-und-schloesser/schloesser-burgen-skandinavien/  /magazin/schloesser-skandinavien/  301
-/burgen-und-schloesser/prachtvolle-schloesser-grossbritannien/  /burgen/  301
-/burgen-und-schloesser/faszinierenden-schloesser-belgien/  /burgen/  301
-/burgen-und-schloesser/italienische-burgen-festungen/  /burgen/  301
-/burgen-und-schloesser/historische-schloesser-burgen-ungarn/  /burgen/  301
-/burgen-und-schloesser/historische-schloesser-burgen-kroatien/  /burgen/  301
-/burgen-und-schloesser/historischen-burgen-irland/  /burgen/  301
-/burgen-und-schloesser/schloesser-burgen-slowakei/  /burgen/  301
+/burgen-und-schloesser/prachtvolle-schloesser-grossbritannien/  /magazin/schloesser-grossbritannien/  301
+/burgen-und-schloesser/faszinierenden-schloesser-belgien/  /magazin/schloesser-belgien/  301
+/burgen-und-schloesser/italienische-burgen-festungen/  /magazin/burgen-italien/  301
+/burgen-und-schloesser/historische-schloesser-burgen-ungarn/  /magazin/schloesser-ungarn/  301
+/burgen-und-schloesser/historische-schloesser-burgen-kroatien/  /magazin/schloesser-kroatien/  301
+/burgen-und-schloesser/historischen-burgen-irland/  /magazin/burgen-irland/  301
+/burgen-und-schloesser/schloesser-burgen-slowakei/  /magazin/burgen-slowakei/  301
 
-# -- /historische-bedeutung/ - Silo entfernt, lieferte 404 (42 Keywords, 15.550 SV) --
+# -- /historische-bedeutung/ - Silo entfernt (42 Keywords, 15.550 SV); Top-3 als Magazin-Artikel restauriert --
 # burgfeste-turniere existiert als Live-Seite und bleibt unberuehrt (Datei gewinnt gegen Redirect).
-/historische-bedeutung/rolle-burg-mittelalter/  /magazin/geschichte-deutscher-burgen/  301
-/historische-bedeutung/funktion-wasserschloesser/  /magazin/geschichte-deutscher-burgen/  301
-/historische-bedeutung/schloesser-renaissance/  /magazin/geschichte-deutscher-burgen/  301
+/historische-bedeutung/rolle-burg-mittelalter/  /magazin/burg-im-mittelalter/  301
+/historische-bedeutung/funktion-wasserschloesser/  /magazin/funktion-wasserschloesser/  301
+/historische-bedeutung/schloesser-renaissance/  /magazin/schloesser-der-renaissance/  301
 /historische-bedeutung/belagerungstechniken-burgen/  /magazin/geschichte-deutscher-burgen/  301
 /historische-bedeutung/burgarchitektur-verteidigung/  /magazin/geschichte-deutscher-burgen/  301
 /historische-bedeutung/wirtschaft-burgen/  /magazin/geschichte-deutscher-burgen/  301
