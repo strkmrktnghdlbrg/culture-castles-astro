@@ -4,7 +4,7 @@
  * -----------------------------
  * Build-Time-Fetch der aktuell bestbewerteten Hotels einer Stadt via
  * Stay22 Direct Travel API. Die Hotels kommen mit fertig affiliate-
- * getaggten Deep-Links direkt aus der API — kein Client-Rewrite nötig.
+ * getaggten Deep-Links direkt aus der API – kein Client-Rewrite nötig.
  *
  * Fetch passiert beim Astro-Build. GitHub Action sollte alle 6–24h
  * deployen, damit Daten frisch bleiben (Stay22 ToS erlaubt 60min Cache,
@@ -39,7 +39,7 @@ const {
   radius,
   limit = 8,
   title = "Aktuell bestbewertete Hotels in der Nähe",
-  lead = "Live von Booking.com via Stay22 — aktuelle Bewertungen und Preise. Aktualisiert beim letzten Build.",
+  lead = "Live von Booking.com via Stay22 – aktuelle Bewertungen und Preise. Aktualisiert beim letzten Build.",
 } = Astro.props;
 
 let hotels: Stay22Accommodation[] | null = null;
@@ -154,7 +154,7 @@ if (visible.length > 0) {
     </div>
 
     <p class="text-[11px] mt-4 leading-relaxed" style="color: var(--color-slate-steel);">
-      * Sponsored — Buchung läuft über Booking.com via Stay22-Affiliate.
+      * Sponsored – Buchung läuft über Booking.com via Stay22-Affiliate.
       Stand: {buildTime}. Preise und Verfügbarkeit ändern sich täglich.
     </p>
   </section>

@@ -1,7 +1,7 @@
 /* ===================================================================
-   BRAND.CSS — culture-castles.de
+   BRAND.CSS – culture-castles.de
    ===================================================================
-   "Gothic Manuscript" auf dunklem Pergament, Palette B —
+   "Gothic Manuscript" auf dunklem Pergament, Palette B –
    Königsburgunder. Wein-Schwarz als Canvas, Champagnergold als Akzent,
    Creme als Schrift. Übernimmt das Manuskript-System von Haley Park,
    tauscht aber das Waldgrün gegen königliches Burgunder.
@@ -42,13 +42,13 @@
   --color-accent-tint:     rgba(205, 171, 109, 0.12);
   --color-accent-contrast: #2a121a;
 
-  /* === Schrift — freie Google Fonts (Manuskript-Voice) === */
+  /* === Schrift – freie Google Fonts (Manuskript-Voice) === */
   --font-sans:    "Lora", Georgia, "Times New Roman", serif;
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-aux:     "Old Standard TT", Georgia, serif;
   --font-serif2:  "Playfair Display", Georgia, serif;
 
-  /* === Hue-Pool — Burgunder/Gold-Familie (Fallback-Gradienten) === */
+  /* === Hue-Pool – Burgunder/Gold-Familie (Fallback-Gradienten) === */
   --hue-1: linear-gradient(135deg, #341721 0%, #6e3b48 55%, #cdab6d 140%);
   --hue-2: linear-gradient(135deg, #2a121a 0%, #5a2f3a 60%, #b07c4f 130%);
   --hue-3: linear-gradient(135deg, #341721 0%, #7a3a4e 55%, #e0c489 140%);

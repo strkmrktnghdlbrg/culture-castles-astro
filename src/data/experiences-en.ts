@@ -35,7 +35,7 @@ export const experiencesEn: Experience[] = [
     icon: "♛",
     tag: "uebernachten",
     intro:
-      "Sleep as nobility once did: many castles and palaces are now elegant hotels. We show you where you can spend the night within historic walls — from a tower room to the piano nobile.",
+      "Sleep as nobility once did: many castles and palaces are now elegant hotels. We show you where you can spend the night within historic walls – from a tower room to the piano nobile.",
   },
   {
     slug: "maerchenschloesser",
@@ -53,7 +53,7 @@ export const experiencesEn: Experience[] = [
     icon: "⚔",
     tag: "mittelalter",
     intro:
-      "Keep, barbican, wall-walk: genuine medieval fortresses where history is palpable in every stone — powerful reminders of a world defined by defence and dominion.",
+      "Keep, barbican, wall-walk: genuine medieval fortresses where history is palpable in every stone – powerful reminders of a world defined by defence and dominion.",
   },
 ];
 

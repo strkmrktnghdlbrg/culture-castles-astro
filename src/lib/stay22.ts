@@ -1,5 +1,5 @@
 /**
- * Stay22 Direct Travel API — Helper
+ * Stay22 Direct Travel API – Helper
  * ----------------------------------
  * Build-Time-Fetch von Live-Hotel-Daten via /v1/accommodations.
  *
@@ -28,7 +28,7 @@ export interface Stay22Accommodation {
   name: string;
   type?: string;
   image?: string;
-  /** Vollständige Affiliate-URL inkl. lmaID — direkt im href verwenden. */
+  /** Vollständige Affiliate-URL inkl. lmaID – direkt im href verwenden. */
   link?: string;
   rating?: {
     /** 0–10. */
@@ -58,7 +58,7 @@ export interface Stay22Accommodation {
 export interface Stay22SearchOptions {
   provider?: "booking" | "expedia" | "vrbo" | "hotelscom";
   /**
-   * Volltext-Adresse für Geo-Lookup. Keine Umlaute — die API antwortet
+   * Volltext-Adresse für Geo-Lookup. Keine Umlaute – die API antwortet
    * sonst mit HTTP 400 (empty body). Beispiel: "Heidelberg, Germany".
    */
   address?: string;
@@ -83,14 +83,14 @@ export interface Stay22SearchOptions {
   children?: number;
   rooms?: number;
   campaign?: string;
-  /** lmaID — Pflicht für Affiliate-Attribution. */
+  /** lmaID – Pflicht für Affiliate-Attribution. */
   aid?: string;
 }
 
 const API_BASE = "https://api.stay22.com/v1";
 
 function getApiKey(): string | null {
-  // @ts-expect-error — import.meta.env existiert in Astro/Vite
+  // @ts-expect-error – import.meta.env existiert in Astro/Vite
   const viteKey = typeof import.meta !== "undefined" ? import.meta.env?.STAY22_API_KEY : undefined;
   const nodeKey = typeof process !== "undefined" ? process.env?.STAY22_API_KEY : undefined;
   const key = viteKey || nodeKey;
@@ -158,12 +158,12 @@ function normalize(
 /**
  * Sucht Live-Accommodations via Stay22 API.
  *
- * Returns null wenn STAY22_API_KEY fehlt — Caller muss das defensiv
+ * Returns null wenn STAY22_API_KEY fehlt – Caller muss das defensiv
  * handhaben (Component versteckt sich, Page zeigt nur statische Hotels).
  *
  * Quirk: Die API-Parameter minguestrating und minstarrating liefern in
  * der Praxis 0 Treffer für City-Searches, auch wenn die Roh-Daten passen
- * würden. Wir filtern deshalb CLIENT-SEITE nach dem Fetch — Reihenfolge:
+ * würden. Wir filtern deshalb CLIENT-SEITE nach dem Fetch – Reihenfolge:
  *   1. API-Call ohne Rating-Filter (bekommt alle Hotels)
  *   2. Lokales Filtern via minguestrating-/minstarrating-Optionen
  *   3. Slice auf limit
@@ -173,11 +173,11 @@ export async function searchAccommodations(
 ): Promise<Stay22Accommodation[] | null> {
   const apiKey = getApiKey();
   if (!apiKey) {
-    console.warn("[stay22] STAY22_API_KEY env var fehlt — Live-Hotels werden übersprungen.");
+    console.warn("[stay22] STAY22_API_KEY env var fehlt – Live-Hotels werden übersprungen.");
     return null;
   }
 
-  // Rating-Filter clientseitig anwenden — die API-Variante scheint
+  // Rating-Filter clientseitig anwenden – die API-Variante scheint
   // 0 Treffer für City-Searches zu liefern. Wir merken sie hier vor
   // und entfernen sie aus den URL-Params unten.
   const minGuest = options.minguestrating;

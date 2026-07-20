@@ -13,13 +13,13 @@ export const site = {
   email: "info@culture-castles.de",
   description: {
     short:
-      "Culture Castles — dein kuratierter Reiseführer durch die schönsten Burgen, Schlösser und Festungen Europas: Geschichte, Besuchstipps, Führungen und Hotels in der Nähe.",
+      "Culture Castles – dein kuratierter Reiseführer durch die schönsten Burgen, Schlösser und Festungen Europas: Geschichte, Besuchstipps, Führungen und Hotels in der Nähe.",
     long:
-      "Culture Castles ist der kuratierte Reiseführer durch die schönsten Burgen, Schlösser und Festungen Europas. Wir verbinden Geschichte und Architektur mit handfesten Besuchstipps — beste Reisezeit, Führungen, Tickets und passende Hotels in Gehweite. Entdecke nach Region, folge fertig geplanten Routen oder lass dich von Erlebniswelten wie Schlosshochzeit, Familienausflug oder Übernachten im Schloss inspirieren.",
+      "Culture Castles ist der kuratierte Reiseführer durch die schönsten Burgen, Schlösser und Festungen Europas. Wir verbinden Geschichte und Architektur mit handfesten Besuchstipps – beste Reisezeit, Führungen, Tickets und passende Hotels in Gehweite. Entdecke nach Region, folge fertig geplanten Routen oder lass dich von Erlebniswelten wie Schlosshochzeit, Familienausflug oder Übernachten im Schloss inspirieren.",
   },
 };
 
-/** Hauptnavigation — entspricht den Content-Clustern. */
+/** Hauptnavigation – entspricht den Content-Clustern. */
 export const nav = [
   { href: "/burgen/", label: "Burgen & Schlösser" },
   { href: "/regionen/", label: "Regionen" },
@@ -29,7 +29,7 @@ export const nav = [
   { href: "/magazin/", label: "Magazin" },
 ];
 
-/** Erlebniswelten — Themen-Cluster über Burg-Tags (kein eigenes Collection). */
+/** Erlebniswelten – Themen-Cluster über Burg-Tags (kein eigenes Collection). */
 export type Experience = {
   slug: string;
   title: string;
@@ -74,7 +74,7 @@ export const experiences: Experience[] = [
     icon: "♛",
     tag: "uebernachten",
     intro:
-      "Einmal schlafen wie Adel: Viele Schlösser sind heute stilvolle Hotels. Wir zeigen, wo du in historischen Mauern übernachten kannst — vom Turmzimmer bis zur Beletage.",
+      "Einmal schlafen wie Adel: Viele Schlösser sind heute stilvolle Hotels. Wir zeigen, wo du in historischen Mauern übernachten kannst – vom Turmzimmer bis zur Beletage.",
   },
   {
     slug: "maerchenschloesser",
