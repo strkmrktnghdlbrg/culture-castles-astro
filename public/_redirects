@@ -1,17 +1,63 @@
+# Redirects culture-castles.de - Stand 2026-07-20 (War-Room Wette 1)
+# Reihenfolge: explizite Regeln VOR den Splats (Netlify: first match wins).
+# Quelle: Fable5-SEO-War-Room/data/dataforseo/own_ranked_keywords.json (33 tote rankende URLs)
+
+# -- Silo-Root --
 /burgen-und-schloesser/  /burgen/  301
+
+# -- /burgen-und-schloesser/ - praezise Ziele (Bestand) --
 /burgen-und-schloesser/geschichte-deutscher-burgen/  /magazin/geschichte-deutscher-burgen/  301
 /burgen-und-schloesser/schloesser-in-bayern/  /magazin/schloesser-in-bayern/  301
 /burgen-und-schloesser/mittelalterliche-burgen/  /erlebnisse/mittelalterliche-burgen/  301
 /burgen-und-schloesser/burgruinen-deutschland/  /erlebnisse/burgruinen/  301
 /burgen-und-schloesser/familienausflug-burg/  /erlebnisse/familienausflug/  301
-/burgen-und-schloesser/burgfuehrungen-deutschland/  /burgen/  301
-/burgen-und-schloesser/schlossfuehrungen/  /burgen/  301
 /burgen-und-schloesser/romantische-schloesser/  /erlebnisse/maerchenschloesser/  301
-/burgen-und-schloesser/europaeische-schloesser/  /regionen/  301
+
+# -- /burgen-und-schloesser/ - Deutschland-Listicles --
+/burgen-und-schloesser/bekanntesten-schloesser-deutschland/  /burgen/  301
+/burgen-und-schloesser/burgen-deutschland/  /burgen/  301
 /burgen-und-schloesser/burgen-in-deutschland/  /burgen/  301
-# Entfernte Bestandsseite -> thematisch naechste Live-Seite
+/burgen-und-schloesser/geschichte-schloesser-deutschland/  /magazin/geschichte-deutscher-burgen/  301
+/burgen-und-schloesser/burgfuehrungen-deutschland/  /magazin/mittelalterliche-burgen-erleben/  301
+/burgen-und-schloesser/schlossfuehrungen/  /magazin/mittelalterliche-burgen-erleben/  301
+/burgen-und-schloesser/europaeische-schloesser/  /burgen/  301
+
+# -- /burgen-und-schloesser/ - Laender-Listicles (Interim-Ziel /burgen/;
+#    bei Wette-2-Restore je Zeile auf den neuen Magazin-Artikel umstellen) --
+/burgen-und-schloesser/majestaetischen-schloesser-spanien/  /burgen/  301
+/burgen-und-schloesser/beeindruckenden-burgen-rumaenien/  /burgen/  301
+/burgen-und-schloesser/historische-burgen-frankreich/  /burgen/  301
+/burgen-und-schloesser/prachtvolle-schloesser-grossbritannien/  /burgen/  301
+/burgen-und-schloesser/faszinierenden-schloesser-belgien/  /burgen/  301
+/burgen-und-schloesser/schloesser-burgen-niederlande/  /burgen/  301
+/burgen-und-schloesser/italienische-burgen-festungen/  /burgen/  301
+/burgen-und-schloesser/schloesser-burgen-skandinavien/  /burgen/  301
+/burgen-und-schloesser/historische-schloesser-burgen-ungarn/  /burgen/  301
+/burgen-und-schloesser/schoensten-schloesser-slowenien/  /burgen/  301
+/burgen-und-schloesser/historische-schloesser-burgen-kroatien/  /burgen/  301
+/burgen-und-schloesser/historischen-burgen-irland/  /burgen/  301
+/burgen-und-schloesser/schloesser-burgen-slowakei/  /burgen/  301
+
+# -- /historische-bedeutung/ - Silo entfernt, lieferte 404 (42 Keywords, 15.550 SV) --
+# burgfeste-turniere existiert als Live-Seite und bleibt unberuehrt (Datei gewinnt gegen Redirect).
+/historische-bedeutung/rolle-burg-mittelalter/  /magazin/geschichte-deutscher-burgen/  301
+/historische-bedeutung/funktion-wasserschloesser/  /magazin/geschichte-deutscher-burgen/  301
+/historische-bedeutung/schloesser-renaissance/  /magazin/geschichte-deutscher-burgen/  301
+/historische-bedeutung/belagerungstechniken-burgen/  /magazin/geschichte-deutscher-burgen/  301
+/historische-bedeutung/burgarchitektur-verteidigung/  /magazin/geschichte-deutscher-burgen/  301
+/historische-bedeutung/wirtschaft-burgen/  /magazin/geschichte-deutscher-burgen/  301
+/historische-bedeutung/mythen-burgen-wahrheit/  /magazin/geschichte-deutscher-burgen/  301
+/historische-bedeutung/schloesser-macht-kultur/  /magazin/geschichte-deutscher-burgen/  301
+/historische-bedeutung/geheime-gaenge-verliese/  /magazin/mittelalterliche-burgen-erleben/  301
+/historische-bedeutung/geistergeschichten-alte-burgen/  /magazin/mittelalterliche-burgen-erleben/  301
+
+# -- Entfernte Bestandsseite -> thematisch naechste Live-Seite --
 /hochzeit/hochzeitsplanung-was-bedacht-werden/  /magazin/heiraten-im-schloss/  301
-# Bestandsseiten mit bezahlten Outbound-Links — NICHT umleiten (vor dem Splat, 200 = ausliefern)
+
+# -- Bestandsseiten mit bezahlten Outbound-Links - NICHT umleiten (vor dem Splat, 200 = ausliefern) --
 /burgen-und-schloesser/10-schoenste-spektakulaere-bauwerke-deutschland/  /burgen-und-schloesser/10-schoenste-spektakulaere-bauwerke-deutschland/  200
 /burgen-und-schloesser/schoenste-schloesser-oesterreich/  /burgen-und-schloesser/schoenste-schloesser-oesterreich/  200
+
+# -- Splats (Sicherheitsnetz fuer nicht rankende Alt-URLs) --
 /burgen-und-schloesser/*  /burgen/  301
+/historische-bedeutung/*  /magazin/geschichte-deutscher-burgen/  301
