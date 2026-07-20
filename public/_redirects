@@ -22,18 +22,18 @@
 /burgen-und-schloesser/schlossfuehrungen/  /magazin/mittelalterliche-burgen-erleben/  301
 /burgen-und-schloesser/europaeische-schloesser/  /burgen/  301
 
-# -- /burgen-und-schloesser/ - Laender-Listicles (Interim-Ziel /burgen/;
-#    bei Wette-2-Restore je Zeile auf den neuen Magazin-Artikel umstellen) --
-/burgen-und-schloesser/majestaetischen-schloesser-spanien/  /burgen/  301
-/burgen-und-schloesser/beeindruckenden-burgen-rumaenien/  /burgen/  301
-/burgen-und-schloesser/historische-burgen-frankreich/  /burgen/  301
+# -- /burgen-und-schloesser/ - Laender-Listicles (Wette 2 restauriert = eigener Magazin-Artikel;
+#    Rest interim auf /burgen/, bis der jeweilige Artikel steht) --
+/burgen-und-schloesser/majestaetischen-schloesser-spanien/  /magazin/schloesser-spanien/  301
+/burgen-und-schloesser/beeindruckenden-burgen-rumaenien/  /magazin/burgen-rumaenien/  301
+/burgen-und-schloesser/historische-burgen-frankreich/  /magazin/schloesser-frankreich/  301
+/burgen-und-schloesser/schloesser-burgen-niederlande/  /magazin/schloesser-niederlande/  301
+/burgen-und-schloesser/schoensten-schloesser-slowenien/  /magazin/schloesser-slowenien/  301
+/burgen-und-schloesser/schloesser-burgen-skandinavien/  /magazin/schloesser-skandinavien/  301
 /burgen-und-schloesser/prachtvolle-schloesser-grossbritannien/  /burgen/  301
 /burgen-und-schloesser/faszinierenden-schloesser-belgien/  /burgen/  301
-/burgen-und-schloesser/schloesser-burgen-niederlande/  /burgen/  301
 /burgen-und-schloesser/italienische-burgen-festungen/  /burgen/  301
-/burgen-und-schloesser/schloesser-burgen-skandinavien/  /burgen/  301
 /burgen-und-schloesser/historische-schloesser-burgen-ungarn/  /burgen/  301
-/burgen-und-schloesser/schoensten-schloesser-slowenien/  /burgen/  301
 /burgen-und-schloesser/historische-schloesser-burgen-kroatien/  /burgen/  301
 /burgen-und-schloesser/historischen-burgen-irland/  /burgen/  301
 /burgen-und-schloesser/schloesser-burgen-slowakei/  /burgen/  301
