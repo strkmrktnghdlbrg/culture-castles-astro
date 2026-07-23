@@ -3,7 +3,7 @@ title: Mecklenburg-Vorpommern
 country: Deutschland
 order: 7
 teaser: Schlösser im Seenland, Ordensburgen auf Rügen und hanseatische Befestigungen – Mecklenburg-Vorpommern verbindet Ostseeküste mit adligem Erbe und slawischen Burgwällen.
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Aerial_image_of_Schwerin_Castle_%28view_from_the_east%29.jpg/3840px-Aerial_image_of_Schwerin_Castle_%28view_from_the_east%29.jpg"
+heroImage: "/images/regions/mecklenburg-vorpommern.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

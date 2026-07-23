@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Ein Sommerschloss im chinoisen Stil am Elbufer: Schloss Pillnitz verbindet Berg- und Wasserpalais mit einem der schönsten historischen Parks Sachsens und war die Sommerresidenz der sächsischen Kurfürsten."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Aerial_image_of_Schlosspark_Pillnitz_%28view_from_the_south%29.jpg/3840px-Aerial_image_of_Schlosspark_Pillnitz_%28view_from_the_south%29.jpg"
+heroImage: "/images/castles/schloss-pillnitz.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

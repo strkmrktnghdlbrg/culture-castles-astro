@@ -3,7 +3,7 @@ title: Bavaria
 country: "Germany"
 order: 1
 teaser: "From Neuschwanstein to the Plassenburg – Bavaria unites fairy-tale royal palaces with formidable hilltop fortresses on rock summits rising above 1,400 metres."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Neuschwanstein_Castle_2024-02.jpg/3840px-Neuschwanstein_Castle_2024-02.jpg"
+heroImage: "/images/regions/bayern.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

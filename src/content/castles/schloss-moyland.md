@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Ein neugotisches Wasserschloss am Niederrhein, dessen Türme sich in breiten Gräften spiegeln – heute beherbergt Schloss Moyland eine der bedeutendsten Sammlungen zu Joseph Beuys."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Schloss_Moyland_Panorama%2C_1.jpg/3840px-Schloss_Moyland_Panorama%2C_1.jpg"
+heroImage: "/images/castles/schloss-moyland.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

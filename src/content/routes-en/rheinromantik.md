@@ -4,7 +4,7 @@ distanceKm: 130
 stops: 5
 days: "3 days"
 teaser: "The UNESCO World Heritage Upper Middle Rhine Valley with the Loreley Rock, vineyards, and five castles in three days."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Burg_Katz_und_Loreley.jpg/3840px-Burg_Katz_und_Loreley.jpg"
+heroImage: "/images/routes/rheinromantik.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

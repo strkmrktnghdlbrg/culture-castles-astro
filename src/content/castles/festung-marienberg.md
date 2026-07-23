@@ -17,7 +17,7 @@ castleOfMonth: false
 
 teaser: "Über dem Maintal thront die Festung Marienberg, jahrhundertelang Residenz der Würzburger Fürstbischöfe und Wahrzeichen der Stadt mit weitem Blick über die Weinberge Frankens."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Festung_Marienberg_-_W%C3%BCrzburg_-_2013.jpg"
+heroImage: "/images/castles/festung-marienberg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

@@ -17,7 +17,7 @@ castleOfMonth: false
 
 teaser: "Hoch über der Fachwerkstadt am Harzrand thront das bunte Schloss Wernigerode – ein Leitbau des norddeutschen Historismus, der wie die Illustration eines Märchenbuchs wirkt."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Schloss_Wernigerode_Luftbild_2.jpg/3840px-Schloss_Wernigerode_Luftbild_2.jpg"
+heroImage: "/images/castles/schloss-wernigerode.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

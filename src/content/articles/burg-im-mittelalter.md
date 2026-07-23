@@ -3,7 +3,7 @@ title: "Die Burg im Mittelalter: Funktion, Alltag und das Leben hinter den Mauer
 date: 2026-05-22
 category: Geschichte
 teaser: "Welche Rolle spielte die Burg im Mittelalter? Wir zeigen, wie eine Burg als Wehranlage, Wohnsitz und Machtzentrum funktionierte und wie der Alltag von Burgherr, Gesinde und Handwerkern wirklich aussah."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Marksburg_im_Winter.jpg/3840px-Marksburg_im_Winter.jpg"
+heroImage: "/images/magazin/burg-im-mittelalter.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

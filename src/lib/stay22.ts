@@ -89,6 +89,38 @@ export interface Stay22SearchOptions {
 
 const API_BASE = "https://api.stay22.com/v1";
 
+/** Geografisches Zentrum Deutschlands – Fallback ohne Koordinaten. */
+export const STAY22_DEFAULT_CENTER: [number, number] = [50.9, 10.0];
+
+/**
+ * Baut die Stay22-Embed-URL für Karte UND für den "Hotels entdecken"-
+ * Outbound-Button. Trägt IMMER die Affiliate-ID (aid) für die Attribution.
+ * Ein gesetztes embedId hat Vorrang (im Stay22-Dashboard vorkonfiguriertes
+ * Widget). Sonst die Parameter-Variante (gm) mit lat/lng/zoom/maincolor.
+ *
+ * Das Öffnen der gm-URL in einem neuen Tab zeigt die Stay22-Hotelkarte
+ * als vollwertige Landing-Page – dieselbe getrackte URL, die der iframe
+ * nutzt. Dadurch geht der bare-Homepage-Link (stay22.com ohne aid) weg.
+ */
+export function stay22EmbedUrl(opts: {
+  aid: string;
+  lat?: number;
+  lng?: number;
+  zoom?: number;
+  maincolor?: string;
+  embedId?: string;
+}): string {
+  if (opts.embedId) return `https://www.stay22.com/embed/${opts.embedId}`;
+  const params = new URLSearchParams({
+    aid: opts.aid,
+    lat: String(opts.lat ?? STAY22_DEFAULT_CENTER[0]),
+    lng: String(opts.lng ?? STAY22_DEFAULT_CENTER[1]),
+    zoom: String(opts.zoom ?? 13),
+    maincolor: opts.maincolor ?? "cdab6d",
+  });
+  return `https://www.stay22.com/embed/gm?${params.toString()}`;
+}
+
 function getApiKey(): string | null {
   // @ts-expect-error – import.meta.env existiert in Astro/Vite
   const viteKey = typeof import.meta !== "undefined" ? import.meta.env?.STAY22_API_KEY : undefined;

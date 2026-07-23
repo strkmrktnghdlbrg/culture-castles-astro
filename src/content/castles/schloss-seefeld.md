@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Ein gräfliches Schloss über dem Pilsensee: Schloss Seefeld im Fünf-Seen-Land verbindet mittelalterliche Ursprünge mit einem lebendigen Marstall voller Handwerk, Kunst und Einkehr."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Aerial_image_of_the_Seefeld_Castle_%28view_from_the_southeast%29.jpg/3840px-Aerial_image_of_the_Seefeld_Castle_%28view_from_the_southeast%29.jpg"
+heroImage: "/images/castles/schloss-seefeld.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

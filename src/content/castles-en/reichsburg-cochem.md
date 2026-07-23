@@ -7,7 +7,7 @@ type: "Castle"
 built: "c. 1000 (rebuilt 1868)"
 lord: "Imperial Ministeriales"
 teaser: "High above the Moselle, Reichsburg Cochem crowns its hilltop as one of Germany's most imposing hilltop castles, with a turbulent history spanning the Middle Ages to the Wilhelmine era."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Cochem%2C_Reichsburg%2C_2012-08_CN-01.jpg"
+heroImage: "/images/castles/reichsburg-cochem.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

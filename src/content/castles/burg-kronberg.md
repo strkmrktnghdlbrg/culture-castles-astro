@@ -17,7 +17,7 @@ castleOfMonth: false
 
 teaser: "Über den Dächern von Kronberg im Taunus erhebt sich eine der besterhaltenen Burganlagen Hessens – mit staufischem Freiturm, Burgkapelle und weitem Blick bis nach Frankfurt."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Burg-Kronberg-JR-E-65-2010-04-18.jpg/3840px-Burg-Kronberg-JR-E-65-2010-04-18.jpg"
+heroImage: "/images/castles/burg-kronberg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

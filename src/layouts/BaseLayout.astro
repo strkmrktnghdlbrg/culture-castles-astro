@@ -38,15 +38,19 @@ const otherLang = lang === "en" ? "de" : "en";
 const switchHref =
   alternates.find((a) => a.hreflang === otherLang)?.href ??
   (lang === "en" ? "/" : "/en/");
+const brandSuffix =
+  lang === "en" ? "Castles & Palaces of Europe" : "Burgen & Schlösser erleben";
 const fullTitle =
   title === site.brandName
-    ? `${site.brandName} – Burgen & Schlösser erleben`
+    ? `${site.brandName} – ${brandSuffix}`
     : `${title} · ${site.brandName}`;
 
-// Default-Social-Image, falls die Seite keins setzt
-const DEFAULT_OG =
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Neuschwanstein_Castle_2024-02.jpg/1200px-Neuschwanstein_Castle_2024-02.jpg";
-const ogImg = ogImage ?? DEFAULT_OG;
+// Default-Social-Image, falls die Seite keins setzt (selbst gehostet).
+const DEFAULT_OG = "/images/castles/schloss-neuschwanstein.jpg";
+// OG/Twitter brauchen absolute URLs – relative Pfade zur Domain auflösen.
+const toAbsolute = (src: string) =>
+  src.startsWith("http") ? src : new URL(src, site.domain).toString();
+const ogImg = toAbsolute(ogImage ?? DEFAULT_OG);
 ---
 
 <!doctype html>

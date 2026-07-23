@@ -3,7 +3,7 @@ title: "Burgen und Schlösser in Italien: Von Castel del Monte bis zu den Reside
 date: 2026-06-20
 category: Ratgeber
 teaser: "Italien vereint staufische Kastelle, mittelalterliche Stadtburgen und prunkvolle Renaissance-Residenzen: vom geheimnisvollen Castel del Monte in Apulien bis zum Castello Sforzesco in Mailand."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Castel_del_Monte_-_Andria.jpg/3840px-Castel_del_Monte_-_Andria.jpg"
+heroImage: "/images/magazin/burgen-italien.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

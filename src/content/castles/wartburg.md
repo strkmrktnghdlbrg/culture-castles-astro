@@ -16,7 +16,7 @@ stayQuery: "Wartburg, Eisenach, Deutschland"
 
 teaser: "Thüringens Wahrzeichen hoch über Eisenach – Welterbe, Luther-Refugium und Inbegriff mittelalterlicher Burgenromantik in einem."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Thuringia_Eisenach_asv2020-07_img23_Wartburg_Castle.jpg/3840px-Thuringia_Eisenach_asv2020-07_img23_Wartburg_Castle.jpg"
+heroImage: "/images/castles/wartburg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

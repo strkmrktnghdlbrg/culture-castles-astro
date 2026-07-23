@@ -3,7 +3,7 @@ title: Mecklenburg-Vorpommern
 country: "Germany"
 order: 7
 teaser: Lakeside palaces, Teutonic Order fortresses on Rügen, and Hanseatic defences – Mecklenburg-Vorpommern unites the Baltic coast with aristocratic heritage and Slavic ring-fort remains.
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Aerial_image_of_Schwerin_Castle_%28view_from_the_east%29.jpg/3840px-Aerial_image_of_Schwerin_Castle_%28view_from_the_east%29.jpg"
+heroImage: "/images/regions/mecklenburg-vorpommern.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

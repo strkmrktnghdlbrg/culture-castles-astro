@@ -17,7 +17,7 @@ castleOfMonth: false
 
 teaser: "Die barocke Sommerresidenz der bayerischen Herrscher: Schloss Nymphenburg im Westen Münchens beeindruckt mit einer prunkvollen Fassade, dem Festsaal und einem der schönsten Schlossparks Europas."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/3/37/Exterior_del_Palacio_de_Nymphenburg%2C_M%C3%BAnich%2C_Alemania61.JPG"
+heroImage: "/images/castles/schloss-nymphenburg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

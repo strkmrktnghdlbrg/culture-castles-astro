@@ -6,7 +6,24 @@ import Band from "../../components/Band.astro";
 import OrnamentRule from "../../components/OrnamentRule.astro";
 import ImageCreditsList from "../../components/ImageCreditsList.astro";
 import JsonLd from "../../components/JsonLd.astro";
+import StaySection from "../../components/StaySection.astro";
+import GetYourGuideWidget from "../../components/GetYourGuideWidget.astro";
 import { site } from "../../data/site";
+
+/**
+ * Monetarisierung der "Ausflugsziele um <Stadt>"-Artikel: Diese Beiträge
+ * sind Prime-Content für Hotels + Touren, hatten aber bisher null CTAs.
+ * Wir hängen pro Stadt einen GetYourGuide-Touren-Feed + eine Stay22-
+ * Hotelkarte (getrackt) an. Key = Artikel-Slug.
+ */
+const CITY_MONETIZATION: Record<string, { city: string; lat: number; lng: number }> = {
+  "burgen-und-schloesser-um-dresden":    { city: "Dresden",           lat: 51.0504, lng: 13.7373 },
+  "burgen-und-schloesser-um-frankfurt":  { city: "Frankfurt am Main", lat: 50.1109, lng: 8.6821 },
+  "burgen-und-schloesser-um-heidelberg": { city: "Heidelberg",        lat: 49.3988, lng: 8.6724 },
+  "burgen-und-schloesser-um-koeln":      { city: "Köln",              lat: 50.9375, lng: 6.9603 },
+  "burgen-und-schloesser-um-nuernberg":  { city: "Nürnberg",          lat: 49.4521, lng: 11.0767 },
+  "burgen-und-schloesser-um-stuttgart":  { city: "Stuttgart",         lat: 48.7758, lng: 9.1829 },
+};
 
 export async function getStaticPaths() {
   const entries = await getCollection("articles");
@@ -17,6 +34,9 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 
 const d = entry.data;
+
+// Monetarisierungs-Block nur für die Stadt-Umgebungs-Artikel.
+const cityMon = CITY_MONETIZATION[entry.id];
 
 // Zugehörige Artikel desselben Clusters (max. 3, ohne den aktuellen)
 const allArticles = await getCollection("articles");
@@ -250,6 +270,52 @@ const articleCrumbs = {
       </div>
     )}
   </div>
+
+  <!-- Monetarisierung: Touren + Hotels für Stadt-Umgebungs-Artikel -->
+  {cityMon && (
+    <>
+      <Band>
+        <OrnamentRule label={`Touren & Tickets um ${cityMon.city}`} />
+        <h2
+          style="
+            font-family: var(--font-display);
+            font-size: clamp(26px, 3.5vw, 40px);
+            font-weight: 300;
+            color: var(--cc-text);
+            margin: 1.25rem 0 0.5rem;
+            text-align: center;
+          "
+        >
+          Führungen & Erlebnisse in {cityMon.city}
+        </h2>
+        <p
+          style="
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            color: var(--cc-text-mute);
+            text-align: center;
+            margin: 0 0 2rem;
+          "
+        >
+          Buchbare Touren zu Burgen, Schlössern & Sehenswürdigkeiten rund um {cityMon.city}.
+        </p>
+        <GetYourGuideWidget
+          variant="search-query"
+          query={cityMon.city}
+          numberOfItems={6}
+        />
+      </Band>
+
+      <Band soft id="uebernachten">
+        <StaySection
+          title={`Hotels rund um ${cityMon.city}`}
+          lead={`Übernachte zentral in ${cityMon.city} und erkunde die Burgen und Schlösser der Umgebung als Tagesausflug – Live-Preise und Verfügbarkeit.`}
+          lat={cityMon.lat}
+          lng={cityMon.lng}
+        />
+      </Band>
+    </>
+  )}
 
   <!-- Verwandte Artikel -->
   {related.length > 0 && (

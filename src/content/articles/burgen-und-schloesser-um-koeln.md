@@ -3,7 +3,7 @@ title: "Die schönsten Burgen und Schlösser um Köln und Bonn: Ausflugsziele im
 date: 2026-07-08
 category: Ratgeber
 teaser: "Zwischen Rhein, Eifel und Bergischem Land liegt eine reiche Burgenlandschaft: vom Märchenschloss Drachenburg über das barocke Schloss Augustusburg bis zu den Wasserburgen der Kölner Bucht."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Schloss_Drachenburg_Bild_1.jpg/3840px-Schloss_Drachenburg_Bild_1.jpg"
+heroImage: "/images/magazin/burgen-und-schloesser-um-koeln.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

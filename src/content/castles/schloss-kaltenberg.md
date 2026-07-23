@@ -17,7 +17,7 @@ castleOfMonth: false
 
 teaser: "Bekannt für das größte Ritterturnier Europas: Schloss Kaltenberg im Voralpenland ist im Besitz des Hauses Wittelsbach und verwandelt sich alljährlich in eine mittelalterliche Erlebniswelt."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Aerial_image_of_Schloss_Kaltenberg_%28view_from_the_southeast%29.jpg"
+heroImage: "/images/castles/schloss-kaltenberg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

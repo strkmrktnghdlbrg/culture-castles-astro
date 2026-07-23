@@ -8,7 +8,7 @@ epoch: "Neugotik"
 built: "1832–1837"
 lord: "König Maximilian II."
 teaser: "Das neugotische Schloss im Allgäu war Kindheitssitz Ludwigs II. und prägte den späteren Märchenkönig wie kein anderes Bauwerk."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/2/23/Hohenschwangau_%283383608894%29.jpg"
+heroImage: "/images/castles/schloss-hohenschwangau.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

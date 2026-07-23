@@ -92,9 +92,9 @@ const topExperiences = experiences.slice(0, 4).map((exp) => ({
 // ── Hero stats ────────────────────────────────────────────────────────────────
 const heroStats = [
   { v: String(castles.length), l: "Burgen & Schlösser" },
-  { v: "7",  l: "Regionen" },
-  { v: "3",  l: "Routen" },
-  { v: "6",  l: "Erlebniswelten" },
+  { v: String(regions.length), l: "Regionen" },
+  { v: String(routes.length),  l: "Routen" },
+  { v: String(experiences.length), l: "Erlebniswelten" },
 ];
 
 // ── RegionGrid props (with zero-padded num "01"…"07") ────────────────────────
@@ -190,7 +190,7 @@ const formatDate = (d: Date) =>
       subtitle="Eine kuratierte Auswahl der eindrucksvollsten Bauwerke – jedes mit Geschichte, Besuchsinfos und Hotels in der Nähe."
     />
     <div class="cc-castle-grid" style="margin-top: 3.5rem;">
-      {featuredCastles.map((c) => (
+      {featuredCastles.map((c, i) => (
         <CastleCard
           href={`/burgen/${c.id}/`}
           title={c.data.title}
@@ -198,7 +198,7 @@ const formatDate = (d: Date) =>
           teaser={c.data.teaser}
           image={c.data.heroImage}
           imageAlt={c.data.title}
-          rank={c.data.rank}
+          rank={i + 1}
           type={c.data.type}
         />
       ))}
@@ -317,6 +317,8 @@ const formatDate = (d: Date) =>
   <Band soft id="uebernachten">
     <StaySection
       lead="Wir finden für jede Burg die passenden Hotels in Gehweite – vom Schlosshotel bis zur Pension im historischen Ortskern. Live-Preise und Verfügbarkeit."
+      lat={castleOfMonth.data.coordinates?.[0]}
+      lng={castleOfMonth.data.coordinates?.[1]}
     />
   </Band>
 

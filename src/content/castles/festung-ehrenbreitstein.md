@@ -17,7 +17,7 @@ castleOfMonth: false
 
 teaser: "Hoch über dem Deutschen Eck wacht die Festung Ehrenbreitstein, eine der größten erhaltenen Festungen Europas, erreichbar per Seilbahn über den Rhein und mit grandiosem Blick auf Koblenz."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/e/ef/Festung_Ehrenbreitstein_Luftbild_080.jpg"
+heroImage: "/images/castles/festung-ehrenbreitstein.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

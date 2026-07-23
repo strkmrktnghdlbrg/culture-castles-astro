@@ -11,7 +11,7 @@ coordinates: [52.4045, 13.039]
 tags: []
 featured: true
 teaser: "Das Rokoko-Juwel Friedrichs des Großen thront auf Weinbergterrassen in Potsdam und zählt zum UNESCO-Weltkulturerbe."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Reflection_of_Sanssouci_Palace.jpg/3840px-Reflection_of_Sanssouci_Palace.jpg"
+heroImage: "/images/castles/schloss-sanssouci.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

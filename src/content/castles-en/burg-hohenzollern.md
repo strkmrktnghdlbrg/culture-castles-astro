@@ -16,7 +16,7 @@ rank: 2
 gygQuery: "Burg Hohenzollern"
 stayQuery: "Burg Hohenzollern, Bisingen, Germany"
 teaser: "A throned silhouette above the Swabian Alb – the ancestral seat of the Hohenzollerns unites Neo-Gothic splendour with 900 years of dynastic history."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Burg_Hohenzollern_10-2016.jpg/3840px-Burg_Hohenzollern_10-2016.jpg"
+heroImage: "/images/castles/burg-hohenzollern.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

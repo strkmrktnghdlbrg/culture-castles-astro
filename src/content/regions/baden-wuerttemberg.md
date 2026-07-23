@@ -3,7 +3,7 @@ title: Baden-Württemberg
 country: Deutschland
 order: 2
 teaser: Schwarzwald, Schwäbische Alb und Bodenseeufer – Baden-Württemberg bietet Staufer-Burgen, Hohenzollern-Schlösser und romantische Ruinen in atemberaubender Naturkulisse.
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Burg_Hohenzollern_10-2016.jpg/3840px-Burg_Hohenzollern_10-2016.jpg"
+heroImage: "/images/regions/baden-wuerttemberg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

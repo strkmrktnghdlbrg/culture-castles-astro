@@ -10,7 +10,7 @@ coordinates: [49.7926, 9.939]
 tags: []
 featured: true
 teaser: "Das barocke Meisterwerk am Main: Die Würzburger Residenz zählt zu den bedeutendsten Fürstenpalästen Europas und ist seit 1981 UNESCO-Welterbe."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Aerial_image_of_W%C3%BCrzburg_Residence_%28view_from_the_east%29.jpg/3840px-Aerial_image_of_W%C3%BCrzburg_Residence_%28view_from_the_east%29.jpg"
+heroImage: "/images/castles/wuerzburger-residenz.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

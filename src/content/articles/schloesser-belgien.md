@@ -3,7 +3,7 @@ title: "Burgen und Schlösser in Belgien: Von der Grafenburg in Gent bis zu den 
 date: 2026-06-18
 category: Ratgeber
 teaser: "Belgien überrascht mit einer dichten Burgenlandschaft: die mittelalterliche Grafenburg Gravensteen mitten in Gent, die Zitadelle von Namur und die romantischen Wasserschlösser Flanderns und Walloniens."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Gravensteen%2C_Gent.jpg"
+heroImage: "/images/magazin/schloesser-belgien.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

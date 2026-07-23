@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Das Märchenschloss Württembergs: Kühn auf einem Felsen der Schwäbischen Alb erbaut, verdankt Schloss Lichtenstein seine Entstehung einem Roman und gilt als eines der romantischsten Bauwerke Deutschlands."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Schloss_Lichtenstein_04-2010.jpg/3840px-Schloss_Lichtenstein_04-2010.jpg"
+heroImage: "/images/castles/schloss-lichtenstein.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

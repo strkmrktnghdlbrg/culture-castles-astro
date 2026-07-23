@@ -11,6 +11,7 @@ import AwinButton from "../../components/AwinButton.astro";
 import JsonLd from "../../components/JsonLd.astro";
 import { site } from "../../data/site";
 import { affiliate } from "../../data/affiliate";
+import { awinEnabled } from "../../data/products";
 
 export async function getStaticPaths() {
   const entries = await getCollection("castles");
@@ -648,7 +649,7 @@ const castleAlternates = hasEn
             margin: 0.75rem 0 0;
           "
         >
-          via Tiqets · Affiliate-Link
+          via Tiqets{awinEnabled ? " · Affiliate-Link" : ""}
         </p>
       </div>
 
@@ -704,11 +705,10 @@ const castleAlternates = hasEn
           <CastleCard
             href={`/burgen/${c.id}/`}
             title={c.data.title}
-            region={c.data.region}
+            region={regionTitle}
             teaser={c.data.teaser}
             image={c.data.heroImage}
             imageAlt={c.data.title}
-            rank={c.data.rank}
             type={c.data.type}
           />
         ))}

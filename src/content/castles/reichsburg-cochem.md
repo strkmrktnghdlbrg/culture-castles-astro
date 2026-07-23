@@ -7,7 +7,7 @@ type: "Burg"
 built: "um 1000 (Wiederaufbau 1868)"
 lord: "Reichsministerialen"
 teaser: "Hoch über der Mosel thront die Reichsburg Cochem – eine der imposantesten Höhenburgen Deutschlands mit bewegter Geschichte vom Mittelalter bis zur Wilhelminischen Ära."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Cochem%2C_Reichsburg%2C_2012-08_CN-01.jpg"
+heroImage: "/images/castles/reichsburg-cochem.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

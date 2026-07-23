@@ -3,7 +3,7 @@ title: "Geschichte deutscher Burgen: Von der Holzpalisade zum steinernen Herrsch
 date: 2026-05-28
 category: Geschichte
 teaser: "Wie aus einfachen Wehranlagen die majestätischen Steinburgen wurden, die heute unsere Landschaft prägen – ein Streifzug durch tausend Jahre Burggeschichte."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Burg_Eltz_-_Mai_2021.jpg/3840px-Burg_Eltz_-_Mai_2021.jpg"
+heroImage: "/images/magazin/geschichte-deutscher-burgen.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

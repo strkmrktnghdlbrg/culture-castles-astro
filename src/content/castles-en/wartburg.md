@@ -12,7 +12,7 @@ tags: ["mittelalter"]
 featured: true
 rank: 5
 teaser: "Thuringia's landmark high above Eisenach – a UNESCO World Heritage Site, Luther's refuge, and the very embodiment of medieval castle romanticism all in one."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Thuringia_Eisenach_asv2020-07_img23_Wartburg_Castle.jpg/3840px-Thuringia_Eisenach_asv2020-07_img23_Wartburg_Castle.jpg"
+heroImage: "/images/castles/wartburg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

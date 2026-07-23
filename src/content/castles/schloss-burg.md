@@ -17,7 +17,7 @@ castleOfMonth: false
 
 teaser: "Die größte wiederaufgebaute Burg Westdeutschlands: Über der Wupper thront Schloss Burg, einst Stammsitz der Grafen von Berg, die dem ganzen Bergischen Land ihren Namen gaben."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/2/2b/Schlossburg_2-v2.jpg"
+heroImage: "/images/castles/schloss-burg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

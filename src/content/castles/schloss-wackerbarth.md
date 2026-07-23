@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Ein Barockschloss zwischen Weinbergen: Schloss Wackerbarth in Radebeul ist Sitz des Sächsischen Staatsweinguts und verbindet höfische Gartenkunst mit Wein, Sekt und einer beliebten Kulisse für Hochzeiten."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Radebeul_Wackerbarth.jpg"
+heroImage: "/images/castles/schloss-wackerbarth.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

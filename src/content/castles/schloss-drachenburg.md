@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Ein Märchenschloss über dem Rhein: In nur zwei Jahren erbaut, thront Schloss Drachenburg mit Türmen und Zinnen am Drachenfels und bietet einen der schönsten Ausblicke ins Rheintal."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Schloss_Drachenburg_Bild_1.jpg/3840px-Schloss_Drachenburg_Bild_1.jpg"
+heroImage: "/images/castles/schloss-drachenburg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

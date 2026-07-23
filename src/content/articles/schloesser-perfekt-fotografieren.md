@@ -3,7 +3,7 @@ title: "Schlösser und Burgen perfekt fotografieren: Techniken, Licht und die be
 date: 2026-05-21
 category: Fotografie
 teaser: "Goldene Stunde, Weitwinkel oder Teleobjektiv – mit den richtigen Techniken gelingen atemberaubende Aufnahmen historischer Gemäuer."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Photographer_Photographing_Nevada_Mountains.jpg/3840px-Photographer_Photographing_Nevada_Mountains.jpg"
+heroImage: "/images/magazin/schloesser-perfekt-fotografieren.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

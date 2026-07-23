@@ -3,7 +3,7 @@ title: "Die schönsten Burgen und Schlösser um Heidelberg: Ausflugsziele in der
 date: 2026-07-12
 category: Ratgeber
 teaser: "Rund um Heidelberg liegt eine der romantischsten Burgenlandschaften Deutschlands: vom weltberühmten Heidelberger Schloss über die Burgen der Bergstraße bis zum Hambacher Schloss in der Pfalz."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Heidelberg-2726936.jpg/3840px-Heidelberg-2726936.jpg"
+heroImage: "/images/magazin/burgen-und-schloesser-um-heidelberg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

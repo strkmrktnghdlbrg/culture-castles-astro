@@ -3,7 +3,7 @@ title: Saxony
 country: "Germany"
 order: 4
 teaser: "Festung Königstein, Schloss Moritzburg, Albrechtsburg Meißen – Saxony combines baroque splendour with cliff-top fortresses high above the Elbe valley."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Aerial_photo_of_Festung_K%C3%B6nigstein%2C_October_2008.jpg"
+heroImage: "/images/regions/sachsen.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

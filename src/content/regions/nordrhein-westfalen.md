@@ -3,7 +3,7 @@ title: Nordrhein-Westfalen
 country: Deutschland
 order: 10
 teaser: Wasserschlösser am Niederrhein, trutzige Höhenburgen im Bergischen Land und die romantische Burgenkette entlang von Rhein und Ruhr – NRW ist das Land der Wasserburgen.
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Schloss_Moyland_Panorama%2C_1.jpg/3840px-Schloss_Moyland_Panorama%2C_1.jpg"
+heroImage: "/images/regions/nordrhein-westfalen.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

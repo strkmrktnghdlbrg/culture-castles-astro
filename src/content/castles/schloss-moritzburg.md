@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Märchenhaftes Barockschloss auf einer Seeinsel – Augusts des Starken prunkvolle Jagdresidenz leuchtet wie aus einem anderen Jahrhundert."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/0/02/Luftbild_Schloss_Moritzburg_2014-03-29_1.JPG"
+heroImage: "/images/castles/schloss-moritzburg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

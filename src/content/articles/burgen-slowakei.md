@@ -3,7 +3,7 @@ title: "Burgen und Schlösser in der Slowakei: Von der Zipser Burg bis zur Burg 
 date: 2026-06-28
 category: Ratgeber
 teaser: "Die Slowakei ist ein wahres Burgenland: die riesige Zipser Burg als UNESCO-Welterbe, die mächtige Burg über Bratislava und unzählige romantische Ruinen auf den Gipfeln der Karpaten."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/f/f0/Spis_Castle_-_Slovakia.jpg"
+heroImage: "/images/magazin/burgen-slowakei.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

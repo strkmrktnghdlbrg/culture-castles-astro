@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Hoch über der Universitätsstadt Marburg thront das Landgrafenschloss, die erste Residenz der hessischen Landgrafen und Schauplatz des berühmten Marburger Religionsgesprächs von 1529."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/5/50/Marburg_Schloss_015.jpg"
+heroImage: "/images/castles/landgrafenschloss-marburg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

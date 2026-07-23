@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Ein neugotischer Traum über dem Leinetal: Schloss Marienburg war die Sommerresidenz der Könige von Hannover und gilt als eines der bedeutendsten Zeugnisse des Historismus in Norddeutschland."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/2021-03-30_121712_Pattensen_Schloss_Marienburg.jpg/3840px-2021-03-30_121712_Pattensen_Schloss_Marienburg.jpg"
+heroImage: "/images/castles/schloss-marienburg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

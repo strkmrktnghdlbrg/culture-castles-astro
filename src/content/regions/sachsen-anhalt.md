@@ -3,7 +3,7 @@ title: Sachsen-Anhalt
 country: Deutschland
 order: 9
 teaser: Das bunte Schloss Wernigerode über dem Harz, die Kaiserpfalzen des Mittelalters und die Straße der Romanik – Sachsen-Anhalt ist eine der geschichtsträchtigsten Burgenregionen Deutschlands.
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Schloss_Wernigerode_Luftbild_2.jpg/3840px-Schloss_Wernigerode_Luftbild_2.jpg"
+heroImage: "/images/regions/sachsen-anhalt.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

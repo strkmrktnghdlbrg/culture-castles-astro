@@ -3,7 +3,7 @@ title: "Burgen und Schlösser in Irland: Vom Rock of Cashel bis zu den Herrenhä
 date: 2026-06-26
 category: Ratgeber
 teaser: "Irland ist übersät mit Burgen: vom dramatisch auf einem Felsen thronenden Rock of Cashel über das mittelalterliche Bunratty Castle bis zu den romantischen Ruinen entlang der wilden Atlantikküste."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/RockOfCashelSummer1986.jpg/3840px-RockOfCashelSummer1986.jpg"
+heroImage: "/images/magazin/burgen-irland.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

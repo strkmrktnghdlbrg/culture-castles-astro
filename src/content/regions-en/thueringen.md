@@ -3,7 +3,7 @@ title: Thuringia
 country: "Germany"
 order: 5
 teaser: "The Wartburg, a UNESCO World Heritage Site and place of the Reformation, is only the beginning – Thuringia earns its nickname the green heart of Germany through its castle landscape as much as anything else."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Thuringia_Eisenach_asv2020-07_img23_Wartburg_Castle.jpg/3840px-Thuringia_Eisenach_asv2020-07_img23_Wartburg_Castle.jpg"
+heroImage: "/images/regions/thueringen.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"
