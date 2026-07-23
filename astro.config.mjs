@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@tailwindcss/vite";
 
+import outboundGate from './integrations/outbound-gate.mjs';
 export default defineConfig({
   site: "https://culture-castles.de",
   output: "static",
@@ -12,7 +13,7 @@ export default defineConfig({
     locales: ["de", "en"],
     routing: { prefixDefaultLocale: false },
   },
-  integrations: [
+  integrations: [outboundGate(), 
     sitemap({
       filter: (page) =>
         !page.includes("/impressum") &&
