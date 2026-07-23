@@ -3,7 +3,7 @@ title: "Burgen und Schlösser in Kroatien: Vom Märchenschloss Trakošćan bis z
 date: 2026-06-24
 category: Ratgeber
 teaser: "Kroatien verbindet die romantischen Schlösser des Zagorje mit den mächtigen Küstenfestungen der Adria: vom malerischen Trakošćan bis zu den Stadtmauern von Dubrovnik."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Trako%C5%A1%C4%87an_2007.JPG"
+heroImage: "/images/magazin/schloesser-kroatien.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

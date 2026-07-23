@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Das Wahrzeichen der Ortenau: Hoch über dem Kinzigtal thront Schloss Ortenberg mit seinem markanten Turm – ein neugotisches Kleinod, das heute eine Jugendherberge beherbergt."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Aerial_image_of_the_Ortenberg_Castle_%28view_from_the_southwest%29.jpg/3840px-Aerial_image_of_the_Ortenberg_Castle_%28view_from_the_southwest%29.jpg"
+heroImage: "/images/castles/schloss-ortenberg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

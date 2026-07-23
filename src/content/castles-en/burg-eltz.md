@@ -14,7 +14,7 @@ tags:
 featured: true
 rank: 3
 teaser: "Eltz Castle has stood undamaged in the wooded Elzbach valley for over 850 years – a medieval masterpiece still owned by the Counts of Eltz to this day."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/e/e4/Wierschem%2C_Burg_Eltz%2C_2012-08_CN-01.jpg"
+heroImage: "/images/castles/burg-eltz.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

@@ -3,7 +3,7 @@ title: Rheinland-Pfalz
 country: Deutschland
 order: 3
 teaser: Das Rheintal mit Loreley und Pfalzgrafenstein, die Mosel mit Burg Eltz – Rheinland-Pfalz ist das Herz der deutschen Burgenromantik schlechthin.
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/e/e4/Wierschem%2C_Burg_Eltz%2C_2012-08_CN-01.jpg"
+heroImage: "/images/regions/rheinland-pfalz.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

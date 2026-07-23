@@ -3,7 +3,7 @@ title: "Burgen und Schlösser in Rumänien: Von Draculas Schloss Bran bis zum M�
 date: 2026-06-06
 category: Ratgeber
 teaser: "Rumänien ist das Land der Karpatenburgen: Zwischen den bewaldeten Gipfeln Transsilvaniens liegen mit Schloss Bran, dem Peleș und der Bauernburg Bran einige der eindrucksvollsten Burgen Osteuropas."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/1/17/Castelul_Bran2.jpg"
+heroImage: "/images/magazin/burgen-rumaenien.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

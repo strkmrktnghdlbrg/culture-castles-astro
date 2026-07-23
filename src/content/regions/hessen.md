@@ -3,7 +3,7 @@ title: Hessen
 country: Deutschland
 order: 11
 teaser: Die staufische Burg Kronberg im Taunus, die Löwenburg im Bergpark Kassel und ein dichtes Netz mittelalterlicher Höhenburgen entlang der alten Handelsstraßen prägen das Burgenland Hessen.
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Burg-Kronberg-JR-E-65-2010-04-18.jpg/3840px-Burg-Kronberg-JR-E-65-2010-04-18.jpg"
+heroImage: "/images/regions/hessen.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

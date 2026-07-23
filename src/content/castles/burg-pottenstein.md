@@ -17,7 +17,7 @@ castleOfMonth: false
 
 teaser: "Eine der ältesten Burgen der Fränkischen Schweiz: Hoch auf einem Felsen über der Stadt Pottenstein thront die tausendjährige Burg mit ihrem Burgmuseum – einst Zufluchtsort der heiligen Elisabeth."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Burgberg_Pottenstein%2C_2.jpg/3840px-Burgberg_Pottenstein%2C_2.jpg"
+heroImage: "/images/castles/burg-pottenstein.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

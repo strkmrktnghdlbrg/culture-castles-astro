@@ -3,7 +3,7 @@ title: "Schlösser in Bayern: Die schönsten königlichen Residenzen und Burgen 
 date: 2026-04-30
 category: Ratgeber
 teaser: "Von Neuschwanstein bis Linderhof, von der Residenz München bis zur Festung Marienberg – Bayern ist das Schlösserland schlechthin in Deutschland."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Neuschwanstein_Castle_2024-02.jpg/3840px-Neuschwanstein_Castle_2024-02.jpg"
+heroImage: "/images/magazin/schloesser-in-bayern.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

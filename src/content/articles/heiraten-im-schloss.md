@@ -3,7 +3,7 @@ title: "Heiraten im Schloss: Traumhochzeiten in historischen Gemäuern – Planu
 date: 2026-05-07
 category: Hochzeit
 teaser: "Ein barocker Festsaal, ein romantischer Schlossgarten und Kerzenleuchter aus dem 18. Jahrhundert – Heiraten im Schloss ist möglich, wenn man weiß, wie."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Ettal%2C_Linderhof_21.jpg/3840px-Ettal%2C_Linderhof_21.jpg"
+heroImage: "/images/magazin/heiraten-im-schloss.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

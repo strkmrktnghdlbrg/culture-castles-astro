@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Eine romantische Ritterburg als bewusste Ruine: Die Löwenburg im UNESCO-Welterbe Bergpark Wilhelmshöhe wurde um 1800 als künstliches Mittelalter-Idyll erbaut und gilt als eine der ersten neugotischen Burgen Deutschlands."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Bergpark_Wilhelmsh%C3%B6he_-_L%C3%B6wenburg_2022-07-16_a.JPG"
+heroImage: "/images/castles/loewenburg-kassel.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

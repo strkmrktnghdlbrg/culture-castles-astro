@@ -11,7 +11,7 @@ coordinates: [52.4045, 13.039]
 tags: []
 featured: true
 teaser: "Frederick the Great's Rococo jewel sits atop vineyard terraces in Potsdam and is a UNESCO World Heritage Site."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Reflection_of_Sanssouci_Palace.jpg/3840px-Reflection_of_Sanssouci_Palace.jpg"
+heroImage: "/images/castles/schloss-sanssouci.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

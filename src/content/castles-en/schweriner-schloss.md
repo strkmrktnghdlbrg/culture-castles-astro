@@ -8,7 +8,7 @@ epoch: "Romanticism / Historicism"
 built: "1845–1857"
 lord: "Grand Dukes of Mecklenburg"
 teaser: "The fairy-tale Schwerin Palace stands on a lake island and ranks among the most significant palace buildings of Romantic Historicism in Germany."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Aerial_image_of_Schwerin_Castle_%28view_from_the_east%29.jpg/3840px-Aerial_image_of_Schwerin_Castle_%28view_from_the_east%29.jpg"
+heroImage: "/images/castles/schweriner-schloss.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

@@ -3,7 +3,7 @@ title: "The History of German Castles: From Wooden Palisade to Stone Seat of Pow
 date: 2026-05-28
 category: History
 teaser: "How simple defensive structures became the majestic stone castles that shape our landscape today – a journey through a thousand years of castle history."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Burg_Eltz_-_Mai_2021.jpg/3840px-Burg_Eltz_-_Mai_2021.jpg"
+heroImage: "/images/magazin/geschichte-deutscher-burgen.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

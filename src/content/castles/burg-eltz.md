@@ -14,7 +14,7 @@ tags:
 featured: true
 rank: 3
 teaser: "Burg Eltz thront seit über 850 Jahren unzerstört im bewaldeten Elzbach-Tal – ein mittelalterliches Gesamtkunstwerk, das noch heute im Familienbesitz der Grafen von und zu Eltz ist."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/e/e4/Wierschem%2C_Burg_Eltz%2C_2012-08_CN-01.jpg"
+heroImage: "/images/castles/burg-eltz.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

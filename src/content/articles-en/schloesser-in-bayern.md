@@ -3,7 +3,7 @@ title: "Castles in Bavaria: The Most Beautiful Royal Residences and Fortresses i
 date: 2026-04-30
 category: Guide
 teaser: "From Neuschwanstein to Linderhof, from the Munich Residenz to the Marienberg Fortress – Bavaria is Germany's castle country par excellence."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Neuschwanstein_Castle_2024-02.jpg/3840px-Neuschwanstein_Castle_2024-02.jpg"
+heroImage: "/images/magazin/schloesser-in-bayern.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

@@ -16,7 +16,7 @@ rank: 2
 gygQuery: "Burg Hohenzollern"
 stayQuery: "Burg Hohenzollern, Bisingen, Deutschland"
 teaser: "Thronende Silhouette über der Schwäbischen Alb – die Stammburg der Hohenzollern vereint neugotische Pracht mit 900 Jahren Dynastiegeschichte."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Burg_Hohenzollern_10-2016.jpg/3840px-Burg_Hohenzollern_10-2016.jpg"
+heroImage: "/images/castles/burg-hohenzollern.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

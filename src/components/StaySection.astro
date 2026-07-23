@@ -1,19 +1,46 @@
 ---
 import Stay22Map from "./Stay22Map.astro";
+import { affiliate } from "../data/affiliate";
+import { stay22EmbedUrl } from "../lib/stay22";
 
 interface Props {
   title?: string;
   lead?: string;
   lat?: number;
   lng?: number;
+  lang?: "de" | "en";
 }
 
-const {
-  title = "Schlaf, wo Könige geherrscht haben.",
-  lead,
+const { lat, lng, lang = "de" } = Astro.props;
+const isEn = lang === "en";
+
+const t = isEn
+  ? {
+      eyebrow: "Stay at the castle",
+      defaultTitle: "Sleep where kings once ruled.",
+      cta: "Explore hotels →",
+      mapLabel: "Map view",
+      mapHint: "Pass coordinates to show hotels nearby.",
+    }
+  : {
+      eyebrow: "Übernachten am Schloss",
+      defaultTitle: "Schlaf, wo Könige geherrscht haben.",
+      cta: "Hotels entdecken →",
+      mapLabel: "Kartenansicht",
+      mapHint: "Koordinaten übergeben, um Hotels in der Nähe anzuzeigen.",
+    };
+
+const title = Astro.props.title ?? t.defaultTitle;
+const lead = Astro.props.lead;
+
+// Getrackter Stay22-Outbound-Link (aid = lmaID) statt bare stay22.com.
+// Nutzt die Sektions-Koordinaten, sonst Deutschland-Mitte als Fallback.
+const hotelsHref = stay22EmbedUrl({
+  aid: affiliate.stay22.lmaId,
   lat,
   lng,
-} = Astro.props;
+  embedId: affiliate.stay22.mapEmbedId || undefined,
+});
 ---
 
 <section
@@ -45,7 +72,7 @@ const {
           margin: 0;
         "
       >
-        Übernachten am Schloss
+        {t.eyebrow}
       </p>
 
       <h2
@@ -77,9 +104,9 @@ const {
 
       <div>
         <a
-          href="https://www.stay22.com"
+          href={hotelsHref}
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer sponsored"
           class="btn-ghost"
           style="
             display: inline-block;
@@ -93,7 +120,7 @@ const {
             text-decoration: none;
           "
         >
-          Hotels entdecken &rarr;
+          {t.cta}
         </a>
       </div>
     </div>
@@ -132,7 +159,7 @@ const {
               margin: 0;
             "
           >
-            Kartenansicht
+            {t.mapLabel}
           </p>
           <p
             style="
@@ -144,7 +171,7 @@ const {
               padding: 0 1.5rem;
             "
           >
-            Koordinaten übergeben, um Hotels in der Nähe anzuzeigen.
+            {t.mapHint}
           </p>
         </div>
       )}

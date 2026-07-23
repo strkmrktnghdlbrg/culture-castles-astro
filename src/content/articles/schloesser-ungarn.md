@@ -3,7 +3,7 @@ title: "Burgen und Schlösser in Ungarn: Vom Burgpalast in Budapest bis zur Fest
 date: 2026-06-22
 category: Ratgeber
 teaser: "Ungarn blickt auf eine bewegte Grenzgeschichte zurück: der Budaer Burgpalast über der Donau, die Trutzburgen gegen die Osmanen und das prunkvolle Schloss Fertőd, das ungarische Versailles."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/20190502_Zamek_w_Budapeszcie_0647_1862_DxO.jpg/3840px-20190502_Zamek_w_Budapeszcie_0647_1862_DxO.jpg"
+heroImage: "/images/magazin/schloesser-ungarn.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

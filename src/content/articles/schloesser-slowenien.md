@@ -3,7 +3,7 @@ title: "Burgen und Schlösser in Slowenien: Von der Höhlenburg Predjama bis zur
 date: 2026-06-12
 category: Ratgeber
 teaser: "Slowenien überrascht mit einer der spektakulärsten Burgenlandschaften Mitteleuropas: die in den Fels gebaute Höhlenburg Predjama, die Burg über dem türkisblauen Bleder See und trutzige Wehrbauten in den Julischen Alpen."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Predjama_castle%2C_Slovenia.jpg/3840px-Predjama_castle%2C_Slovenia.jpg"
+heroImage: "/images/magazin/schloesser-slowenien.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

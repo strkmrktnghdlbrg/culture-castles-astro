@@ -3,7 +3,7 @@ title: Baden-Württemberg
 country: "Germany"
 order: 2
 teaser: "Black Forest, Swabian Alb, and the shores of Lake Constance – Baden-Württemberg offers Hohenstaufen castles, Hohenzollern palaces, and romantic ruins set against breathtaking natural scenery."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Burg_Hohenzollern_10-2016.jpg/3840px-Burg_Hohenzollern_10-2016.jpg"
+heroImage: "/images/regions/baden-wuerttemberg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

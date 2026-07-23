@@ -4,7 +4,7 @@ distanceKm: 975
 stops: 8
 days: "7–10 days"
 teaser: "Germany's oldest holiday route links over 70 castles and palaces from Mannheim to Prague – a medieval panorama spanning three countries."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/5/50/Burgenstra%C3%9Fe-Schild.jpg"
+heroImage: "/images/routes/burgenstrasse.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

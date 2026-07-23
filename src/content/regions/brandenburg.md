@@ -3,7 +3,7 @@ title: Brandenburg
 country: Deutschland
 order: 6
 teaser: "Zwischen Spreewald, Havelland und Uckermark: Brandenburgs Wasserburgen, Herrenhäuser und Schlösser im Seenland erzählen von Hohenzollern-Macht und märkischem Adel."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Reflection_of_Sanssouci_Palace.jpg/3840px-Reflection_of_Sanssouci_Palace.jpg"
+heroImage: "/images/regions/brandenburg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

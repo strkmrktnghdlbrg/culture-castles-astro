@@ -10,9 +10,11 @@ interface Props {
   imageAlt?: string;
   rank?: number;
   type?: string;
+  /** CTA-Label. Default deutsch; EN-Seiten übergeben "View castle →". */
+  cta?: string;
 }
 
-const { href, title, region, teaser, image, imageAlt, rank, type } = Astro.props;
+const { href, title, region, teaser, image, imageAlt, rank, type, cta = "Profil ansehen →" } = Astro.props;
 ---
 
 <a href={href} class="castle-card">
@@ -37,7 +39,7 @@ const { href, title, region, teaser, image, imageAlt, rank, type } = Astro.props
     {teaser && (
       <p class="castle-card__teaser">{teaser}</p>
     )}
-    <span class="castle-card__cta">Profil ansehen →</span>
+    <span class="castle-card__cta">{cta}</span>
   </div>
 </a>
 

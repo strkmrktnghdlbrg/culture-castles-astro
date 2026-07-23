@@ -3,7 +3,7 @@ title: "Mittelalterliche Burgen erleben: Führungen, Feste und lebendige Geschic
 date: 2026-05-14
 category: Ratgeber
 teaser: "Ritterturnier, Bogenschießen oder nächtliche Fackelführung – so wird ein Burgbesuch zum unvergesslichen Familienabenteuer."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/0/03/St_Michaels_Church_Hildesheim.jpg"
+heroImage: "/images/magazin/mittelalterliche-burgen-erleben.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

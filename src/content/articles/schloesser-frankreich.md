@@ -3,7 +3,7 @@ title: "Schlösser und Burgen in Frankreich: Von den Loire-Schlössern bis zu de
 date: 2026-06-08
 category: Ratgeber
 teaser: "Frankreich ist das Land der Châteaux: Von den Renaissanceschlössern der Loire über die Festungsstadt Carcassonne bis zum Mont-Saint-Michel reiht sich ein architektonisches Meisterwerk ans nächste."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/8/80/France_Loir-et-Cher_Chambord_Chateau_03.jpg"
+heroImage: "/images/magazin/schloesser-frankreich.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

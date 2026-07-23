@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Die Wiege der deutschen Demokratie: Auf dem Hambacher Schloss forderten 1832 zehntausende Menschen Freiheit und Einheit. Heute erinnert eine moderne Ausstellung über den Weinbergen an diesen Meilenstein."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/IMG_Hambacher_Schloss_8284.jpg/3840px-IMG_Hambacher_Schloss_8284.jpg"
+heroImage: "/images/castles/hambacher-schloss.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

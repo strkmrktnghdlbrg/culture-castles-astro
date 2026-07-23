@@ -3,7 +3,7 @@ title: "Schlösser und Burgen in Großbritannien: Von Windsor Castle bis zu den 
 date: 2026-06-16
 category: Ratgeber
 teaser: "Kein Land verkörpert das Bild der Ritterburg so sehr wie Großbritannien: von Windsor Castle über den Tower of London bis zu den einsamen Burgen der schottischen Highlands wie Eilean Donan."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Windsor_Castle_at_Sunset_-_Nov_2006.jpg/3840px-Windsor_Castle_at_Sunset_-_Nov_2006.jpg"
+heroImage: "/images/magazin/schloesser-grossbritannien.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

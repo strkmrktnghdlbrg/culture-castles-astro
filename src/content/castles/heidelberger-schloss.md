@@ -13,7 +13,7 @@ tags:
 featured: true
 rank: 6
 teaser: "Weithin sichtbar über Heidelberg thront das Schloss aus rotem Sandstein – Deutschlands berühmteste Ruine und Sinnbild der Romantik schlechthin."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Heidelberg-2726936.jpg/3840px-Heidelberg-2726936.jpg"
+heroImage: "/images/castles/heidelberger-schloss.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

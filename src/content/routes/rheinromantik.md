@@ -4,7 +4,7 @@ distanceKm: 130
 stops: 5
 days: "3 Tage"
 teaser: "Das UNESCO-Welterbe Oberes Mittelrheintal mit Loreley-Felsen, Weinbergen und fuenf Burgen in drei Tagen."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Burg_Katz_und_Loreley.jpg/3840px-Burg_Katz_und_Loreley.jpg"
+heroImage: "/images/routes/rheinromantik.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

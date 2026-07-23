@@ -3,7 +3,7 @@ title: Brandenburg
 country: "Germany"
 order: 6
 teaser: "Between the Spreewald, Havelland and Uckermark: Brandenburg's moated castles, manor houses and palaces amid the lake district tell of Hohenzollern power and the nobility of the Mark."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Reflection_of_Sanssouci_Palace.jpg/3840px-Reflection_of_Sanssouci_Palace.jpg"
+heroImage: "/images/regions/brandenburg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

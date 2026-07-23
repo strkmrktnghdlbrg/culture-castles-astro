@@ -12,7 +12,7 @@ tags: ["familie"]
 featured: true
 rank: 4
 teaser: "Hoch über der Elbe thront eine der mächtigsten Bergfestungen Europas – Fels, Geschichte und Panorama in einem."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Aerial_photo_of_Festung_K%C3%B6nigstein%2C_October_2008.jpg"
+heroImage: "/images/castles/festung-koenigstein.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

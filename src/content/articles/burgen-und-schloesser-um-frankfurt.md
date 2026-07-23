@@ -3,7 +3,7 @@ title: "Die schönsten Burgen und Schlösser um Frankfurt: Ausflugsziele im Rhei
 date: 2026-07-02
 category: Ratgeber
 teaser: "Rund um Frankfurt liegt eine überraschend dichte Burgenlandschaft: vom staufischen Kronberg im Taunus über die Ronneburg bis zum Renaissanceschloss Aschaffenburg. Die schönsten Ausflugsziele im Umkreis."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Burg-Kronberg-JR-E-65-2010-04-18.jpg/3840px-Burg-Kronberg-JR-E-65-2010-04-18.jpg"
+heroImage: "/images/magazin/burgen-und-schloesser-um-frankfurt.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

@@ -3,7 +3,7 @@ title: "Schlösser und Burgen in Skandinavien: Königsresidenzen und Wehrbauten 
 date: 2026-06-14
 category: Ratgeber
 teaser: "Von Hamlets Schloss Kronborg über das Renaissanceschloss Frederiksborg bis zur Festung Akershus in Oslo – Skandinaviens Burgen und Schlösser erzählen die Geschichte der nordischen Königreiche."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/e/ed/Frederiksborg_Slot_i_sol.jpg"
+heroImage: "/images/magazin/schloesser-skandinavien.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

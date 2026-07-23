@@ -3,7 +3,7 @@ title: "Die schönsten Burgen und Schlösser um Nürnberg: Ausflugsziele in Fran
 date: 2026-07-10
 category: Ratgeber
 teaser: "Franken ist eine der burgenreichsten Landschaften Europas: von der Kaiserburg Nürnberg über die Burgen der Fränkischen Schweiz bis zur mächtigen Plassenburg und der Veste Coburg."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/5/50/N%C3%BCrnberg_Burg_ArM.jpg"
+heroImage: "/images/magazin/burgen-und-schloesser-um-nuernberg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

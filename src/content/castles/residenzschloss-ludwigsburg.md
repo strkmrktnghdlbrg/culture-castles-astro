@@ -17,7 +17,7 @@ castleOfMonth: false
 
 teaser: "Das schwäbische Versailles: Das Residenzschloss Ludwigsburg ist eine der größten barocken Schlossanlagen Deutschlands, umgeben vom blühenden Barock und einem Märchengarten für Familien."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Aerial_image_of_the_Ludwigsburg_Palace.jpg/3840px-Aerial_image_of_the_Ludwigsburg_Palace.jpg"
+heroImage: "/images/castles/residenzschloss-ludwigsburg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

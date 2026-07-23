@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "A fairytale Baroque palace on a lake island – Augustus the Strong's magnificent hunting residence glows as if from another century."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/0/02/Luftbild_Schloss_Moritzburg_2014-03-29_1.JPG"
+heroImage: "/images/castles/schloss-moritzburg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

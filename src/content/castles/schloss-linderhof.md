@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Das kleinste und einzige vollendete Schloss König Ludwigs II.: Linderhof im einsamen Graswangtal verbindet Rokoko-Pracht mit einem verwunschenen Park voller Grotten und Wasserspiele."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Ettal%2C_Linderhof_21.jpg/3840px-Ettal%2C_Linderhof_21.jpg"
+heroImage: "/images/castles/schloss-linderhof.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

@@ -14,7 +14,7 @@ coordinates: [47.5576, 10.7498]
 tags:
   - maerchen
 teaser: "Bavaria's most famous fairy-tale palace crowns the cliffs above the Alpsee – Ludwig II's romantic vision became the most photographed building in Germany."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Neuschwanstein_Castle_2024-02.jpg/3840px-Neuschwanstein_Castle_2024-02.jpg"
+heroImage: "/images/castles/schloss-neuschwanstein.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

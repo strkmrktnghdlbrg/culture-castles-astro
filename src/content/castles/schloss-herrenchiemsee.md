@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Ludwigs II. Hommage an Versailles: Auf einer Insel im Chiemsee ließ der Märchenkönig ein bayerisches Versailles errichten, dessen Spiegelgalerie das französische Vorbild sogar übertreffen sollte."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/b/be/Schloss_Herrenchiemsee.jpg"
+heroImage: "/images/castles/schloss-herrenchiemsee.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

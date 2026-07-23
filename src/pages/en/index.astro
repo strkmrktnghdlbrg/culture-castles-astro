@@ -60,15 +60,16 @@ const credits = castlesEn
       subtitle="A curated selection of the most impressive landmarks – each with history, visiting information and hotels nearby."
     />
     <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1.5rem;" class="cc-en-grid">
-      {castlesEn.map((c) => (
+      {castlesEn.map((c, i) => (
         <CastleCard
           href={`/en/castles/${c.id}/`}
           title={c.data.title}
           region={c.data.place ?? c.data.country}
           teaser={c.data.teaser}
           image={c.data.heroImage}
-          rank={c.data.rank}
+          rank={i + 1}
           type={c.data.type}
+          cta="View castle →"
         />
       ))}
     </div>
@@ -86,8 +87,11 @@ const credits = castlesEn
   </Band>
 
   <StaySection
+    lang="en"
     title="Sleep where kings once ruled"
     lead="For every castle we find the right hotels within walking distance – from castle hotels to charming guesthouses in the historic centre."
+    lat={featured?.data.coordinates?.[0]}
+    lng={featured?.data.coordinates?.[1]}
   />
 
   <ImageCreditsList credits={credits} heading="Image credits" />

@@ -3,7 +3,7 @@ title: Rhineland-Palatinate
 country: "Germany"
 order: 3
 teaser: The Rhine valley with the Loreley and Pfalzgrafenstein, the Moselle with Eltz Castle – Rhineland-Palatinate is the very heart of German castle romanticism.
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/e/e4/Wierschem%2C_Burg_Eltz%2C_2012-08_CN-01.jpg"
+heroImage: "/images/regions/rheinland-pfalz.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

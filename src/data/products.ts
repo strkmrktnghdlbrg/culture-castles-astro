@@ -46,8 +46,13 @@ export type AwinMerchant = {
 };
 
 export const awin = {
-  /** ← Deine Awin Publisher-/Affiliate-ID (awinaffid). Nach Annahme eintragen. */
-  publisherId: "",
+  /**
+   * Awin Publisher-/Affiliate-ID (awinaffid) = Account WebMagics Ltd. 02.
+   * Damit werden Awin-Merchant-Links (z.B. Tiqets, mid 8616) zu getrackten
+   * cread.php-Deeplinks. Klicks attribuieren, sobald das jeweilige Programm
+   * angenommen ist; vorher redirected der Link nur ungetrackt weiter.
+   */
+  publisherId: "631151",
 
   /** cread.php-Redirect-Basis (Awin Standard, nicht ändern). */
   creadBase: "https://www.awin1.com/cread.php",

@@ -3,7 +3,7 @@ title: "Schlösser der Renaissance: Wie aus der Burg das Schloss wurde"
 date: 2026-05-24
 category: Geschichte
 teaser: "In der Renaissance wandelte sich die wehrhafte Burg zum lichten Wohnschloss. Wir erklären die Merkmale der Renaissance-Architektur und zeigen die schönsten Renaissanceschlösser in Deutschland."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/2/2e/SchlossHartenfels.JPG"
+heroImage: "/images/magazin/schloesser-der-renaissance.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

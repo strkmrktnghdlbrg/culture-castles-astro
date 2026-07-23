@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Mächtig erhebt sich das Hohenzollernschloss Sigmaringen über der jungen Donau, Stammsitz der fürstlichen Linie Hohenzollern-Sigmaringen mit einer der größten privaten Waffensammlungen Europas."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Schloss_Sigmaringen_2022.jpg/3840px-Schloss_Sigmaringen_2022.jpg"
+heroImage: "/images/castles/schloss-sigmaringen.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

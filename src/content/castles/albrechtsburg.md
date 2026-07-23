@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Der erste deutsche Schlossbau: Hoch über Meißen und der Elbe erhebt sich die spätgotische Albrechtsburg, die als ältestes Schloss Deutschlands gilt und später die Wiege des europäischen Porzellans war."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Mei%C3%9Fen%2C_Albrechtsburg_corrected.jpg/3840px-Mei%C3%9Fen%2C_Albrechtsburg_corrected.jpg"
+heroImage: "/images/castles/albrechtsburg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

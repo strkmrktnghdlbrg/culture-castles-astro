@@ -3,7 +3,7 @@ title: "How to Photograph Castles Perfectly: Techniques, Light and the Best Vant
 date: 2026-05-21
 category: Photography
 teaser: "Golden hour, wide-angle or telephoto – with the right techniques you can capture breathtaking images of historic stonework."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Photographer_Photographing_Nevada_Mountains.jpg/3840px-Photographer_Photographing_Nevada_Mountains.jpg"
+heroImage: "/images/magazin/schloesser-perfekt-fotografieren.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

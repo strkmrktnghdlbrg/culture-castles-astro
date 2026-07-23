@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Eine der größten frühbarocken Schlossanlagen Deutschlands: Schloss Friedenstein über Gotha vereint fürstliche Prunkräume, ein barockes Theater und bedeutende Kunstsammlungen unter einem Dach."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/a/af/Gotha-schloss-friedenstein-westen.jpg"
+heroImage: "/images/castles/schloss-friedenstein.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

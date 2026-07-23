@@ -4,7 +4,7 @@ distanceKm: 60
 stops: 3
 days: "2 days"
 teaser: "Neuschwanstein, Hohenschwangau and Linderhof – Ludwig II's romantic dream world in the Allgäu and Ammergau Alps on a compact two-day route."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Neuschwanstein_Castle_2024-02.jpg/3840px-Neuschwanstein_Castle_2024-02.jpg"
+heroImage: "/images/routes/maerchenschloesser-bayern.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

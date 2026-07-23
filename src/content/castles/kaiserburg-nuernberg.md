@@ -17,7 +17,7 @@ castleOfMonth: false
 
 teaser: "Das Wahrzeichen Nürnbergs: Über der Altstadt erhebt sich die Kaiserburg, jahrhundertelang Aufenthaltsort der römisch-deutschen Könige und Kaiser und eine der bedeutendsten Reichsburgen des Mittelalters."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/5/50/N%C3%BCrnberg_Burg_ArM.jpg"
+heroImage: "/images/castles/kaiserburg-nuernberg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

@@ -16,7 +16,7 @@ castleOfMonth: false
 
 teaser: "Die einzige nie zerstörte Höhenburg am Mittelrhein: Die Marksburg über Braubach zeigt, wie eine mittelalterliche Wehranlage wirklich aussah – vollständig erhalten und heute Sitz der Deutschen Burgenvereinigung."
 
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Marksburg_im_Winter.jpg/3840px-Marksburg_im_Winter.jpg"
+heroImage: "/images/castles/marksburg.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

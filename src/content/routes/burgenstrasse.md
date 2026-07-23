@@ -4,7 +4,7 @@ distanceKm: 975
 stops: 8
 days: "7–10 Tage"
 teaser: "Deutschlands älteste Ferienstraße verbindet über 70 Burgen und Schlösser von Mannheim bis Prag – ein Mittelalter-Panorama durch drei Länder."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/5/50/Burgenstra%C3%9Fe-Schild.jpg"
+heroImage: "/images/routes/burgenstrasse.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

@@ -3,7 +3,7 @@ title: "Schlösser und Burgen in den Niederlanden: Wasserschlösser, Grachten un
 date: 2026-06-10
 category: Ratgeber
 teaser: "Die Niederlande sind ein Land der Wasserschlösser: Umgeben von Grachten und weiten Poldern liegen mit Kasteel de Haar, Muiderslot und Het Loo einige der schönsten Kasteelen Europas."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/De_Haar_castlle.jpg/3840px-De_Haar_castlle.jpg"
+heroImage: "/images/magazin/schloesser-niederlande.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

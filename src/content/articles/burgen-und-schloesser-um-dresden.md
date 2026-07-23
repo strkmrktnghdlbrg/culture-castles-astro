@@ -3,7 +3,7 @@ title: "Die schönsten Burgen und Schlösser um Dresden: Ausflugsziele in Sachse
 date: 2026-07-06
 category: Ratgeber
 teaser: "Rund um Dresden reiht sich Schloss an Schloss: das Märchenschloss Moritzburg, die chinoise Sommerresidenz Pillnitz, die Bergfestung Königstein und die Weinschlösser des Elbtals."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/0/02/Luftbild_Schloss_Moritzburg_2014-03-29_1.JPG"
+heroImage: "/images/magazin/burgen-und-schloesser-um-dresden.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

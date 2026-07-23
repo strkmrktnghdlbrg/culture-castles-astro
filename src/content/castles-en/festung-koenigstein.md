@@ -12,7 +12,7 @@ tags: ["familie"]
 featured: true
 rank: 4
 teaser: "High above the Elbe stands one of the mightiest hilltop fortresses in Europe – rock, history and panorama combined in one extraordinary site."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Aerial_photo_of_Festung_K%C3%B6nigstein%2C_October_2008.jpg"
+heroImage: "/images/castles/festung-koenigstein.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

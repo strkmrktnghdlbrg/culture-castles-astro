@@ -3,7 +3,7 @@ title: "Was ist ein Wasserschloss? Funktion, Geschichte und die schönsten Beisp
 date: 2026-05-20
 category: Geschichte
 teaser: "Ein Wasserschloss ist eine von Gräben oder Teichen umgebene Burg oder Residenz. Wir erklären die Funktion des Wassers, die Entwicklung vom Wehrbau zum Prachtschloss und zeigen die schönsten Beispiele."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Schloss_Moyland_Panorama%2C_1.jpg/3840px-Schloss_Moyland_Panorama%2C_1.jpg"
+heroImage: "/images/magazin/funktion-wasserschloesser.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

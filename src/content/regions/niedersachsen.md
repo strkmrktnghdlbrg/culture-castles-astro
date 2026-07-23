@@ -3,7 +3,7 @@ title: Niedersachsen
 country: Deutschland
 order: 8
 teaser: Vom welfischen Märchenschloss Marienburg bis zu den Wasserburgen der Norddeutschen Tiefebene – Niedersachsen verbindet höfische Pracht mit wehrhafter Backsteingotik.
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/2021-03-30_121712_Pattensen_Schloss_Marienburg.jpg/3840px-2021-03-30_121712_Pattensen_Schloss_Marienburg.jpg"
+heroImage: "/images/regions/niedersachsen.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

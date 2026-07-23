@@ -14,7 +14,7 @@ coordinates: [47.5576, 10.7498]
 tags:
   - maerchen
 teaser: "Bayerns berühmtestes Märchenschloss thront über dem Alpsee – Ludwigs II. romantische Vision wurde zum meistfotografierten Bauwerk Deutschlands."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Neuschwanstein_Castle_2024-02.jpg/3840px-Neuschwanstein_Castle_2024-02.jpg"
+heroImage: "/images/castles/schloss-neuschwanstein.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

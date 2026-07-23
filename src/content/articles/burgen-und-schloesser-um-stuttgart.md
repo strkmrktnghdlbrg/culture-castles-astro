@@ -3,7 +3,7 @@ title: "Die schönsten Burgen und Schlösser um Stuttgart: Ausflugsziele in Bade
 date: 2026-07-04
 category: Ratgeber
 teaser: "Vom barocken Residenzschloss Ludwigsburg über das Märchenschloss Lichtenstein bis zur Burg Hohenzollern: Rund um Stuttgart liegen einige der schönsten Schlösser und Burgen Süddeutschlands."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Aerial_image_of_the_Ludwigsburg_Palace.jpg/3840px-Aerial_image_of_the_Ludwigsburg_Palace.jpg"
+heroImage: "/images/magazin/burgen-und-schloesser-um-stuttgart.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

@@ -8,7 +8,7 @@ epoch: "Romantik / Historismus"
 built: "1845–1857"
 lord: "Großherzöge von Mecklenburg"
 teaser: "Das märchenhafte Schweriner Schloss thront auf einer Seeinsel und gehört zu den bedeutendsten Schlossbauten des romantischen Historismus in Deutschland."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Aerial_image_of_Schwerin_Castle_%28view_from_the_east%29.jpg/3840px-Aerial_image_of_Schwerin_Castle_%28view_from_the_east%29.jpg"
+heroImage: "/images/castles/schweriner-schloss.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

@@ -13,7 +13,7 @@ tags:
 featured: true
 rank: 6
 teaser: "Visible from afar above Heidelberg, the red sandstone palace reigns over the skyline – Germany's most celebrated ruin and the very embodiment of Romanticism."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Heidelberg-2726936.jpg/3840px-Heidelberg-2726936.jpg"
+heroImage: "/images/castles/heidelberger-schloss.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

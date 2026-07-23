@@ -3,7 +3,7 @@ title: Sachsen
 country: Deutschland
 order: 4
 teaser: Festung Königstein, Schloss Moritzburg, Albrechtsburg Meißen – Sachsen verbindet barocke Prachtentfaltung mit Felsenfestungen hoch über dem Elbtal.
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Aerial_photo_of_Festung_K%C3%B6nigstein%2C_October_2008.jpg"
+heroImage: "/images/regions/sachsen.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"

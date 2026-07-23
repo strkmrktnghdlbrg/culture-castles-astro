@@ -8,7 +8,7 @@ epoch: "Gothic Revival"
 built: "1832–1837"
 lord: "King Maximilian II"
 teaser: "This Gothic Revival palace in the Allgäu was the childhood home of Ludwig II and shaped the later 'Fairy-tale King' more profoundly than any other building."
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/2/23/Hohenschwangau_%283383608894%29.jpg"
+heroImage: "/images/castles/schloss-hohenschwangau.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "see source"

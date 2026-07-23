@@ -3,7 +3,7 @@ title: Thüringen
 country: Deutschland
 order: 5
 teaser: Die Wartburg, Weltkulturerbe und Ort der Reformation, ist nur der Beginn – Thüringen trägt den Beinamen das grüne Herz Deutschlands auch durch seine Burgenwelt.
-heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Thuringia_Eisenach_asv2020-07_img23_Wartburg_Castle.jpg/3840px-Thuringia_Eisenach_asv2020-07_img23_Wartburg_Castle.jpg"
+heroImage: "/images/regions/thueringen.jpg"
 heroCredit:
   author: "Wikimedia Commons"
   license: "siehe Quelle"
